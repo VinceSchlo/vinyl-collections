@@ -3,8 +3,8 @@
 @section('content')
 <div class="container">
     <div class="row">
-        <h2>Tous les artistes</h2>
-        <a href="{{ route('artists.create') }}" class="btn btn-primary">Ajouter Artiste</a>
+        <h2>Tous les genres</h2>
+        <a href="{{ route('genres.create') }}" class="btn btn-primary">Ajouter Genre</a>
     </div>
     <div class="row">
         <table class="table table-striped">
@@ -16,19 +16,19 @@
                 </tr>
             </thead>
             <tbody>
-                @foreach($artists as $artist)
+                @foreach($genres as $genre)
                 <tr>
-                    <td>{{$artist->id}}</td>
-                    <td>{{$artist->name}}</td>
-                    <td><a href="{{ route('artists.edit', ['artist' => $artist->id] ) }}" class="btn btn-warning">Edit</a></td>
+                    <td>{{$genre->id}}</td>
+                    <td>{{$genre->name}}</td>
+                    <td><a href="{{ route('genres.edit', ['genre' => $genre->id] ) }}" class="btn btn-warning">Edit</a></td>
                     <td>
-                        <form action="{{ route('artists.destroy', ['artist' => $artist->id]) }} " method="post">
+                        <form action="{{ route('genres.destroy', ['genre' => $genre->id]) }} " method="post">
                             @method('DELETE')
                             @csrf
                             <button class="btn btn-danger" type="submit">Delete</button>
                         </form>
                     </td>
-                    <td><a href="{{ route('artists.show', ['artist' => $artist->id] ) }}" class="btn btn-success">Show</a></td>
+                    <td><a href="{{ route('genres.show', ['genre' => $genre->id] ) }}" class="btn btn-success">Show</a></td>
                 </tr>
                 @endforeach
             </tbody>

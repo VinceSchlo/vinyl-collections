@@ -11,9 +11,9 @@
             </ul>
         </div><br />
     @endif
-    <h1>Ajouter un nouvel artiste</h1>
+    <h1>Ajouter un nouveau genre</h1>
     <div class="row">
-    <form method="post" action="{{ route('artists.store') }}">
+    <form method="post" action="{{ route('genres.store') }}">
         @csrf
         <div class="form-group">
             <label for="name">Nom</label>

@@ -14,7 +14,9 @@ class GenreController extends Controller
      */
     public function index()
     {
-        //
+        $genre = Genre::all();
+        
+        return view('genre.index')->with('genres', $genre);
     }
 
     /**
@@ -24,7 +26,7 @@ class GenreController extends Controller
      */
     public function create()
     {
-        //
+        return view('genre.create');
     }
 
     /**
@@ -35,7 +37,13 @@ class GenreController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $genre = new Genre();
+        $data = $this->validate($request, [
+            'name'=>'required|unique:genres|max:100',
+        ]);
+       
+        $genre->saveGenre($data);
+        return redirect()->route('genres.index');
     }
 
     /**
@@ -46,7 +54,7 @@ class GenreController extends Controller
      */
     public function show(Genre $genre)
     {
-        //
+        return view('genre.show')->with('genre', $genre);        
     }
 
     /**
@@ -57,7 +65,7 @@ class GenreController extends Controller
      */
     public function edit(Genre $genre)
     {
-        //
+        return view('genre.edit')->with('genre', $genre);
     }
 
     /**
@@ -69,7 +77,11 @@ class GenreController extends Controller
      */
     public function update(Request $request, Genre $genre)
     {
-        //
+        $data = $this->validate($request, [
+            'name'=>'required|unique:genres|max:100',
+        ]);
+        $genre->saveGenre($data);
+        return redirect()->route('genres.index');
     }
 
     /**
@@ -80,6 +92,7 @@ class GenreController extends Controller
      */
     public function destroy(Genre $genre)
     {
-        //
+        $genre->delete();
+        return redirect()->route('genres.index');
     }
 }
