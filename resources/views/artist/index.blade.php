@@ -12,7 +12,7 @@
                 <tr>
                 <td>ID</td>
                 <td>Nom</td>
-                <td colspan="2">Action</td>
+                <td colspan="3">Action</td>
                 </tr>
             </thead>
             <tbody>
@@ -28,6 +28,7 @@
                             <button class="btn btn-danger" type="submit">Delete</button>
                         </form>
                     </td>
+                    <td><a href="{{ route('artists.show', ['artist' => $artist->id] ) }}" class="btn btn-success">Show</a></td>
                 </tr>
                 @endforeach
             </tbody>
