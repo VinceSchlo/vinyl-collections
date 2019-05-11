@@ -36,4 +36,12 @@ class User extends Authenticatable
     protected $casts = [
         'email_verified_at' => 'datetime',
     ];
+
+    /**
+     * The vinyls owns by the user.
+     */
+    public function vinyls()
+    {
+        return $this->belongsToMany('App\Vinyl');
+    }
 }

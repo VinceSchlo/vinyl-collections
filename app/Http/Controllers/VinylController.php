@@ -3,6 +3,9 @@
 namespace App\Http\Controllers;
 
 use App\Vinyl;
+use App\Artist;
+use App\Genre;
+use App\Pochette;
 use Illuminate\Http\Request;
 
 class VinylController extends Controller
@@ -14,7 +17,9 @@ class VinylController extends Controller
      */
     public function index()
     {
-        //
+        $vinyls = Vinyl::all();
+
+        return view('vinyl.index', ['vinyls' => $vinyls]);
     }
 
     /**
@@ -24,7 +29,14 @@ class VinylController extends Controller
      */
     public function create()
     {
-        //
+        $artists = Artist::all();
+        $genres = Genre::all();
+        $pochettes = Pochette::all();
+
+        return view('vinyl.create', [
+            'artists' => $artists, 
+            'genres' => $genres, 
+            'pochettes' => $pochettes]);
     }
 
     /**
@@ -35,7 +47,18 @@ class VinylController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $vinyl = new Vinyl();
+        $data = $this->validate($request, [
+            'name'=>'required|max:100',
+            'date'=>'required|date',
+            'tracklist'=>'required|max:100',
+            'format'=>'required|max:100',
+            'artist_id'=>'required',
+            'genre_id'=>'required',
+        ]);
+       
+        $vinyl->saveVinyl($data);
+        return redirect()->route('vinyls.index');
     }
 
     /**
@@ -46,7 +69,7 @@ class VinylController extends Controller
      */
     public function show(Vinyl $vinyl)
     {
-        //
+        return view('vinyl.show', ['vinyl' => $vinyl]);
     }
 
     /**
@@ -57,7 +80,15 @@ class VinylController extends Controller
      */
     public function edit(Vinyl $vinyl)
     {
-        //
+        $artists = Artist::all();
+        $genres = Genre::all();
+        $pochettes = Pochette::all();
+
+        return view('vinyl.edit', [
+            'artists'   => $artists, 
+            'genres'    => $genres, 
+            'pochettes' => $pochettes,
+            'vinyl'     => $vinyl]);
     }
 
     /**
@@ -69,7 +100,17 @@ class VinylController extends Controller
      */
     public function update(Request $request, Vinyl $vinyl)
     {
-        //
+        $data = $this->validate($request, [
+            'name'=>'required|max:100',
+            'date'=>'required|date',
+            'tracklist'=>'required|max:100',
+            'format'=>'required|max:100',
+            'artist_id'=>'required',
+            'genre_id'=>'required',
+        ]);
+
+        $vinyl->saveVinyl($data);
+        return redirect()->route('vinyls.index');
     }
 
     /**
@@ -80,6 +121,7 @@ class VinylController extends Controller
      */
     public function destroy(Vinyl $vinyl)
     {
-        //
+        $vinyl->delete();
+        return redirect()->route('vinyls.index');
     }
 }

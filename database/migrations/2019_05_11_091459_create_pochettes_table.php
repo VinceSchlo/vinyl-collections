@@ -17,7 +17,10 @@ class CreatePochettesTable extends Migration
             $table->bigIncrements('id');
             $table->char('image', 250);
             $table->char('illustrator', 100);
+            $table->bigInteger('vinyl_id')->unsigned()->nullable();
             $table->timestamps();
+
+            $table->foreign('vinyl_id')->references('id')->on('vinyls');
         });
     }
 

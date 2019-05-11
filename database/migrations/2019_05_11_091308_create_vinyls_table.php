@@ -19,9 +19,9 @@ class CreateVinylsTable extends Migration
             $table->char('tracklist', 100);
             $table->char('format', 100);
             $table->date('date');
-            $table->bigInteger('genre_id')->unsigned();
-            $table->bigInteger('artist_id')->unsigned();
-            $table->bigInteger('pochette_id')->unsigned();
+            $table->bigInteger('genre_id')->unsigned()->nullable();
+            $table->bigInteger('artist_id')->unsigned()->nullable();
+            $table->bigInteger('pochette_id')->unsigned()->nullable();
             $table->timestamps();
             
             $table->foreign('genre_id')->references('id')->on('genres');
