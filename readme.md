@@ -6,5 +6,4 @@
     ````
     DB_CONNECTION=sqlite
     DB_HOST=path/to/your/database/database.sqlite
-    ```
 4. Run : php artisan migrate
