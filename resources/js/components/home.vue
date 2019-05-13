@@ -6,6 +6,7 @@
         </div>
         <div class="row">
             <router-link :to="{name: 'artists'}" class="btn btn-default">Tous les Artistes</router-link>
+            <router-link :to="{name: 'artistCreate'}" class="btn btn-default">Ajouter un Artiste</router-link>
             <!-- <a href="{{ route('artists.create') }}" class="btn btn-success">Ajouter Artiste</a>
             <a href="{{ route('artists.index') }}" class="btn btn-default">Tous les Artistes</a> -->
         </div>
