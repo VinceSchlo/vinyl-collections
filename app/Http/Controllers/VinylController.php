@@ -20,6 +20,7 @@ class VinylController extends Controller
         $vinyls = Vinyl::all();
 
         return view('vinyl.index', ['vinyls' => $vinyls]);
+        // return $vinyls;
     }
 
     /**

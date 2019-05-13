@@ -16,7 +16,8 @@ class ArtistController extends Controller
     {
         $artists = Artist::all();
         
-        return view('artist.index')->with('artists', $artists);
+        // return view('artist.index')->with('artists', $artists);
+        return $artists;
     }
 
     /**

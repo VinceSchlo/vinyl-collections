@@ -17,7 +17,9 @@
 
 Auth::routes();
 
-Route::get('/', 'HomeController@index')->name('home');
+Route::get('/{any}', 'HomeController@index')->where('any', '.*');
+
+// Route::get('/', 'HomeController@index')->name('home');
 
 Route::resource('artists', 'ArtistController');
 Route::resource('genres', 'GenreController');

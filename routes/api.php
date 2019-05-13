@@ -2,6 +2,12 @@
 
 use Illuminate\Http\Request;
 
+// Artist API
+use App\Artist;
+use App\Http\Resources\ArtistCollection;
+use App\Http\Resources\Artist as ArtistRessource;
+
+
 /*
 |--------------------------------------------------------------------------
 | API Routes
@@ -15,4 +21,10 @@ use Illuminate\Http\Request;
 
 Route::middleware('auth:api')->get('/user', function (Request $request) {
     return $request->user();
+});
+
+
+// Artist API
+Route::get('/artists', function () {
+    return ArtistRessource::collection(Artist::all()->keyBy->id);
 });
