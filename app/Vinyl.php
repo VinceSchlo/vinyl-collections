@@ -48,7 +48,7 @@ class Vinyl extends Model
         $this->tracklist   = $data['tracklist'];
         $this->format      = $data['format'];
         $this->artist_id   = $data['artist_id'];
-        // $this->genre_id    = $data['genre_id'];
+        $this->genre_id    = $data['genre_id'];
         // $this->pochette_id = $data['pochette_id'];
         $this->save();
     }

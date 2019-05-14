@@ -2442,7 +2442,6 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
-//
 
 /* harmony default export */ __webpack_exports__["default"] = ({
   data: function data() {
@@ -2480,24 +2479,21 @@ __webpack_require__.r(__webpack_exports__);
     },
     getArtistsFromApi: function getArtistsFromApi() {
       return axios.get("/api/artists");
-    } // getGenresFromApi() {
-    //     return axios.get(`/api/genres`);
-    // }
-    // getPochettesFromApi() {
-    //     return axios.get(`/api/pochettes`);
-    // }
-
+    },
+    getGenresFromApi: function getGenresFromApi() {
+      return axios.get("/api/genres");
+    }
   },
   mounted: function mounted() {
     var vm = this;
     vm.getArtistsFromApi().then(function (result) {
       var artists;
       vm.artists = result.data;
-    }); // vm.getGenresFromApi().then((result) => {
-    //         let genres;
-    //         vm.genres = result.data.data;
-    //     })
-    // vm.getPochettesFromApi().then((result) => {
+    });
+    vm.getGenresFromApi().then(function (result) {
+      var genres;
+      vm.genres = result.data;
+    }); // vm.getPochettesFromApi().then((result) => {
     //         let pochettes;
     //         vm.pochettes = result.data.data;
     //     })
@@ -39008,6 +39004,48 @@ var render = function() {
               : _vm._e()
           ]),
           _vm._v(" "),
+          _c("div", { staticClass: "form-group" }, [
+            _c("label", { attrs: { for: "artist_id" } }, [_vm._v("Genre")]),
+            _vm._v(" "),
+            _c(
+              "select",
+              {
+                directives: [
+                  {
+                    name: "model",
+                    rawName: "v-model",
+                    value: _vm.fields.genre_id,
+                    expression: "fields.genre_id"
+                  }
+                ],
+                attrs: { name: "genre_id", id: "genre_id" },
+                on: {
+                  change: function($event) {
+                    var $$selectedVal = Array.prototype.filter
+                      .call($event.target.options, function(o) {
+                        return o.selected
+                      })
+                      .map(function(o) {
+                        var val = "_value" in o ? o._value : o.value
+                        return val
+                      })
+                    _vm.$set(
+                      _vm.fields,
+                      "genre_id",
+                      $event.target.multiple ? $$selectedVal : $$selectedVal[0]
+                    )
+                  }
+                }
+              },
+              _vm._l(_vm.genres.data, function(genre, index) {
+                return _c("option", { domProps: { value: genre.id } }, [
+                  _vm._v(_vm._s(genre.name))
+                ])
+              }),
+              0
+            )
+          ]),
+          _vm._v(" "),
           _c(
             "button",
             { staticClass: "btn btn-primary", attrs: { type: "submit" } },
@@ -39018,7 +39056,7 @@ var render = function() {
       _vm._v(" "),
       _vm.success
         ? _c("div", { staticClass: "alert alert-success mt-3" }, [
-            _vm._v("\n            Artiste ajouté !\n        ")
+            _vm._v("\n            Vinyle ajouté !\n        ")
           ])
         : _vm._e()
     ])
@@ -39083,7 +39121,11 @@ var render = function() {
               _vm._v(" "),
               _c("td", [_vm._v(_vm._s(vinyl.tracklist))]),
               _vm._v(" "),
-              _c("td", [_vm._v(_vm._s(vinyl.artist.name))])
+              _c("td", [_vm._v(_vm._s(vinyl.artist.name))]),
+              _vm._v(" "),
+              vinyl.genre
+                ? _c("td", [_vm._v(_vm._s(vinyl.genre.name))])
+                : _vm._e()
             ])
           }),
           0

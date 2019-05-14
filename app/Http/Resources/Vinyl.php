@@ -8,6 +8,10 @@ use Illuminate\Http\Resources\Json\JsonResource;
 use App\Artist;
 use App\Http\Resources\Artist as ArtistResource;
 
+// Genre API
+use App\Genre;
+use App\Http\Resources\Genre as GenreResource;
+
 class Vinyl extends JsonResource
 {
     /**
@@ -25,6 +29,7 @@ class Vinyl extends JsonResource
             'format' => $this->format,
             'date' => $this->date,
             'artist' => new ArtistResource(Artist::find($this->artist_id)),
+            'genre' => new GenreResource(Genre::find($this->genre_id)),
             // 'created_at' => $this->created_at,
             // 'updated_at' => $this->updated_at,
         ];

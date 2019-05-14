@@ -55,7 +55,7 @@ class VinylController extends Controller
             'tracklist'=>'required|max:100',
             'format'=>'required|max:100',
             'artist_id'=>'required',
-            // 'genre_id'=>'required',
+            'genre_id'=>'required',
         ]);
        
         $vinyl->saveVinyl($data);

@@ -31,14 +31,13 @@
                 </select>
                 <div v-if="errors && errors.artist_id" class="text-danger">{{ errors.artist_id[0] }}</div>
             </div>
-            <!-- <div class="form-group">  
-                <select name="genre_id" id="genre_id">
-                    @foreach ($genres as $genre)
-                        <option value="{{ $genre->id }}">{{ $genre->name }}</option>
-                    @endforeach
+            <div class="form-group">
+                <label for="artist_id">Genre</label>
+                <select name="genre_id" id="genre_id" v-model="fields.genre_id">
+                    <option v-for="(genre, index) in genres.data" :value='genre.id'>{{ genre.name }}</option>
                 </select>
             </div>
-            <div class="form-group">  
+            <!--<div class="form-group">  
                 <select name="pochette-id" id="pochette">
                     @foreach ($pochettes as $pochette)
                         <option value="{{ $pochette->id }}">{{ $pochette->illustrator }}</option>
@@ -48,7 +47,7 @@
             <button type="submit" class="btn btn-primary">Create</button>
         </form>
         <div v-if="success" class="alert alert-success mt-3">
-            Artiste ajouté !
+            Vinyle ajouté !
         </div>
     </div>
 </div>
@@ -90,10 +89,10 @@ export default {
         },
         getArtistsFromApi() {
             return axios.get(`/api/artists`);
-        }
-        // getGenresFromApi() {
-        //     return axios.get(`/api/genres`);
-        // }
+        },
+        getGenresFromApi() {
+            return axios.get(`/api/genres`);
+        },
         // getPochettesFromApi() {
         //     return axios.get(`/api/pochettes`);
         // }
@@ -104,10 +103,10 @@ export default {
                 let artists;
                 vm.artists = result.data;
             })
-        // vm.getGenresFromApi().then((result) => {
-        //         let genres;
-        //         vm.genres = result.data.data;
-        //     })
+        vm.getGenresFromApi().then((result) => {
+                let genres;
+                vm.genres = result.data;
+            })
         // vm.getPochettesFromApi().then((result) => {
         //         let pochettes;
         //         vm.pochettes = result.data.data;

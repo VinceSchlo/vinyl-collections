@@ -27,7 +27,7 @@
                         <td>{{ vinyl.format }}</td>
                         <td>{{ vinyl.tracklist }}</td>
                         <td>{{ vinyl.artist.name }}</td>
-                        <!-- <td>{{ vinyl.genre.name }}</td> -->
+                        <td v-if='vinyl.genre'>{{ vinyl.genre.name }}</td>
                         <!-- <td><a href="{{ route('vinyls.edit', ['vinyl' => $vinyl->id] ) }}" class="btn btn-warning">Edit</a></td>
                         <td>
                             <form action="{{ route('vinyls.destroy', ['vinyl' => $vinyl->id]) }} " method="post">
