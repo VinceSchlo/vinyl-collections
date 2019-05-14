@@ -19,11 +19,13 @@
                 <div v-if="errors && errors.tracklist" class="text-danger">{{ errors.tracklist[0] }}</div>
             </div>
             <div class="form-group">  
+                <label for="format">Format</label>
                 <input type="radio" name="format" value="33" v-model="fields.format"><label for="format">33T</label>
                 <input type="radio" name="format" value="45" v-model="fields.format"><label for="format">45T</label>
                 <div v-if="errors && errors.format" class="text-danger">{{ errors.format[0] }}</div>
             </div>
             <div class="form-group">  
+                <label for="artist_id">Artiste</label>
                 <select name="artist_id" id="artist_id" v-model="fields.artist_id">
                     <option v-for="(artist, index) in artists.data" :value='artist.id'>{{ artist.name }}</option>
                 </select>

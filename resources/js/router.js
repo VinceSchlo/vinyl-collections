@@ -16,6 +16,9 @@ import ArtistEdit from './components/artist/edit.vue';
 import VinylIndex from './components/vinyl/index.vue';
 import VinylCreate from './components/vinyl/create.vue';
 
+// Collection components
+import CollectionAdd from './components/collection/add.vue';
+
 // 2. Définition des routes
 // Chaque route doit être mappée à un composant
 const routes =
@@ -51,6 +54,12 @@ const routes =
         path: '/vinyls/create',
         name: 'vinylCreate',
         component: VinylCreate
+    },
+    // Collection routes
+    {
+        path: '/collection/add',
+        name: 'collectionAdd',
+        component: CollectionAdd
     },
 ];
 

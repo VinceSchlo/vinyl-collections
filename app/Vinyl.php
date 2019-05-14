@@ -38,7 +38,7 @@ class Vinyl extends Model
      */
     public function users()
     {
-        return $this->belongsToMany('App\User');
+        return $this->belongsToMany('App\User', 'vinyls_users');
     }
 
     public function saveVinyl($data)

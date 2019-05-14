@@ -25,8 +25,8 @@ class Vinyl extends JsonResource
             'format' => $this->format,
             'date' => $this->date,
             'artist' => new ArtistResource(Artist::find($this->artist_id)),
-            'created_at' => $this->created_at,
-            'updated_at' => $this->updated_at,
+            // 'created_at' => $this->created_at,
+            // 'updated_at' => $this->updated_at,
         ];
         // return parent::toArray($request);
     }

@@ -42,6 +42,15 @@ class User extends Authenticatable
      */
     public function vinyls()
     {
-        return $this->belongsToMany('App\Vinyl');
+        return $this->belongsToMany('App\Vinyl', 'vinyls_users');
+    }
+
+    /**
+     * Add vinyl to the collection of the user.
+     */
+    public function addVinylsToMyCollection($id)
+    {
+        $user = Auth::user();
+        $user->vinyls()->attach($id);
     }
 }

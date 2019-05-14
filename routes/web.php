@@ -25,3 +25,4 @@ Route::resource('artists', 'ArtistController');
 Route::resource('genres', 'GenreController');
 Route::resource('pochettes', 'PochetteController');
 Route::resource('vinyls', 'VinylController');
+Route::resource('users', 'UserController');
