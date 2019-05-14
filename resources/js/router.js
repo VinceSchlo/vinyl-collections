@@ -19,6 +19,12 @@ import VinylCreate from './components/vinyl/create.vue';
 // Collection components
 import CollectionAdd from './components/collection/add.vue';
 
+// Genres components
+import GenreIndex from './components/genre/index.vue';
+import GenreCreate from './components/genre/create.vue';
+import GenreEdit from './components/genre/edit.vue';
+
+
 // 2. Définition des routes
 // Chaque route doit être mappée à un composant
 const routes =
@@ -60,6 +66,22 @@ const routes =
         path: '/collection/add',
         name: 'collectionAdd',
         component: CollectionAdd
+    },
+    // Genres routes
+    {
+        path: '/genres',
+        name: 'genres',
+        component: GenreIndex
+    },
+    {
+        path: '/genres/create',
+        name: 'genreCreate',
+        component: GenreCreate
+    },
+    {
+        path: '/genres/:id/edit',
+        name: 'genreEdit',
+        component: GenreEdit
     },
 ];
 

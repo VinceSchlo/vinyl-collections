@@ -16,6 +16,8 @@
             <h2>Genres</h2>
         </div>
         <div class="row">
+            <router-link :to="{name: 'genres'}" class="btn btn-default">Tous les Genres</router-link>
+            <router-link :to="{name: 'genreCreate'}" class="btn btn-default">Ajouter un Genre</router-link>
             <!-- <a href="{{ route('genres.create') }}" class="btn btn-success">Ajouter Genre</a>
             <a href="{{ route('genres.index') }}" class="btn btn-default">Tous les Genres</a> -->
         </div>
