@@ -16,6 +16,12 @@ import ArtistEdit from './components/artist/edit.vue';
 import VinylIndex from './components/vinyl/index.vue';
 import VinylCreate from './components/vinyl/create.vue';
 
+// Genres components
+import GenreIndex from './components/genre/index.vue';
+import GenreCreate from './components/genre/create.vue';
+import GenreEdit from './components/genre/edit.vue';
+
+
 // 2. Définition des routes
 // Chaque route doit être mappée à un composant
 const routes =
@@ -51,6 +57,22 @@ const routes =
         path: '/vinyls/create',
         name: 'vinylCreate',
         component: VinylCreate
+    },
+    // Genres routes
+    {
+        path: '/genres',
+        name: 'genres',
+        component: GenreIndex
+    },
+    {
+        path: '/genres/create',
+        name: 'genreCreate',
+        component: GenreCreate
+    },
+    {
+        path: '/genres/:id/edit',
+        name: 'genreEdit',
+        component: GenreEdit
     },
 ];
 
