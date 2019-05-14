@@ -3,7 +3,7 @@
  
     <div class="row">
         <h2>Tous les artistes</h2>
-        <!-- <a href="{{ route('artists.create') }}" class="btn btn-primary">Ajouter Artiste</a> -->
+        <router-link :to="{name: 'artistCreate'}" class="btn btn-default">Ajouter un Artiste</router-link>
     </div>
     <div class="row">
         <table class="table table-striped">
@@ -18,15 +18,14 @@
                 <tr v-for="(artist, index) in artists.data">
                     <td>{{artist.id}}</td>
                     <td>{{artist.name}}</td>
+                    <td><router-link :to="{name: 'artistEdit', params: {id: artist.id }}" class="btn btn-warning">Edit</router-link></td>
+                    <td>
+                        <form @submit.prevent="destroy(artist.id)">
+                            <button class="btn btn-danger" type="submit">Delete</button>
+                        </form>
+                    </td>
                 </tr>
-                <!-- <td><a href="{{ route('artists.edit', ['artist' => $artist->id] ) }}" class="btn btn-warning">Edit</a></td> -->
-                <!-- <td>
-                    <form action="{{ route('artists.destroy', ['artist' => $artist->id]) }} " method="post">
-                        @method('DELETE')
-                        @csrf
-                        <button class="btn btn-danger" type="submit">Delete</button>
-                    </form>
-                </td> -->
+                
                 <!-- <td><a href="{{ route('artists.show', ['artist' => $artist->id] ) }}" class="btn btn-success">Show</a></td> -->
             </tbody>
         </table>
@@ -45,15 +44,24 @@
         },
         methods: {
             getArtistsFromApi: function () {
-                let vm = this;
-                return axios.get('http://localhost:8000/api/artists');
+                return axios.get('/api/artists');
+            },
+            destroy: function (id) {
+                axios.post(`/artists/${id}`, { _method: 'delete' }).then(response => {
+                this.success = true;
+                this.artists.splice(id, 1);
+            }).catch(error => {
+                if (error.response.status === 422) {
+                    this.errors = error.response.data.errors || {};
+                }
+            });
             }
         },
         created() {
             let vm = this;
             vm.getArtistsFromApi().then((result) => {
-                let artists;
-                vm.artists = result.data;
+                    let artists;
+                    vm.artists = result.data;
                 })
                 
         }

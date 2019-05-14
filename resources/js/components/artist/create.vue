@@ -1,9 +1,9 @@
 <template>
 <div class="container">
     <h1>Ajouter un nouvel artiste</h1>
+    <router-link :to="{name: 'artists'}" class="btn btn-default">Tous les Artistes</router-link>
     <div class="row">
         <form @submit.prevent="submit">
-            <input type="hidden" name="_token" :value="csrf">
             <div class="form-group">
                 <label for="name">Nom</label>
                 <input type="text" class="form-control" name="name" v-model="fields.name"/>
@@ -21,6 +21,8 @@
 
 
 <script>
+import 'axios'
+
 export default {
   data() {
     return {
@@ -37,14 +39,14 @@ export default {
         this.success = false;
         this.errors = {};
         axios.post('/artists', this.fields).then(response => {
-          this.fields = {}; //Clear input fields.
-          this.loaded = true;
-          this.success = true;
+            this.fields = {}; //Clear input fields.
+            this.loaded = true;
+            this.success = true;
         }).catch(error => {
-          this.loaded = true;
-          if (error.response.status === 422) {
-            this.errors = error.response.data.errors || {};
-          }
+            this.loaded = true;
+            if (error.response.status === 422) {
+                this.errors = error.response.data.errors || {};
+            }
         });
       }
     },

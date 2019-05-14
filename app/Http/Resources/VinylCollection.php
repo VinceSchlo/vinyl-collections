@@ -4,7 +4,7 @@ namespace App\Http\Resources;
 
 use Illuminate\Http\Resources\Json\ResourceCollection;
 
-class ArtistCollection extends ResourceCollection
+class VinylCollection extends ResourceCollection
 {
     /**
      * Transform the resource collection into an array.
@@ -14,9 +14,6 @@ class ArtistCollection extends ResourceCollection
      */
     public function toArray($request)
     {
-        // return [
-        //     'data' => $this->collection,
-        // ];
         return parent::toArray($request);
     }
 }

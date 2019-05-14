@@ -1,0 +1,115 @@
+<template>
+<div class="container">
+    <h1>Ajouter un nouveau vinyle</h1>
+    <div class="row">
+        <form @submit.prevent="submit">
+            <div class="form-group">
+                <label for="name">Titre</label>
+                <input type="text" class="form-control" name="name" v-model="fields.name"/>
+                <div v-if="errors && errors.name" class="text-danger">{{ errors.name[0] }}</div>
+            </div>
+            <div class="form-group">
+                <label for="date">Date de sortie</label>
+                <input type="date" class="form-control" name="date" v-model="fields.date"/>
+                <div v-if="errors && errors.date" class="text-danger">{{ errors.date[0] }}</div>
+            </div>
+            <div class="form-group">
+                <label for="tracklist">Tracklist</label>
+                <input type="text" class="form-control" name="tracklist" v-model="fields.tracklist"/>
+                <div v-if="errors && errors.tracklist" class="text-danger">{{ errors.tracklist[0] }}</div>
+            </div>
+            <div class="form-group">  
+                <input type="radio" name="format" value="33" v-model="fields.format"><label for="format">33T</label>
+                <input type="radio" name="format" value="45" v-model="fields.format"><label for="format">45T</label>
+                <div v-if="errors && errors.format" class="text-danger">{{ errors.format[0] }}</div>
+            </div>
+            <div class="form-group">  
+                <select name="artist_id" id="artist_id" v-model="fields.artist_id">
+                    <option v-for="(artist, index) in artists.data" :value='artist.id'>{{ artist.name }}</option>
+                </select>
+                <div v-if="errors && errors.artist_id" class="text-danger">{{ errors.artist_id[0] }}</div>
+            </div>
+            <!-- <div class="form-group">  
+                <select name="genre_id" id="genre_id">
+                    @foreach ($genres as $genre)
+                        <option value="{{ $genre->id }}">{{ $genre->name }}</option>
+                    @endforeach
+                </select>
+            </div>
+            <div class="form-group">  
+                <select name="pochette-id" id="pochette">
+                    @foreach ($pochettes as $pochette)
+                        <option value="{{ $pochette->id }}">{{ $pochette->illustrator }}</option>
+                    @endforeach
+                </select>
+            </div> -->
+            <button type="submit" class="btn btn-primary">Create</button>
+        </form>
+        <div v-if="success" class="alert alert-success mt-3">
+            Artiste ajouté !
+        </div>
+    </div>
+</div>
+</template>
+
+<script>
+import 'axios'
+
+export default {
+    data() {
+        return {
+            fields: {},
+            artists: {},
+            genres: {},
+            pochettes: {},
+            errors: {},
+            success: false,
+            loaded: true,
+        }
+    },
+    methods: {
+        submit() {
+            if (this.loaded) {
+                this.loaded = false;
+                this.success = false;
+                this.errors = {};
+                axios.post('/vinyls', this.fields).then(response => {
+                    // this.fields = {}; //Clear input fields.
+                    this.loaded = true;
+                    this.success = true;
+                }).catch(error => {
+                    console.log(this.fields)
+                    this.loaded = true;
+                    if (error.response.status === 422) {
+                        this.errors = error.response.data.errors || {};
+                    }
+                });
+            }
+        },
+        getArtistsFromApi() {
+            return axios.get(`/api/artists`);
+        }
+        // getGenresFromApi() {
+        //     return axios.get(`/api/genres`);
+        // }
+        // getPochettesFromApi() {
+        //     return axios.get(`/api/pochettes`);
+        // }
+    },
+    mounted() {
+        let vm = this;
+        vm.getArtistsFromApi().then((result) => {
+                let artists;
+                vm.artists = result.data;
+            })
+        // vm.getGenresFromApi().then((result) => {
+        //         let genres;
+        //         vm.genres = result.data.data;
+        //     })
+        // vm.getPochettesFromApi().then((result) => {
+        //         let pochettes;
+        //         vm.pochettes = result.data.data;
+        //     })
+    }
+}
+</script>

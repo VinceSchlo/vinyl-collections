@@ -42,9 +42,11 @@ class ArtistController extends Controller
         $data = $this->validate($request, [
             'name'=>'required|unique:artists|max:100',
         ]);
-       
+
         $artist->saveArtist($data);
-        return redirect()->route('artists.index');
+
+        return response()->json(null, 200);
+        // return redirect()->route('artists.index');
     }
 
     /**
@@ -81,8 +83,10 @@ class ArtistController extends Controller
         $data = $this->validate($request, [
             'name'=>'required|unique:artists|max:100',
         ]);
+        
         $artist->saveArtist($data);
-        return redirect()->route('artists.index');
+
+        return response()->json($request, 200);
     }
 
     /**
