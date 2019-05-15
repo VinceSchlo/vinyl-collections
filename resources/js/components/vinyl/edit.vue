@@ -32,7 +32,7 @@
                 <div v-if="errors && errors.artist_id" class="text-danger">{{ errors.artist_id[0] }}</div>
             </div>
             <div class="form-group">
-                <label for="artist_id">Genre</label>
+                <label for="genre_id">Genre</label>
                 <select name="genre_id" id="genre_id" v-model="fields.genre_id">
                     <option v-for="(genre, index) in genres.data" :value='genre.id' :key='index'>{{ genre.name }}</option>
                 </select>
@@ -61,6 +61,8 @@ export default {
         return {
             id: this.$route.params.id,
             fields: {},
+            genres: {},
+            artists: {},
             errors: {},
             success: false,
         }
@@ -87,14 +89,30 @@ export default {
         },
         init() {
             return axios.get(`/api/vinyls/${this.id}`);
+        },
+        getArtists() {
+            return axios.get(`/api/artists`);
+        },
+        getGenres() {
+            return axios.get(`/api/genres`);
         }
+
     },
     mounted() {
         let vm = this;
         vm.init().then((result) => {
-                let fields;
-                vm.fields = result.data.data;
-            })
-    }
+            let fields;
+            vm.fields = result.data.data;
+        })
+        vm.getArtists().then((response) => {
+            let artists;
+            vm.artists = response.data;
+        }),
+        vm.getGenres().then((response) => {
+            let genres;
+            vm.genres = response.data;
+        })
+    },
+
 }
 </script>
