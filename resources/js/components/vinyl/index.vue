@@ -20,7 +20,7 @@
                     </tr>
                 </thead>
                 <tbody>
-                    <tr v-for="(vinyl, index) in vinyls.data">
+                    <tr v-for="(vinyl, index) in vinyls.data" :key="index">
                         <td>{{ vinyl.id }}</td>
                         <td>{{ vinyl.name }}</td>
                         <td>{{ vinyl.date }}</td>
@@ -28,6 +28,16 @@
                         <td>{{ vinyl.tracklist }}</td>
                         <td>{{ vinyl.artist.name }}</td>
                         <td v-if='vinyl.genre'>{{ vinyl.genre.name }}</td>
+                        <td v-else><i>unknown</i></td>
+                        <td><router-link :to="{name: 'vinylEdit', params: {id: vinyl.id }}" class="btn btn-warning">Edit</router-link></td>
+                        <td>
+                            <form @submit.prevent="destroy(vinyl.id)">
+                                <button class="btn btn-danger" type="submit">Delete</button>
+                            </form>
+                            <div v-if="success" class="alert alert-success mt-3">
+                                Vinyle supprimé !
+                            </div>
+                        </td>
                         <!-- <td><a href="{{ route('vinyls.edit', ['vinyl' => $vinyl->id] ) }}" class="btn btn-warning">Edit</a></td>
                         <td>
                             <form action="{{ route('vinyls.destroy', ['vinyl' => $vinyl->id]) }} " method="post">

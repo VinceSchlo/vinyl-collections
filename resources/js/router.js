@@ -15,6 +15,7 @@ import ArtistEdit from './components/artist/edit.vue';
 // Vinyl components
 import VinylIndex from './components/vinyl/index.vue';
 import VinylCreate from './components/vinyl/create.vue';
+import VinylEdit from './components/vinyl/edit.vue';
 
 // Collection components
 import CollectionAdd from './components/collection/add.vue';
@@ -60,6 +61,11 @@ const routes =
         path: '/vinyls/create',
         name: 'vinylCreate',
         component: VinylCreate
+    },
+    {
+        path: '/vinyls/:id/edit',
+        name: 'vinylEdit',
+        component: VinylEdit
     },
     // Collection routes
     {
