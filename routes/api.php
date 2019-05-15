@@ -17,6 +17,11 @@ use App\Vinyl;
 use App\Http\Resources\VinylCollection;
 use App\Http\Resources\Vinyl as VinylResource;
 
+// User API
+use App\User;
+// use App\Http\Resources\UserCollection;
+use App\Http\Resources\User as UserResource;
+
 
 /*
 |--------------------------------------------------------------------------
@@ -38,8 +43,8 @@ Route::get('/artists', function () {
     // return ArtistRessource::collection(Artist::all()->keyBy->id);
     return new ArtistCollection(Artist::paginate());
 });
-Route::get('/artists/{id}', function ($id) {
-    return new ArtistResource(Artist::find($id));
+Route::get('/artists/{artist}', function (Artist $artist) {
+    return new ArtistResource($artist);
 });
 
 // Genre API
@@ -47,8 +52,8 @@ Route::get('/genres', function () {
     // return ArtistRessource::collection(Artist::all()->keyBy->id);
     return new GenreCollection(Genre::all());
 });
-Route::get('/genres/{id}', function ($id) {
-    return new GenreResource(Genre::find($id));
+Route::get('/genres/{genre}', function (Genre $genre) {
+    return new GenreResource($genre);
 });
 
 // Vinyl API
@@ -56,6 +61,11 @@ Route::get('/vinyls', function () {
     // return ArtistRessource::collection(Artist::all()->keyBy->id);
     return new VinylCollection(Vinyl::all());
 });
-Route::get('/vinyls/{id}', function ($id) {
-    return new VinylResource(Vinyl::find($id));
+Route::get('/vinyls/{vinyl}', function (Vinyl $vinyl) {
+    return new VinylResource($vinyl);
+});
+
+// Collection API
+Route::get('/collections/{id}', function ($id) {
+    return new UserResource(User::find($id));
 });
