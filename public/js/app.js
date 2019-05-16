@@ -1985,8 +1985,7 @@ __webpack_require__.r(__webpack_exports__);
         _method: 'delete'
       }).then(function (response) {
         _this.success = true;
-
-        _this.artists.splice(id, 1);
+        _this.artists = _this.artists.splice(id, 1);
       })["catch"](function (error) {
         if (error.response.status === 422) {
           _this.errors = error.response.data.errors || {};
@@ -2575,11 +2574,8 @@ __webpack_require__.r(__webpack_exports__);
     return {
       id: this.$route.params.id,
       fields: {},
-<<<<<<< HEAD
-=======
       genres: {},
       artists: {},
->>>>>>> 933b796eb8c325f27b223a05ec52ee4d70a6485e
       errors: {},
       success: false
     };
@@ -2608,15 +2604,12 @@ __webpack_require__.r(__webpack_exports__);
     },
     init: function init() {
       return axios.get("/api/vinyls/".concat(this.id));
-<<<<<<< HEAD
-=======
     },
     getArtists: function getArtists() {
       return axios.get("/api/artists");
     },
     getGenres: function getGenres() {
       return axios.get("/api/genres");
->>>>>>> 933b796eb8c325f27b223a05ec52ee4d70a6485e
     }
   },
   mounted: function mounted() {
@@ -2625,8 +2618,6 @@ __webpack_require__.r(__webpack_exports__);
       var fields;
       vm.fields = result.data.data;
     });
-<<<<<<< HEAD
-=======
     vm.getArtists().then(function (response) {
       var artists;
       vm.artists = response.data;
@@ -2634,7 +2625,6 @@ __webpack_require__.r(__webpack_exports__);
       var genres;
       vm.genres = response.data;
     });
->>>>>>> 933b796eb8c325f27b223a05ec52ee4d70a6485e
   }
 });
 
@@ -39524,11 +39514,7 @@ var render = function() {
           ]),
           _vm._v(" "),
           _c("div", { staticClass: "form-group" }, [
-<<<<<<< HEAD
-            _c("label", { attrs: { for: "artist_id" } }, [_vm._v("Genre")]),
-=======
             _c("label", { attrs: { for: "genre_id" } }, [_vm._v("Genre")]),
->>>>>>> 933b796eb8c325f27b223a05ec52ee4d70a6485e
             _vm._v(" "),
             _c(
               "select",
@@ -55556,16 +55542,10 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _components_vinyl_create_vue__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! ./components/vinyl/create.vue */ "./resources/js/components/vinyl/create.vue");
 /* harmony import */ var _components_vinyl_edit_vue__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! ./components/vinyl/edit.vue */ "./resources/js/components/vinyl/edit.vue");
 /* harmony import */ var _components_collection_add_vue__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(/*! ./components/collection/add.vue */ "./resources/js/components/collection/add.vue");
-<<<<<<< HEAD
 /* harmony import */ var _components_collection_index_vue__WEBPACK_IMPORTED_MODULE_10__ = __webpack_require__(/*! ./components/collection/index.vue */ "./resources/js/components/collection/index.vue");
 /* harmony import */ var _components_genre_index_vue__WEBPACK_IMPORTED_MODULE_11__ = __webpack_require__(/*! ./components/genre/index.vue */ "./resources/js/components/genre/index.vue");
 /* harmony import */ var _components_genre_create_vue__WEBPACK_IMPORTED_MODULE_12__ = __webpack_require__(/*! ./components/genre/create.vue */ "./resources/js/components/genre/create.vue");
 /* harmony import */ var _components_genre_edit_vue__WEBPACK_IMPORTED_MODULE_13__ = __webpack_require__(/*! ./components/genre/edit.vue */ "./resources/js/components/genre/edit.vue");
-=======
-/* harmony import */ var _components_genre_index_vue__WEBPACK_IMPORTED_MODULE_10__ = __webpack_require__(/*! ./components/genre/index.vue */ "./resources/js/components/genre/index.vue");
-/* harmony import */ var _components_genre_create_vue__WEBPACK_IMPORTED_MODULE_11__ = __webpack_require__(/*! ./components/genre/create.vue */ "./resources/js/components/genre/create.vue");
-/* harmony import */ var _components_genre_edit_vue__WEBPACK_IMPORTED_MODULE_12__ = __webpack_require__(/*! ./components/genre/edit.vue */ "./resources/js/components/genre/edit.vue");
->>>>>>> 933b796eb8c325f27b223a05ec52ee4d70a6485e
 
 
 vue__WEBPACK_IMPORTED_MODULE_0___default.a.use(vue_router__WEBPACK_IMPORTED_MODULE_1__["default"]);
@@ -55634,7 +55614,6 @@ var routes = [{
 {
   path: '/genres',
   name: 'genres',
-<<<<<<< HEAD
   component: _components_genre_index_vue__WEBPACK_IMPORTED_MODULE_11__["default"]
 }, {
   path: '/genres/create',
@@ -55644,17 +55623,6 @@ var routes = [{
   path: '/genres/:id/edit',
   name: 'genreEdit',
   component: _components_genre_edit_vue__WEBPACK_IMPORTED_MODULE_13__["default"]
-=======
-  component: _components_genre_index_vue__WEBPACK_IMPORTED_MODULE_10__["default"]
-}, {
-  path: '/genres/create',
-  name: 'genreCreate',
-  component: _components_genre_create_vue__WEBPACK_IMPORTED_MODULE_11__["default"]
-}, {
-  path: '/genres/:id/edit',
-  name: 'genreEdit',
-  component: _components_genre_edit_vue__WEBPACK_IMPORTED_MODULE_12__["default"]
->>>>>>> 933b796eb8c325f27b223a05ec52ee4d70a6485e
 }];
 /* harmony default export */ __webpack_exports__["default"] = (new vue_router__WEBPACK_IMPORTED_MODULE_1__["default"]({
   history: true,
