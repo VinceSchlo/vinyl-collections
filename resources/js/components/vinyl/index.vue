@@ -22,7 +22,7 @@
                 <tbody>
                     <tr v-for="(vinyl, index) in vinyls.data" :key="index">
                         <td>{{ vinyl.id }}</td>
-                        <td>{{ vinyl.name }}</td>
+                        <td><router-link :to="{name: 'vinylShow', params: {id: vinyl.id}}">{{ vinyl.name }}</router-link></td>
                         <td>{{ vinyl.date }}</td>
                         <td>{{ vinyl.format }}</td>
                         <td>{{ vinyl.tracklist }}</td>
@@ -83,7 +83,7 @@
                     let vinyls;
                     vm.vinyls = result.data;
                 })
-                
+
         }
     }
 </script>
