@@ -75,7 +75,7 @@ class UserController extends Controller
             'vinyl'=>'unique:vinyls_users',
         ]);
         
-        $user->vinyls()->sync($data['vinyl']);
+        $user->vinyls()->attach($data['vinyl']);
 
         return response()->json($request, 200);
     }

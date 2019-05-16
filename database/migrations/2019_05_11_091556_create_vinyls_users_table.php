@@ -19,6 +19,8 @@ class CreateVinylsUsersTable extends Migration
             $table->bigInteger('user_id')->unsigned();
             $table->timestamps();
 
+            $table->unique('vinyl_id', 'user_id');
+            
             $table->foreign('vinyl_id')->references('id')->on('vinyls')
                     ->onDelete('cascade')
                     ->onUpdate('cascade');

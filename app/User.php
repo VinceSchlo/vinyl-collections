@@ -50,7 +50,6 @@ class User extends Authenticatable
      */
     public function addVinylsToMyCollection($id)
     {
-        $user = Auth::user();
-        $user->vinyls()->attach($id);
+        $this->vinyls()->attach($id);
     }
 }

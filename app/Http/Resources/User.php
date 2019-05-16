@@ -22,7 +22,7 @@ class User extends JsonResource
             'id' => $this->id,
             'name' => $this->name,
             'email' => $this->email,
-            // 'collection' => Vinyl::collection($this->whenLoaded('vinyls_users')),
+            'collection' => Vinyl::collection($this->vinyls),
             // 'collection' => new ArtistResource(Artist::find($this->artist_id)),
         //     'created_at' => $this->created_at,
         //     'updated_at' => $this->updated_at,
