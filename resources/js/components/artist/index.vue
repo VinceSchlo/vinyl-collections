@@ -49,7 +49,7 @@
             destroy: function (id) {
                 axios.post(`/artists/${id}`, { _method: 'delete' }).then(response => {
                 this.success = true;
-                this.artists.splice(id, 1);
+                this.artists = this.artists.splice(id, 1);
             }).catch(error => {
                 if (error.response.status === 422) {
                     this.errors = error.response.data.errors || {};
