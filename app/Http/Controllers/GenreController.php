@@ -8,28 +8,6 @@ use Illuminate\Http\Request;
 class GenreController extends Controller
 {
     /**
-     * Display a listing of the resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function index()
-    {
-        $genre = Genre::all();
-        
-        return view('genre.index')->with('genres', $genre);
-    }
-
-    /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function create()
-    {
-        return view('genre.create');
-    }
-
-    /**
      * Store a newly created resource in storage.
      *
      * @param  \Illuminate\Http\Request  $request
@@ -43,29 +21,7 @@ class GenreController extends Controller
         ]);
        
         $genre->saveGenre($data);
-        return redirect()->route('genres.index');
-    }
-
-    /**
-     * Display the specified resource.
-     *
-     * @param  \App\Genre  $genre
-     * @return \Illuminate\Http\Response
-     */
-    public function show(Genre $genre)
-    {
-        return view('genre.show')->with('genre', $genre);        
-    }
-
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  \App\Genre  $genre
-     * @return \Illuminate\Http\Response
-     */
-    public function edit(Genre $genre)
-    {
-        return view('genre.edit')->with('genre', $genre);
+        return response()->json("created", 201);
     }
 
     /**
@@ -81,7 +37,8 @@ class GenreController extends Controller
             'name'=>'required|unique:genres|max:100',
         ]);
         $genre->saveGenre($data);
-        return redirect()->route('genres.index');
+
+        return response()->json($request, 200);
     }
 
     /**
@@ -93,6 +50,7 @@ class GenreController extends Controller
     public function destroy(Genre $genre)
     {
         $genre->delete();
-        return redirect()->route('genres.index');
+
+        return response()->json("Deleted", 200);
     }
 }

@@ -32,7 +32,7 @@ export default {
         submit() {
             this.success = false;
             this.errors = {};
-            axios.post(`/artists/${this.id}`, { name: this.fields.name, _method: 'patch'} ).then(response => {
+            axios.post(`/api/artists/${this.id}`, { name: this.fields.name, _method: 'patch'} ).then(response => {
                 this.success = true;
             }).catch(error => {
                 if (error.response.status === 422) {

@@ -8,29 +8,6 @@ use Illuminate\Http\Request;
 class ArtistController extends Controller
 {
     /**
-     * Display a listing of the resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function index()
-    {
-        $artists = Artist::all();
-        
-        // return view('artist.index')->with('artists', $artists);
-        return $artists;
-    }
-
-    /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function create()
-    {
-        return view('artist.create');
-    }
-
-    /**
      * Store a newly created resource in storage.
      *
      * @param  \Illuminate\Http\Request  $request
@@ -45,30 +22,7 @@ class ArtistController extends Controller
 
         $artist->saveArtist($data);
 
-        return response()->json(null, 200);
-        // return redirect()->route('artists.index');
-    }
-
-    /**
-     * Display the specified resource.
-     *
-     * @param  \App\Artist  $artist
-     * @return \Illuminate\Http\Response
-     */
-    public function show(Artist $artist)
-    {
-        return view('artist.show')->with('artist', $artist);
-    }
-
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  \App\Artist  $artist
-     * @return \Illuminate\Http\Response
-     */
-    public function edit(Artist $artist)
-    {
-        return view('artist.edit')->with('artist', $artist);
+        return response()->json("created", 201);
     }
 
     /**
@@ -98,6 +52,6 @@ class ArtistController extends Controller
     public function destroy(Artist $artist)
     {
         $artist->delete();
-        return redirect()->route('artists.index');
+        return response()->json("deleted", 200);
     }
 }

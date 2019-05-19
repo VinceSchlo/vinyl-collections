@@ -34,6 +34,15 @@ use App\Http\Resources\User as UserResource;
 |
 */
 
+// Ressources
+Route::resource('artists'  , 'ArtistController'  )->only(['store', 'update', 'destroy']);
+Route::resource('genres'   , 'GenreController'   )->only(['store', 'update', 'destroy']);
+Route::resource('pochettes', 'PochetteController')->only(['store', 'update', 'destroy']);
+Route::resource('vinyls'   , 'VinylController'   )->only(['store', 'update', 'destroy']);
+Route::resource('users'    , 'UserController'    )->only(['store', 'update', 'destroy']);
+
+
+
 Route::middleware('auth:api')->get('/user', function (Request $request) {
     return $request->user();
 });

@@ -5,17 +5,17 @@
             <!-- @method('PATCH') -->
             <div class="form-group">
                 <label for="name">Titre</label>
-                <input type="text" class="form-control" name="name" v-model="fields.name"/>
+                <input type="text" class="form-control" id="name" name="name" v-model="fields.name"/>
                 <div v-if="errors && errors.name" class="text-danger">{{ errors.name[0] }}</div>
             </div>
             <div class="form-group">
                 <label for="date">Date de sortie</label>
-                <input type="date" class="form-control" name="date" v-model="fields.date"/>
+                <input type="date" class="form-control" id="date" name="date" v-model="fields.date"/>
                 <div v-if="errors && errors.date" class="text-danger">{{ errors.date[0] }}</div>
             </div>
             <div class="form-group">
                 <label for="tracklist">Tracklist</label>
-                <input type="text" class="form-control" name="tracklist" v-model="fields.tracklist"/>
+                <input type="text" class="form-control" id="tracklist" name="tracklist" v-model="fields.tracklist"/>
                 <div v-if="errors && errors.tracklist" class="text-danger">{{ errors.tracklist[0] }}</div>
             </div>
             <div class="form-group">
@@ -71,7 +71,7 @@ export default {
         submit() {
             this.success = false;
             this.errors = {};
-            axios.post(`/vinyls/${this.id}`, {
+            axios.post(`/api/vinyls/${this.id}`, {
                 name: this.fields.name,
                 date: this.fields.date,
                 tracklist: this.fields.tracklist,

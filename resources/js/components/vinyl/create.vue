@@ -74,7 +74,7 @@ export default {
                 this.loaded = false;
                 this.success = false;
                 this.errors = {};
-                axios.post('/vinyls', this.fields).then(response => {
+                axios.post('/api/vinyls', this.fields).then(response => {
                     // this.fields = {}; //Clear input fields.
                     this.loaded = true;
                     this.success = true;

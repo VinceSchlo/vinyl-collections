@@ -68,7 +68,7 @@
                 return axios.get('/api/vinyls');
             },
             destroy: function (id) {
-                axios.post(`/vinyls/${id}`, { _method: 'delete' }).then(response => {
+                axios.post(`/api/vinyls/${id}`, { _method: 'delete' }).then(response => {
                 this.success = true;
             }).catch(error => {
                 if (error.response.status === 422) {

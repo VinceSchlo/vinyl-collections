@@ -1831,7 +1831,7 @@ __webpack_require__.r(__webpack_exports__);
         this.loaded = false;
         this.success = false;
         this.errors = {};
-        axios.post('/artists', this.fields).then(function (response) {
+        axios.post('/api/artists', this.fields).then(function (response) {
           _this.fields = {}; //Clear input fields.
 
           _this.loaded = true;
@@ -1895,7 +1895,7 @@ __webpack_require__.r(__webpack_exports__);
 
       this.success = false;
       this.errors = {};
-      axios.post("/artists/".concat(this.id), {
+      axios.post("/api/artists/".concat(this.id), {
         name: this.fields.name,
         _method: 'patch'
       }).then(function (response) {
@@ -1981,7 +1981,7 @@ __webpack_require__.r(__webpack_exports__);
     destroy: function destroy(id) {
       var _this = this;
 
-      axios.post("/artists/".concat(id), {
+      axios.post("/api/artists/".concat(id), {
         _method: 'delete'
       }).then(function (response) {
         _this.success = true;
@@ -2134,7 +2134,7 @@ __webpack_require__.r(__webpack_exports__);
         this.loaded = false;
         this.success = false;
         this.errors = {};
-        axios.post('/genres', this.fields).then(function (response) {
+        axios.post('/api/genres', this.fields).then(function (response) {
           _this.fields = {}; //Clear input fields.
 
           _this.loaded = true;
@@ -2199,7 +2199,7 @@ __webpack_require__.r(__webpack_exports__);
 
       this.success = false;
       this.errors = {};
-      axios.post("/genres/".concat(this.id), {
+      axios.post("/api/genres/".concat(this.id), {
         name: this.fields.name,
         _method: 'patch'
       }).then(function (response) {
@@ -2287,7 +2287,7 @@ __webpack_require__.r(__webpack_exports__);
     destroy: function destroy(id) {
       var _this = this;
 
-      axios.post("/genres/".concat(id), {
+      axios.post("/api/genres/".concat(id), {
         _method: 'delete'
       }).then(function (response) {
         _this.success = true;
@@ -2463,7 +2463,7 @@ __webpack_require__.r(__webpack_exports__);
         this.loaded = false;
         this.success = false;
         this.errors = {};
-        axios.post('/vinyls', this.fields).then(function (response) {
+        axios.post('/api/vinyls', this.fields).then(function (response) {
           // this.fields = {}; //Clear input fields.
           _this.loaded = true;
           _this.success = true;
@@ -2586,7 +2586,7 @@ __webpack_require__.r(__webpack_exports__);
 
       this.success = false;
       this.errors = {};
-      axios.post("/vinyls/".concat(this.id), {
+      axios.post("/api/vinyls/".concat(this.id), {
         name: this.fields.name,
         date: this.fields.date,
         tracklist: this.fields.tracklist,
@@ -2711,7 +2711,7 @@ __webpack_require__.r(__webpack_exports__);
     destroy: function destroy(id) {
       var _this = this;
 
-      axios.post("/vinyls/".concat(id), {
+      axios.post("/api/vinyls/".concat(id), {
         _method: 'delete'
       }).then(function (response) {
         _this.success = true;
@@ -38729,7 +38729,7 @@ var render = function() {
                 }
               ],
               staticClass: "form-control",
-              attrs: { type: "text", name: "name" },
+              attrs: { type: "text", id: "name", name: "name" },
               domProps: { value: _vm.fields.name },
               on: {
                 input: function($event) {
@@ -39397,7 +39397,7 @@ var render = function() {
                 }
               ],
               staticClass: "form-control",
-              attrs: { type: "text", name: "name" },
+              attrs: { type: "text", id: "name", name: "name" },
               domProps: { value: _vm.fields.name },
               on: {
                 input: function($event) {
@@ -39429,7 +39429,7 @@ var render = function() {
                 }
               ],
               staticClass: "form-control",
-              attrs: { type: "date", name: "date" },
+              attrs: { type: "date", id: "date", name: "date" },
               domProps: { value: _vm.fields.date },
               on: {
                 input: function($event) {
@@ -39461,7 +39461,7 @@ var render = function() {
                 }
               ],
               staticClass: "form-control",
-              attrs: { type: "text", name: "tracklist" },
+              attrs: { type: "text", id: "tracklist", name: "tracklist" },
               domProps: { value: _vm.fields.tracklist },
               on: {
                 input: function($event) {

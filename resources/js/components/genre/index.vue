@@ -49,7 +49,7 @@
                 return axios.get('/api/genres');
             },
             destroy: function (id) {
-                axios.post(`/genres/${id}`, { _method: 'delete' }).then(response => {
+                axios.post(`/api/genres/${id}`, { _method: 'delete' }).then(response => {
                 this.success = true;
                 this.genres.splice(id, 1);
                 this.success = true;

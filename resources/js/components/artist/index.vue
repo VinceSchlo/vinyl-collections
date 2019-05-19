@@ -47,7 +47,7 @@
                 return axios.get('/api/artists');
             },
             destroy: function (id) {
-                axios.post(`/artists/${id}`, { _method: 'delete' }).then(response => {
+                axios.post(`/api/artists/${id}`, { _method: 'delete' }).then(response => {
                 this.success = true;
                 this.artists = this.artists.splice(id, 1);
             }).catch(error => {

@@ -5,7 +5,7 @@
             <!-- @method('PATCH') -->
             <div class="form-group">
                 <label for="name">Nom</label>
-                <input type="text" class="form-control" name="name" v-model="fields.name"  />
+                <input type="text" class="form-control" id="name" name="name" v-model="fields.name"  />
             </div>
             <button type="submit" class="btn btn-primary">Update</button>
         </form>
@@ -33,7 +33,7 @@ export default {
         submit() {
             this.success = false;
             this.errors = {};
-            axios.post(`/genres/${this.id}`, { name: this.fields.name, _method: 'patch'} ).then(response => {
+            axios.post(`/api/genres/${this.id}`, { name: this.fields.name, _method: 'patch'} ).then(response => {
                 this.success = true;
             }).catch(error => {
                 if (error.response.status === 422) {

@@ -11,36 +11,6 @@ use Illuminate\Http\Request;
 class VinylController extends Controller
 {
     /**
-     * Display a listing of the resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function index()
-    {
-        $vinyls = Vinyl::all();
-
-        return view('vinyl.index', ['vinyls' => $vinyls]);
-        // return $vinyls;
-    }
-
-    /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function create()
-    {
-        $artists = Artist::all();
-        $genres = Genre::all();
-        $pochettes = Pochette::all();
-
-        return view('vinyl.create', [
-            'artists' => $artists, 
-            'genres' => $genres, 
-            'pochettes' => $pochettes]);
-    }
-
-    /**
      * Store a newly created resource in storage.
      *
      * @param  \Illuminate\Http\Request  $request
@@ -59,37 +29,7 @@ class VinylController extends Controller
         ]);
        
         $vinyl->saveVinyl($data);
-        return redirect()->route('vinyls.index');
-    }
-
-    /**
-     * Display the specified resource.
-     *
-     * @param  \App\Vinyl  $vinyl
-     * @return \Illuminate\Http\Response
-     */
-    public function show(Vinyl $vinyl)
-    {
-        return view('vinyl.show', ['vinyl' => $vinyl]);
-    }
-
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  \App\Vinyl  $vinyl
-     * @return \Illuminate\Http\Response
-     */
-    public function edit(Vinyl $vinyl)
-    {
-        $artists = Artist::all();
-        $genres = Genre::all();
-        $pochettes = Pochette::all();
-
-        return view('vinyl.edit', [
-            'artists'   => $artists, 
-            'genres'    => $genres, 
-            'pochettes' => $pochettes,
-            'vinyl'     => $vinyl]);
+        return response()->json("created", 201);
     }
 
     /**
@@ -111,7 +51,7 @@ class VinylController extends Controller
         ]);
 
         $vinyl->saveVinyl($data);
-        return redirect()->route('vinyls.index');
+        return response()->json($request, 200);
     }
 
     /**
@@ -123,6 +63,6 @@ class VinylController extends Controller
     public function destroy(Vinyl $vinyl)
     {
         $vinyl->delete();
-        return redirect()->route('vinyls.index');
+        return response()->json("Deleted", 200);
     }
 }
