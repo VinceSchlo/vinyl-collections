@@ -27,6 +27,7 @@
             <div class="form-group">
                 <label for="artist_id">Artiste</label>
                 <select name="artist_id" id="artist_id" v-model="fields.artist_id">
+                    <option disabled>Artiste actuel : {{ fields.artist.name }}</option>
                     <option v-for="(artist, index) in artists.data" :value='artist.id' :key='index'>{{ artist.name }}</option>
                 </select>
                 <div v-if="errors && errors.artist_id" class="text-danger">{{ errors.artist_id[0] }}</div>
@@ -34,6 +35,7 @@
             <div class="form-group">
                 <label for="genre_id">Genre</label>
                 <select name="genre_id" id="genre_id" v-model="fields.genre_id">
+                    <option disabled>Genre actuel : {{ fields.genre.name }}</option>
                     <option v-for="(genre, index) in genres.data" :value='genre.id' :key='index'>{{ genre.name }}</option>
                 </select>
             </div>

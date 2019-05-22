@@ -2568,6 +2568,8 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
 
 /* harmony default export */ __webpack_exports__["default"] = ({
   data: function data() {
@@ -2786,12 +2788,29 @@ __webpack_require__.r(__webpack_exports__);
   methods: {
     getVinyl: function getVinyl() {
       return axios.get("/api/vinyls/".concat(this.id));
+    },
+    getTracklist: function getTracklist() {
+      var config = {
+        headers: {
+          'Access-Control-Allow-Methods': 'GET,PUT,PATCH,POST,DELETE',
+          'Access-Control-Allow-Origin': '*',
+          'Content-Type': 'application/json',
+          'Access-Control-Allow-Headers': 'Content-Type'
+        }
+      }; // const tracklist_id = this.vinyl.tracklist;
+
+      return axios.get('https://api.discogs.com/masters/1203', config);
     }
   },
   mounted: function mounted() {
     var vm = this;
     vm.getVinyl().then(function (result) {
       vm.vinyl = result.data.data;
+    });
+    vm.getTracklist().then(function (result) {
+      vm.vinyl.tracklist_content = result.tracklist;
+    })["catch"](function (error) {
+      console.log(error);
     });
   }
 });
@@ -39277,9 +39296,11 @@ var render = function() {
                 }
               },
               _vm._l(_vm.artists.data, function(artist, index) {
-                return _c("option", { domProps: { value: artist.id } }, [
-                  _vm._v(_vm._s(artist.name))
-                ])
+                return _c(
+                  "option",
+                  { key: index, domProps: { value: artist.id } },
+                  [_vm._v(_vm._s(artist.name))]
+                )
               }),
               0
             ),
@@ -39325,9 +39346,11 @@ var render = function() {
                 }
               },
               _vm._l(_vm.genres.data, function(genre, index) {
-                return _c("option", { domProps: { value: genre.id } }, [
-                  _vm._v(_vm._s(genre.name))
-                ])
+                return _c(
+                  "option",
+                  { key: index, domProps: { value: genre.id } },
+                  [_vm._v(_vm._s(genre.name))]
+                )
               }),
               0
             )
@@ -39561,14 +39584,20 @@ var render = function() {
                   }
                 }
               },
-              _vm._l(_vm.artists.data, function(artist, index) {
-                return _c(
-                  "option",
-                  { key: index, domProps: { value: artist.id } },
-                  [_vm._v(_vm._s(artist.name))]
-                )
-              }),
-              0
+              [
+                _c("option", { attrs: { disabled: "" } }, [
+                  _vm._v("Artiste actuel : " + _vm._s(_vm.fields.artist.name))
+                ]),
+                _vm._v(" "),
+                _vm._l(_vm.artists.data, function(artist, index) {
+                  return _c(
+                    "option",
+                    { key: index, domProps: { value: artist.id } },
+                    [_vm._v(_vm._s(artist.name))]
+                  )
+                })
+              ],
+              2
             ),
             _vm._v(" "),
             _vm.errors && _vm.errors.artist_id
@@ -39611,14 +39640,20 @@ var render = function() {
                   }
                 }
               },
-              _vm._l(_vm.genres.data, function(genre, index) {
-                return _c(
-                  "option",
-                  { key: index, domProps: { value: genre.id } },
-                  [_vm._v(_vm._s(genre.name))]
-                )
-              }),
-              0
+              [
+                _c("option", { attrs: { disabled: "" } }, [
+                  _vm._v("Genre actuel : " + _vm._s(_vm.fields.genre.name))
+                ]),
+                _vm._v(" "),
+                _vm._l(_vm.genres.data, function(genre, index) {
+                  return _c(
+                    "option",
+                    { key: index, domProps: { value: genre.id } },
+                    [_vm._v(_vm._s(genre.name))]
+                  )
+                })
+              ],
+              2
             )
           ]),
           _vm._v(" "),
@@ -39852,7 +39887,7 @@ var render = function() {
     ]),
     _vm._v(" "),
     _c("div", { staticClass: "row" }, [
-      _c("p", [_vm._v(" tracklist : " + _vm._s(_vm.vinyl.tracklist))])
+      _c("p", [_vm._v(" tracklist : " + _vm._s(_vm.vinyl.tracklist_content))])
     ]),
     _vm._v(" "),
     _c("div", { staticClass: "row" }, [
