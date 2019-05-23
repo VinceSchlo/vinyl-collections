@@ -15,19 +15,19 @@
                     <td>Tracklist</td>
                     <td>Artiste</td>
                     <td>Genre</td>
-                    <!-- <td>Genre</td> -->
+                    <td>Genre</td>
                     <td colspan="3">Action</td>
                     </tr>
                 </thead>
                 <tbody>
-                    <!-- <tr v-for="(vinyl, index) in vinyls.data">
+                    <tr v-for="(vinyl, index) in collection" :key="index">
                         <td>{{ vinyl.id }}</td>
                         <td>{{ vinyl.name }}</td>
                         <td>{{ vinyl.date }}</td>
                         <td>{{ vinyl.format }}</td>
                         <td>{{ vinyl.tracklist }}</td>
                         <td>{{ vinyl.artist.name }}</td>
-                        <td v-if='vinyl.genre'>{{ vinyl.genre.name }}</td> -->
+                        <td v-if='vinyl.genre'>{{ vinyl.genre.name }}</td>
                         <!-- <td><a href="{{ route('vinyls.edit', ['vinyl' => $vinyl->id] ) }}" class="btn btn-warning">Edit</a></td>
                         <td>
                             <form action="{{ route('vinyls.destroy', ['vinyl' => $vinyl->id]) }} " method="post">
@@ -37,9 +37,34 @@
                             </form>
                         </td>
                         <td><a href="{{ route('vinyls.show', ['vinyl' => $vinyl->id] ) }}" class="btn btn-success">Show</a></td> -->
-                    <!-- </tr> -->
+                    </tr>
                 </tbody>
             </table>
         </div>
     </div>
 </template>
+
+<script>
+    import 'axios'
+
+    export default {
+        data() {
+            return {
+                collection: {}
+            }
+        },
+        methods: {
+            getCollectionFromApi: function () {
+                return axios.get(`/api/collections/${this.$userId}`);
+            },
+        },
+        created() {
+            let vm = this;
+            vm.getCollectionFromApi().then((result) => {
+                    let collection;
+                    vm.collection = result.data.data;
+                })
+
+        }
+    }
+</script>

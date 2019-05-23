@@ -14,7 +14,7 @@
             <p> format : {{ vinyl.format }}</p>
         </div>
         <div class="row">
-            <p> tracklist : {{ vinyl.tracklist }}</p>
+            <p> tracklist : {{ vinyl.tracklist_content }}</p>
         </div>
         <div class="row">
             <p> artiste : {{ vinyl.artist.name }}</p>
@@ -42,6 +42,11 @@
         methods: {
             getVinyl: function () {
                 return axios.get(`/api/vinyls/${this.id}`);
+            },
+            getTracklist: function() {
+                let config = { headers: { 'Access-Control-Allow-Methods': 'GET,PUT,PATCH,POST,DELETE', 'Access-Control-Allow-Origin': '*', 'Content-Type': 'application/json', 'Access-Control-Allow-Headers': 'Content-Type' } };
+                // const tracklist_id = this.vinyl.tracklist;
+                return axios.get('https://api.discogs.com/masters/1203', config);
             }
         },
         mounted() {
@@ -49,6 +54,13 @@
             vm.getVinyl().then((result) => {
                 vm.vinyl = result.data.data;
             });
+
+            vm.getTracklist().then((result) => {
+                vm.vinyl.tracklist_content = result.tracklist;
+            }).catch(error => {
+                console.log(error);
+
+            })
         }
     }
 </script>
