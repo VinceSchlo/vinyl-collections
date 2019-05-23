@@ -52,6 +52,6 @@ class ArtistController extends Controller
     public function destroy(Artist $artist)
     {
         $artist->delete();
-        return response()->json("deleted", 200);
+        return response()->json($artist, 200);
     }
 }

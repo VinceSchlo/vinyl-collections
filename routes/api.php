@@ -54,7 +54,7 @@ Route::get('/artists', function () {
 });
 Route::get('/artists/{artist}', function (Artist $artist) {
     return new ArtistResource($artist);
-});
+})->name('artist.show');
 
 // Genre API
 Route::get('/genres', function () {

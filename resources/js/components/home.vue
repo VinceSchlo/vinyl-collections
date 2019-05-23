@@ -45,6 +45,15 @@
             <a href="{{ route('vinyls.index') }}" class="btn btn-default">Tous les Vinyles</a> -->
         </div>
     </div>
+    <div class="container">
+        <div class="row">
+            <h2>Pochettes</h2>
+        </div>
+        <div class="row">
+<!--            <router-link :to="{name: 'pochettes'}" class="btn btn-default">Toutes les pochettes</router-link>-->
+            <router-link :to="{name: 'pochetteCreate'}" class="btn btn-default">Ajouter une pochette</router-link>
+        </div>
+    </div>
 </div>
 </template>
 

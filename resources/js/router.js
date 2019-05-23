@@ -27,6 +27,9 @@ import GenreIndex from './components/genre/index.vue';
 import GenreCreate from './components/genre/create.vue';
 import GenreEdit from './components/genre/edit.vue';
 
+// Pochettes components
+import PochetteCreate from './components/pochette/create.vue';
+
 
 // 2. Définition des routes
 // Chaque route doit être mappée à un composant
@@ -101,6 +104,12 @@ const routes =
         name: 'genreEdit',
         component: GenreEdit
     },
+    // Pochettes routes
+    {
+        path: '/pochettes/create',
+        name: 'pochetteCreate',
+        component: PochetteCreate
+    }
 ];
 
 

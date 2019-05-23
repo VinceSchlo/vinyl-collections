@@ -38,7 +38,7 @@ export default {
         this.loaded = false;
         this.success = false;
         this.errors = {};
-        axios.post('/api/artists', this.fields).then(response => {
+        axios.post('/artists', this.fields).then(response => {
             this.fields = {}; //Clear input fields.
             this.loaded = true;
             this.success = true;

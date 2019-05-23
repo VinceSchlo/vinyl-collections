@@ -7,9 +7,10 @@ use Illuminate\Database\Eloquent\Model;
 class Pochette extends Model
 {
     protected $table = 'pochettes';
+    protected $fillable = ['illustrator', 'image'];
 
         /**
-     * Get the user that owns the phone.
+     * Get the vinyl that belong to the pochette.
      */
     public function vinyl()
     {
