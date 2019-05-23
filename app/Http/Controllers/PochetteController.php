@@ -8,26 +8,6 @@ use Illuminate\Http\Request;
 class PochetteController extends Controller
 {
     /**
-     * Display a listing of the resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function index()
-    {
-        //
-    }
-
-    /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function create()
-    {
-        //
-    }
-
-    /**
      * Store a newly created resource in storage.
      *
      * @param  \Illuminate\Http\Request  $request
@@ -35,29 +15,17 @@ class PochetteController extends Controller
      */
     public function store(Request $request)
     {
-        //
-    }
+        $data = $this->validate($request,[
+            'illustrator'=>'required|max:100',
+        ]);
 
-    /**
-     * Display the specified resource.
-     *
-     * @param  \App\Pochette  $pochette
-     * @return \Illuminate\Http\Response
-     */
-    public function show(Pochette $pochette)
-    {
-        //
-    }
 
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  \App\Pochette  $pochette
-     * @return \Illuminate\Http\Response
-     */
-    public function edit(Pochette $pochette)
-    {
-        //
+        $image = $request->file->store('pochettes');
+
+        $pochette = new Pochette();
+        $pochette->image = $image;
+        $pochette->illustrator = $data['illustrator'];
+        $pochette->save();
     }
 
     /**

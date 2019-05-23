@@ -25,7 +25,7 @@
                         </form>
                     </td>
                 </tr>
-                
+                {{ artists }}
                 <!-- <td><a href="{{ route('artists.show', ['artist' => $artist->id] ) }}" class="btn btn-success">Show</a></td> -->
             </tbody>
         </table>
@@ -39,7 +39,9 @@
     export default {
         data() {
             return {
-                artists: []
+                artists: [],
+                error: {},
+                artist: {}
             }
         },
         methods: {
@@ -48,10 +50,11 @@
             },
             destroy: function (id) {
                 axios.post(`/api/artists/${id}`, { _method: 'delete' }).then(response => {
-                this.success = true;
-                this.artists = this.artists.splice(id, 1);
-            }).catch(error => {
-                if (error.response.status === 422) {
+                    this.success = true;
+
+
+                }).catch(error => {
+                    if (error.response.status === 422) {
                     this.errors = error.response.data.errors || {};
                 }
             });
