@@ -6,7 +6,7 @@
                 <div class="form-group">
                     <label for="vinyl_id">Vinyl</label>
                     <select name="vinyl_id" id="vinyl_id" v-model="fields.id">
-                        <option v-for="(vinyl, index) in vinyls.data" :value='vinyl.id'>{{ vinyl.name }}</option>
+                        <option v-for="(vinyl, index) in vinyls.data" :value='vinyl.id' :key="index">{{ vinyl.name }}</option>
                     </select>
                     <div v-if="errors && errors.id" class="text-danger">{{ errors.id[0] }}</div>
                     <button type="submit" class="btn btn-primary">Add</button>
@@ -41,7 +41,7 @@ export default {
         submit() {
             this.success = false;
             this.errors = {};
-            axios.post(`/users/${this.$userId}`, { vinyl: this.fields, user_id: this.$userId, _method: 'patch'} ).then(response => {
+            axios.post(`/api/users/${this.$userId}`, { vinyl: this.fields, user_id: this.$userId, _method: 'patch'} ).then(response => {
                 this.success = true;
             }).catch(error => {
                 if (error.response.status === 422) {

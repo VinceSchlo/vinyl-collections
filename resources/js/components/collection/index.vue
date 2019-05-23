@@ -15,12 +15,11 @@
                     <td>Tracklist</td>
                     <td>Artiste</td>
                     <td>Genre</td>
-                    <td>Genre</td>
                     <td colspan="3">Action</td>
                     </tr>
                 </thead>
                 <tbody>
-                    <tr v-for="(vinyl, index) in collection" :key="index">
+                    <tr v-for="(vinyl, index) in vinylCollection" :key="index">
                         <td>{{ vinyl.id }}</td>
                         <td>{{ vinyl.name }}</td>
                         <td>{{ vinyl.date }}</td>
@@ -28,6 +27,7 @@
                         <td>{{ vinyl.tracklist }}</td>
                         <td>{{ vinyl.artist.name }}</td>
                         <td v-if='vinyl.genre'>{{ vinyl.genre.name }}</td>
+                        <td><button class="btn btn-warning" @click="removeVinyl(vinyl.id)">Remove</button></td>
                         <!-- <td><a href="{{ route('vinyls.edit', ['vinyl' => $vinyl->id] ) }}" class="btn btn-warning">Edit</a></td>
                         <td>
                             <form action="{{ route('vinyls.destroy', ['vinyl' => $vinyl->id]) }} " method="post">
@@ -37,6 +37,9 @@
                             </form>
                         </td>
                         <td><a href="{{ route('vinyls.show', ['vinyl' => $vinyl->id] ) }}" class="btn btn-success">Show</a></td> -->
+                    </tr>
+                    <tr>
+                        <td v-if="success" class="alert alert-success mt-3" colspan="8"> Vinyl supprimé de votre collection !</td>
                     </tr>
                 </tbody>
             </table>
@@ -50,21 +53,27 @@
     export default {
         data() {
             return {
-                collection: {}
+                vinylCollection: [],
+                success: false
             }
         },
         methods: {
             getCollectionFromApi: function () {
                 return axios.get(`/api/collections/${this.$userId}`);
             },
+            removeVinyl: function(id) {
+                axios.post(`/api/users/${this.$userId}`, {
+                    user_id: this.$userId,
+                    vinyl_id: id,
+                    _method: 'delete' })
+                .then(response => { this.success = true; })
+                .catch(error => { console.log('oups, something went wrong'); });
+            }
         },
         created() {
-            let vm = this;
-            vm.getCollectionFromApi().then((result) => {
-                    let collection;
-                    vm.collection = result.data.data;
-                })
-
+            this.getCollectionFromApi().then((result) => {
+                this.vinylCollection = result.data.data.collection;
+            })
         }
     }
 </script>
