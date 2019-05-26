@@ -15,7 +15,7 @@
                 </tr>
             </thead>
             <tbody>
-                <tr v-for="(artist, index) in artists.data">
+                <tr v-for="(artist, index) in artists.data" :key="index">
                     <td>{{artist.id}}</td>
                     <td>{{artist.name}}</td>
                     <td><router-link :to="{name: 'artistEdit', params: {id: artist.id }}" class="btn btn-warning">Edit</router-link></td>
@@ -66,7 +66,6 @@
                     let artists;
                     vm.artists = result.data;
                 })
-                
         }
     }
 </script>

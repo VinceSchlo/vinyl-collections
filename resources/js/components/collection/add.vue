@@ -6,7 +6,7 @@
                 <div class="form-group">
                     <label for="vinyl_id">Vinyl</label>
                     <select name="vinyl_id" id="vinyl_id" v-model="fields.id">
-                        <option v-for="(vinyl, index) in vinyls.data" :value='vinyl.id'>{{ vinyl.name }}</option>
+                        <option v-for="(vinyl, index) in vinyls.data" :value='vinyl.id' :key="index">{{ vinyl.name }}</option>
                     </select>
                     <div v-if="errors && errors.id" class="text-danger">{{ errors.id[0] }}</div>
                     <button type="submit" class="btn btn-primary">Add</button>

@@ -29,6 +29,7 @@
 
 <script>
     import 'axios'
+    import { log } from 'util';
 
     export default {
         data() {
