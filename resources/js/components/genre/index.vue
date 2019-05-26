@@ -51,7 +51,9 @@
             destroy: function (id) {
                 axios.post(`/api/genres/${id}`, { _method: 'delete' }).then(response => {
                 this.success = true;
-                this.genres.splice(id, 1);
+                this.getGenresFromApi().then((result) => {
+                    this.genres = result.data;
+                })
                 this.success = true;
             }).catch(error => {
                 if (error.response.status === 422) {

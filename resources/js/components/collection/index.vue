@@ -66,7 +66,12 @@
                     user_id: this.$userId,
                     vinyl_id: id,
                     _method: 'delete' })
-                .then(response => { this.success = true; })
+                .then(response => {
+                    this.success = true;
+                    this.getCollectionFromApi().then((result) => {
+                        this.vinylCollection = result.data.data.collection;
+                    })
+                })
                 .catch(error => { console.log('oups, something went wrong'); });
             }
         },

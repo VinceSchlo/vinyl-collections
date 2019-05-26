@@ -70,6 +70,10 @@
             destroy: function (id) {
                 axios.post(`/api/vinyls/${id}`, { _method: 'delete' }).then(response => {
                 this.success = true;
+
+                this.getVinylsFromApi().then((result) => {
+                    this.vinyls = result.data;
+                })
             }).catch(error => {
                 if (error.response.status === 422) {
                     this.errors = error.response.data.errors || {};

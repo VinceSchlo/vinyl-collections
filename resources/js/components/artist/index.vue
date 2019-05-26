@@ -25,7 +25,6 @@
                         </form>
                     </td>
                 </tr>
-                {{ artists }}
                 <!-- <td><a href="{{ route('artists.show', ['artist' => $artist->id] ) }}" class="btn btn-success">Show</a></td> -->
             </tbody>
         </table>
@@ -52,11 +51,17 @@
                 axios.post(`/api/artists/${id}`, { _method: 'delete' }).then(response => {
                     this.success = true;
 
+                    this.getArtistsFromApi().then((result) => {
+                        this.artists = result.data;
+                    })
 
                 }).catch(error => {
                     if (error.response.status === 422) {
-                    this.errors = error.response.data.errors || {};
-                }
+                        this.error = error.response.data.errors || {};
+                    }
+                    if (error.response.status === 500) {
+                        this.error = "Impossible de supprimer cet artiste";
+                    }
             });
             }
         },
