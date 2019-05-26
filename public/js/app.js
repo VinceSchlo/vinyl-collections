@@ -1831,7 +1831,7 @@ __webpack_require__.r(__webpack_exports__);
         this.loaded = false;
         this.success = false;
         this.errors = {};
-        axios.post('/artists', this.fields).then(function (response) {
+        axios.post('/api/artists', this.fields).then(function (response) {
           _this.fields = {}; //Clear input fields.
 
           _this.loaded = true;
@@ -1932,6 +1932,14 @@ __webpack_require__.r(__webpack_exports__);
 __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var axios__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! axios */ "./node_modules/axios/index.js");
 /* harmony import */ var axios__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(axios__WEBPACK_IMPORTED_MODULE_0__);
+//
+//
+//
+//
+//
+//
+//
+//
 //
 //
 //
@@ -2658,7 +2666,6 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
-//
 
 /* harmony default export */ __webpack_exports__["default"] = ({
   data: function data() {
@@ -2681,7 +2688,9 @@ __webpack_require__.r(__webpack_exports__);
         this.success = false;
         this.errors = {};
         axios.post('/api/vinyls', this.fields).then(function (response) {
-          // this.fields = {}; //Clear input fields.
+          console.log(_this.fields);
+          _this.fields = {}; //Clear input fields.
+
           _this.loaded = true;
           _this.success = true;
         })["catch"](function (error) {
@@ -2699,21 +2708,22 @@ __webpack_require__.r(__webpack_exports__);
     },
     getGenresFromApi: function getGenresFromApi() {
       return axios.get("/api/genres");
+    },
+    getPochettesFromApi: function getPochettesFromApi() {
+      return axios.get("/api/pochettes");
     }
   },
   mounted: function mounted() {
     var vm = this;
     vm.getArtistsFromApi().then(function (result) {
-      var artists;
       vm.artists = result.data;
     });
     vm.getGenresFromApi().then(function (result) {
-      var genres;
       vm.genres = result.data;
-    }); // vm.getPochettesFromApi().then((result) => {
-    //         let pochettes;
-    //         vm.pochettes = result.data.data;
-    //     })
+    });
+    vm.getPochettesFromApi().then(function (result) {
+      vm.pochettes = result.data;
+    });
   }
 });
 
@@ -39395,7 +39405,29 @@ var render = function() {
           }),
           0
         )
-      ])
+      ]),
+      _vm._v(" "),
+      _c(
+        "div",
+        { staticClass: "pagination" },
+        [
+          _c("b-pagination", {
+            attrs: {
+              "total-rows": _vm.artists.meta.to,
+              "per-page": _vm.artists.meta.perPage,
+              "aria-controls": "my-table"
+            },
+            model: {
+              value: _vm.artists.meta.current_page,
+              callback: function($$v) {
+                _vm.$set(_vm.artists.meta, "current_page", $$v)
+              },
+              expression: "artists.meta.current_page"
+            }
+          })
+        ],
+        1
+      )
     ])
   ])
 }
@@ -40483,7 +40515,7 @@ var render = function() {
           ]),
           _vm._v(" "),
           _c("div", { staticClass: "form-group" }, [
-            _c("label", { attrs: { for: "artist_id" } }, [_vm._v("Genre")]),
+            _c("label", { attrs: { for: "genre_id" } }, [_vm._v("Genre")]),
             _vm._v(" "),
             _c(
               "select",
@@ -40520,6 +40552,52 @@ var render = function() {
                   "option",
                   { key: index, domProps: { value: genre.id } },
                   [_vm._v(_vm._s(genre.name))]
+                )
+              }),
+              0
+            )
+          ]),
+          _vm._v(" "),
+          _c("div", { staticClass: "form-group" }, [
+            _c("label", { attrs: { for: "pochette_id" } }, [
+              _vm._v("Pochette")
+            ]),
+            _vm._v(" "),
+            _c(
+              "select",
+              {
+                directives: [
+                  {
+                    name: "model",
+                    rawName: "v-model",
+                    value: _vm.fields.pochette_id,
+                    expression: "fields.pochette_id"
+                  }
+                ],
+                attrs: { name: "pochette_id", id: "pochette_id" },
+                on: {
+                  change: function($event) {
+                    var $$selectedVal = Array.prototype.filter
+                      .call($event.target.options, function(o) {
+                        return o.selected
+                      })
+                      .map(function(o) {
+                        var val = "_value" in o ? o._value : o.value
+                        return val
+                      })
+                    _vm.$set(
+                      _vm.fields,
+                      "pochette_id",
+                      $event.target.multiple ? $$selectedVal : $$selectedVal[0]
+                    )
+                  }
+                }
+              },
+              _vm._l(_vm.pochettes.data, function(pochette, index) {
+                return _c(
+                  "option",
+                  { key: index, domProps: { value: pochette.id } },
+                  [_vm._v(_vm._s(pochette.illustrator))]
                 )
               }),
               0

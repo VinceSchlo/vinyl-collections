@@ -17,6 +17,11 @@ use App\Vinyl;
 use App\Http\Resources\VinylCollection;
 use App\Http\Resources\Vinyl as VinylResource;
 
+// Pochette API
+use App\Pochette;
+use App\Http\Resources\PochetteCollection;
+use App\Http\Resources\Pochette as PochetteResource;
+
 // User API
 use App\User;
 // use App\Http\Resources\UserCollection;
@@ -49,7 +54,6 @@ Route::middleware('auth:api')->get('/user', function (Request $request) {
 
 // Artist API
 Route::get('/artists', function () {
-    // return ArtistRessource::collection(Artist::all()->keyBy->id);
     return new ArtistCollection(Artist::paginate());
 })->name('artist.index');
 Route::get('/artists/{artist}', function (Artist $artist) {
@@ -58,7 +62,6 @@ Route::get('/artists/{artist}', function (Artist $artist) {
 
 // Genre API
 Route::get('/genres', function () {
-    // return ArtistRessource::collection(Artist::all()->keyBy->id);
     return new GenreCollection(Genre::all());
 });
 Route::get('/genres/{genre}', function (Genre $genre) {
@@ -67,11 +70,18 @@ Route::get('/genres/{genre}', function (Genre $genre) {
 
 // Vinyl API
 Route::get('/vinyls', function () {
-    // return ArtistRessource::collection(Artist::all()->keyBy->id);
-    return new VinylCollection(Vinyl::all());
+    return new VinylCollection(Vinyl::paginate());
 });
 Route::get('/vinyls/{vinyl}', function (Vinyl $vinyl) {
     return new VinylResource($vinyl);
+});
+
+// Pochette API
+Route::get('/pochettes', function () {
+    return new PochetteCollection(Pochette::all());
+});
+Route::get('/pochettes/{pochette}', function (Pochette $pochette) {
+    return new PochetteResource($pochette);
 });
 
 // Collection API

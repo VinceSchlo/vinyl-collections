@@ -28,6 +28,14 @@
                 <!-- <td><a href="{{ route('artists.show', ['artist' => $artist->id] ) }}" class="btn btn-success">Show</a></td> -->
             </tbody>
         </table>
+        <div class="pagination">
+            <b-pagination
+                    v-model="artists.meta.current_page"
+                    :total-rows="artists.meta.to"
+                    :per-page="artists.meta.perPage"
+                    aria-controls="my-table"
+            ></b-pagination>
+        </div>
     </div>
 </div>
 </template>

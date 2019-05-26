@@ -26,9 +26,7 @@ class CreateVinylsTable extends Migration
             
             $table->foreign('genre_id')->references('id')->on('genres');
             $table->foreign('artist_id')->references('id')->on('artists');
-            $table->foreign('pochette_id')->references('id')->on('pochettes')
-                    ->onDelete('cascade')
-                    ->onUpdate('cascade');
+            $table->foreign('pochette_id')->references('id')->on('pochettes');
         });
     }
 

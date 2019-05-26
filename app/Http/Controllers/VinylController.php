@@ -26,6 +26,7 @@ class VinylController extends Controller
             'format'=>'required|max:100',
             'artist_id'=>'required',
             'genre_id'=>'required',
+            'pochette_id'=>'required',
         ]);
        
         $vinyl->saveVinyl($data);
@@ -48,6 +49,7 @@ class VinylController extends Controller
             'format'=>'required|max:100',
             'artist_id'=>'required',
             'genre_id'=>'required',
+            'pochette_id'=>'required',
         ]);
 
         $vinyl->saveVinyl($data);

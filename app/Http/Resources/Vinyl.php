@@ -12,6 +12,10 @@ use App\Http\Resources\Artist as ArtistResource;
 use App\Genre;
 use App\Http\Resources\Genre as GenreResource;
 
+// Pochette API
+use App\Pochette;
+use App\Http\Resources\Pochette as PochetteResource;
+
 class Vinyl extends JsonResource
 {
     /**
@@ -30,6 +34,7 @@ class Vinyl extends JsonResource
             'date' => $this->date,
             'artist' => new ArtistResource(Artist::find($this->artist_id)),
             'genre' => new GenreResource(Genre::find($this->genre_id)),
+            'pochette' => new PochetteResource(Pochette::find($this->pochette_id)),
             // 'created_at' => $this->created_at,
             // 'updated_at' => $this->updated_at,
         ];

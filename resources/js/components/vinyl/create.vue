@@ -32,18 +32,17 @@
                 <div v-if="errors && errors.artist_id" class="text-danger">{{ errors.artist_id[0] }}</div>
             </div>
             <div class="form-group">
-                <label for="artist_id">Genre</label>
+                <label for="genre_id">Genre</label>
                 <select name="genre_id" id="genre_id" v-model="fields.genre_id">
                     <option v-for="(genre, index) in genres.data" :value='genre.id' :key="index">{{ genre.name }}</option>
                 </select>
             </div>
-            <!--<div class="form-group">
-                <select name="pochette-id" id="pochette">
-                    @foreach ($pochettes as $pochette)
-                        <option value="{{ $pochette->id }}">{{ $pochette->illustrator }}</option>
-                    @endforeach
+            <div class="form-group">
+                <label for="pochette_id">Pochette</label>
+                <select name="pochette_id" id="pochette_id" v-model="fields.pochette_id">
+                    <option v-for="(pochette, index) in pochettes.data" :value='pochette.id' :key="index">{{ pochette.illustrator }}</option>
                 </select>
-            </div> -->
+            </div>
             <button type="submit" class="btn btn-primary">Create</button>
         </form>
         <div v-if="success" class="alert alert-success mt-3">
@@ -75,7 +74,8 @@ export default {
                 this.success = false;
                 this.errors = {};
                 axios.post('/api/vinyls', this.fields).then(response => {
-                    // this.fields = {}; //Clear input fields.
+                    console.log(this.fields)
+                    this.fields = {}; //Clear input fields.
                     this.loaded = true;
                     this.success = true;
                 }).catch(error => {
@@ -93,24 +93,21 @@ export default {
         getGenresFromApi() {
             return axios.get(`/api/genres`);
         },
-        // getPochettesFromApi() {
-        //     return axios.get(`/api/pochettes`);
-        // }
+        getPochettesFromApi() {
+            return axios.get(`/api/pochettes`);
+        }
     },
     mounted() {
         let vm = this;
         vm.getArtistsFromApi().then((result) => {
-                let artists;
                 vm.artists = result.data;
             })
         vm.getGenresFromApi().then((result) => {
-                let genres;
                 vm.genres = result.data;
             })
-        // vm.getPochettesFromApi().then((result) => {
-        //         let pochettes;
-        //         vm.pochettes = result.data.data;
-        //     })
+        vm.getPochettesFromApi().then((result) => {
+                vm.pochettes = result.data;
+            })
     }
 }
 </script>
