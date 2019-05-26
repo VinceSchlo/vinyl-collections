@@ -17,7 +17,7 @@
             </div>
         </div>
     </div>
-</template>
+</template>collections
 
 <script>
 import 'axios'
@@ -41,7 +41,7 @@ export default {
         submit() {
             this.success = false;
             this.errors = {};
-            axios.post(`/users/${this.$userId}`, { vinyl: this.fields, user_id: this.$userId, _method: 'patch'} ).then(response => {
+            axios.post(`/api/users/${this.$userId}`, { vinyl: this.fields, user_id: this.$userId, _method: 'patch'} ).then(response => {
                 this.success = true;
             }).catch(error => {
                 if (error.response.status === 422) {

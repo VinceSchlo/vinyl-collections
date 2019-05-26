@@ -2062,7 +2062,7 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
 
     this.success = false;
     this.errors = {};
-    axios.post("/users/".concat(this.$userId), {
+    axios.post("/api/users/".concat(this.$userId), {
       vinyl: this.fields,
       user_id: this.$userId,
       _method: 'patch'
@@ -2892,29 +2892,12 @@ __webpack_require__.r(__webpack_exports__);
   methods: {
     getVinyl: function getVinyl() {
       return axios.get("/api/vinyls/".concat(this.id));
-    },
-    getTracklist: function getTracklist() {
-      var config = {
-        headers: {
-          'Access-Control-Allow-Methods': 'GET,PUT,PATCH,POST,DELETE',
-          'Access-Control-Allow-Origin': '*',
-          'Content-Type': 'application/json',
-          'Access-Control-Allow-Headers': 'Content-Type'
-        }
-      }; // const tracklist_id = this.vinyl.tracklist;
-
-      return axios.get('https://api.discogs.com/masters/1203', config);
     }
   },
   mounted: function mounted() {
     var vm = this;
     vm.getVinyl().then(function (result) {
       vm.vinyl = result.data.data;
-    });
-    vm.getTracklist().then(function (result) {
-      vm.vinyl.tracklist_content = result.tracklist;
-    })["catch"](function (error) {
-      console.log(error);
     });
   }
 });
@@ -40126,7 +40109,7 @@ var render = function() {
     ]),
     _vm._v(" "),
     _c("div", { staticClass: "row" }, [
-      _c("p", [_vm._v(" tracklist : " + _vm._s(_vm.vinyl.tracklist_content))])
+      _c("p", [_vm._v(" tracklist : " + _vm._s(_vm.vinyl.tracklist))])
     ]),
     _vm._v(" "),
     _c("div", { staticClass: "row" }, [
