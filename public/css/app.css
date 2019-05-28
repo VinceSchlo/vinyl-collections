@@ -10662,3 +10662,45 @@ a.text-dark:focus {
   }
 }
 
+.vinyl-logo {
+  max-width: 50px;
+  margin-right: 0.5rem;
+}
+
+.vinyl-cover {
+  margin-bottom: 0.5rem;
+  border-radius: 5px;
+}
+
+.vinyl-title {
+  margin-bottom: 0;
+}
+
+.vinyl-artist {
+  color: #5f6e7c;
+}
+
+.link {
+  color: #212529;
+  font-weight: 500;
+}
+
+.link:hover {
+  color: #5f6e7c;
+  text-decoration: none;
+}
+
+.row-margin-top {
+  margin-top: 2rem;
+}
+
+.page-title {
+  font-size: 2.5rem;
+}
+
+.col-2 {
+  min-width: -webkit-fit-content;
+  min-width: -moz-fit-content;
+  min-width: fit-content;
+  align-self: center;
+}

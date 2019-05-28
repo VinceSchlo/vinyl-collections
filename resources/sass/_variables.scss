@@ -5,6 +5,7 @@ $body-bg: #f8fafc;
 $font-family-sans-serif: 'Nunito', sans-serif;
 $font-size-base: 0.9rem;
 $line-height-base: 1.6;
+$bold-font-weight: 500;
 
 // Colors
 $blue: #3490dc;
@@ -17,3 +18,10 @@ $yellow: #ffed4a;
 $green: #38c172;
 $teal: #4dc0b5;
 $cyan: #6cb2eb;
+$dark-grey: #212529;
+$light-grey: #5f6e7c;
+
+// Defaults
+$default-margin: 0.5rem;
+$default-border-radius: 5px;
+$default-element-width: 200px;

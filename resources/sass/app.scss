@@ -6,3 +6,50 @@
 
 // Bootstrap
 @import '~bootstrap/scss/bootstrap';
+
+// App
+.vinyl-logo {
+  max-width: 50px;
+  margin-right: $default-margin;
+}
+
+// Vinyls
+.vinyl-cover {
+  margin-bottom: $default-margin;
+  border-radius: $default-border-radius;
+}
+
+.vinyl-title {
+  margin-bottom: 0;
+}
+
+.vinyl-artist {
+  color: $light-grey;
+}
+
+// Links
+.link {
+  color: $dark-grey;
+  font-weight: $bold-font-weight;
+
+  &:hover {
+    color: $light-grey;
+    text-decoration: none;
+  }
+}
+
+// Rows
+.row-margin-top {
+  margin-top: 2rem;
+}
+
+// Titles
+.page-title {
+  font-size: 2.5rem;
+}
+
+// Columns
+.col-2 {
+  min-width: fit-content;
+  align-self: center;
+}

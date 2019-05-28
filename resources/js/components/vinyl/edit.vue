@@ -1,55 +1,62 @@
 <template>
 <div class="container">
     <div class="row">
-        <form @submit.prevent="submit">
-            <!-- @method('PATCH') -->
-            <div class="form-group">
-                <label for="name">Titre</label>
-                <input type="text" class="form-control" id="name" name="name" v-model="fields.name"/>
-                <div v-if="errors && errors.name" class="text-danger">{{ errors.name[0] }}</div>
+        <div class="col-12">
+            <router-link :to="{ name: 'vinyls' }" class="page-title link">Vinyls</router-link> / Edit <i>{{ fields.name }}</i>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-6">
+            <form @submit.prevent="submit">
+                <!-- @method('PATCH') -->
+                <div class="form-group">
+                    <label for="name">Title</label>
+                    <input type="text" class="form-control" id="name" name="name" v-model="fields.name"/>
+                    <div v-if="errors && errors.name" class="text-danger">{{ errors.name[0] }}</div>
+                </div>
+                <div class="form-group">
+                    <label for="date">Release date</label>
+                    <input type="date" class="form-control" id="date" name="date" v-model="fields.date"/>
+                    <div v-if="errors && errors.date" class="text-danger">{{ errors.date[0] }}</div>
+                </div>
+                <div class="form-group">
+                    <label for="tracklist">Tracklist</label>
+                    <input type="text" class="form-control" id="tracklist" name="tracklist" v-model="fields.tracklist"/>
+                    <div v-if="errors && errors.tracklist" class="text-danger">{{ errors.tracklist[0] }}</div>
+                </div>
+                <div class="form-group">
+                    <label for="format">Format</label>
+                    <input type="radio" name="format" value="33" v-model="fields.format"><label for="format">33T</label>
+                    <input type="radio" name="format" value="45" v-model="fields.format"><label for="format">45T</label>
+                    <div v-if="errors && errors.format" class="text-danger">{{ errors.format[0] }}</div>
+                </div>
+                <div class="form-group">
+                    <label for="artist_id">Artist</label>
+                    <select name="artist_id" id="artist_id" v-model="fields.artist_id">
+                        <option disabled>Current artist : {{ fields.artist.name }}</option>
+                        <option v-for="(artist, index) in artists.data" :value='artist.id' :key='index'>{{ artist.name }}</option>
+                    </select>
+                    <div v-if="errors && errors.artist_id" class="text-danger">{{ errors.artist_id[0] }}</div>
+                </div>
+                <div class="form-group">
+                    <label for="genre_id">Genre</label>
+                    <select name="genre_id" id="genre_id" v-model="fields.genre_id">
+                        <option disabled>Current genre : {{ fields.genre.name }}</option>
+                        <option v-for="(genre, index) in genres.data" :value='genre.id' :key='index'>{{ genre.name }}</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label for="pochette_id">Cover</label>
+                    <select name="pochette_id" id="pochette_id" v-model="fields.pochette_id">
+                        <option disabled>Current cover : {{ fields.pochette.illustrator }}</option>
+                        <option v-for="(pochette, index) in pochettes.data" :value='pochette.id' :key="index">{{ pochette.illustrator }}</option>
+                    </select>
+                </div>
+                <button type="submit" class="btn btn-primary">Update</button>
+            </form>
+            <div v-if="success" class="alert alert-success mt-3">
+                Vinyl updated !
             </div>
-            <div class="form-group">
-                <label for="date">Date de sortie</label>
-                <input type="date" class="form-control" id="date" name="date" v-model="fields.date"/>
-                <div v-if="errors && errors.date" class="text-danger">{{ errors.date[0] }}</div>
-            </div>
-            <div class="form-group">
-                <label for="tracklist">Tracklist</label>
-                <input type="text" class="form-control" id="tracklist" name="tracklist" v-model="fields.tracklist"/>
-                <div v-if="errors && errors.tracklist" class="text-danger">{{ errors.tracklist[0] }}</div>
-            </div>
-            <div class="form-group">
-                <label for="format">Format</label>
-                <input type="radio" name="format" value="33" v-model="fields.format"><label for="format">33T</label>
-                <input type="radio" name="format" value="45" v-model="fields.format"><label for="format">45T</label>
-                <div v-if="errors && errors.format" class="text-danger">{{ errors.format[0] }}</div>
-            </div>
-            <div class="form-group">
-                <label for="artist_id">Artiste</label>
-                <select name="artist_id" id="artist_id" v-model="fields.artist_id">
-                    <option disabled>Artiste actuel : {{ fields.artist.name }}</option>
-                    <option v-for="(artist, index) in artists.data" :value='artist.id' :key='index'>{{ artist.name }}</option>
-                </select>
-                <div v-if="errors && errors.artist_id" class="text-danger">{{ errors.artist_id[0] }}</div>
-            </div>
-            <div class="form-group">
-                <label for="genre_id">Genre</label>
-                <select name="genre_id" id="genre_id" v-model="fields.genre_id">
-                    <option disabled>Genre actuel : {{ fields.genre.name }}</option>
-                    <option v-for="(genre, index) in genres.data" :value='genre.id' :key='index'>{{ genre.name }}</option>
-                </select>
-            </div>
-            <!--<div class="form-group">
-                <select name="pochette-id" id="pochette">
-                    @foreach ($pochettes as $pochette)
-                        <option value="{{ $pochette->id }}">{{ $pochette->illustrator }}</option>
-                    @endforeach
-                </select>
-            </div> -->
-            <button type="submit" class="btn btn-primary">Update</button>
-        </form>
-        <div v-if="success" class="alert alert-success mt-3">
-            Vinyle modifié !
         </div>
     </div>
 </div>
@@ -65,6 +72,7 @@ export default {
             fields: {},
             genres: {},
             artists: {},
+            pochettes: {},
             errors: {},
             success: false,
         }
@@ -78,11 +86,14 @@ export default {
                 date: this.fields.date,
                 tracklist: this.fields.tracklist,
                 format: this.fields.format,
-                artist_id: this.fields.artist_id,
-                genre_id: this.fields.genre_id,
+                artist_id: this.fields.artist.id,
+                genre_id: this.fields.genre.id,
+                pochette_id: this.fields.pochette.id,
                 _method: 'patch'
             }).then(response => {
                 this.success = true;
+                // console.log(reponse);
+                this.$router.push(`/vinyls/${this.id}/show` );
             }).catch(error => {
                 if (error.response.status === 422) {
                     this.errors = error.response.data.errors || {};
@@ -97,6 +108,9 @@ export default {
         },
         getGenres() {
             return axios.get(`/api/genres`);
+        },
+        getPochettes() {
+            return axios.get(`/api/pochettes`);
         }
 
     },
@@ -105,7 +119,7 @@ export default {
         vm.init().then((result) => {
             let fields;
             vm.fields = result.data.data;
-        })
+        }),
         vm.getArtists().then((response) => {
             let artists;
             vm.artists = response.data;
@@ -113,6 +127,10 @@ export default {
         vm.getGenres().then((response) => {
             let genres;
             vm.genres = response.data;
+        }),
+        vm.getPochettes().then((response) => {
+            let pochettes;
+            vm.pochettes = response.data;
         })
     },
 
