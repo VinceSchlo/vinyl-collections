@@ -1974,47 +1974,65 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
 
 /* harmony default export */ __webpack_exports__["default"] = ({
   data: function data() {
     return {
       artists: [],
       error: {},
-      artist: {}
+      artist: {},
+      url: '/api/artists',
+      pagination: []
     };
   },
   methods: {
     getArtistsFromApi: function getArtistsFromApi() {
-      return axios.get('/api/artists');
+      var _this = this;
+
+      axios.get(this.url).then(function (response) {
+        _this.artists = response.data.data;
+
+        _this.makePagination(response.data);
+      });
     },
     destroy: function destroy(id) {
-      var _this = this;
+      var _this2 = this;
 
       axios.post("/api/artists/".concat(id), {
         _method: 'delete'
       }).then(function (response) {
-        _this.success = true;
+        _this2.success = true;
 
-        _this.getArtistsFromApi().then(function (result) {
-          _this.artists = result.data;
+        _this2.getArtistsFromApi().then(function (result) {
+          _this2.artists = result.data;
         });
       })["catch"](function (error) {
         if (error.response.status === 422) {
-          _this.error = error.response.data.errors || {};
+          _this2.error = error.response.data.errors || {};
         }
 
         if (error.response.status === 500) {
-          _this.error = "Impossible de supprimer cet artiste";
+          _this2.error = "Impossible de supprimer cet artiste";
         }
       });
+    },
+    makePagination: function makePagination(data) {
+      var pagination = {
+        current_page: data.meta.current_page,
+        last_page: data.meta.last_page,
+        next_page_url: data.links.next,
+        prev_page_url: data.links.prev
+      };
+      this.pagination = pagination;
+    },
+    fetchPaginateArtists: function fetchPaginateArtists(url) {
+      this.url = url;
+      this.getArtistsFromApi();
     }
   },
   created: function created() {
-    var vm = this;
-    vm.getArtistsFromApi().then(function (result) {
-      var artists;
-      vm.artists = result.data;
-    });
+    this.getArtistsFromApi();
   }
 });
 
@@ -39355,7 +39373,7 @@ var render = function() {
         _vm._v(" "),
         _c(
           "tbody",
-          _vm._l(_vm.artists.data, function(artist, index) {
+          _vm._l(_vm.artists, function(artist, index) {
             return _c("tr", { key: index }, [
               _c("td", [_vm._v(_vm._s(artist.id))]),
               _vm._v(" "),
@@ -39407,27 +39425,44 @@ var render = function() {
         )
       ]),
       _vm._v(" "),
-      _c(
-        "div",
-        { staticClass: "pagination" },
-        [
-          _c("b-pagination", {
-            attrs: {
-              "total-rows": _vm.artists.meta.to,
-              "per-page": _vm.artists.meta.perPage,
-              "aria-controls": "my-table"
-            },
-            model: {
-              value: _vm.artists.meta.current_page,
-              callback: function($$v) {
-                _vm.$set(_vm.artists.meta, "current_page", $$v)
-              },
-              expression: "artists.meta.current_page"
+      _c("div", { staticClass: "pagination" }, [
+        _c(
+          "button",
+          {
+            staticClass: "btn btn-default",
+            attrs: { disabled: !_vm.pagination.prev_page_url },
+            on: {
+              click: function($event) {
+                return _vm.fetchPaginateArtists(_vm.pagination.prev_page_url)
+              }
             }
-          })
-        ],
-        1
-      )
+          },
+          [_vm._v("\n                Previous\n            ")]
+        ),
+        _vm._v(" "),
+        _c("span", [
+          _vm._v(
+            "Page " +
+              _vm._s(_vm.pagination.current_page) +
+              " of " +
+              _vm._s(_vm.pagination.last_page)
+          )
+        ]),
+        _vm._v(" "),
+        _c(
+          "button",
+          {
+            staticClass: "btn btn-default",
+            attrs: { disabled: !_vm.pagination.next_page_url },
+            on: {
+              click: function($event) {
+                return _vm.fetchPaginateArtists(_vm.pagination.next_page_url)
+              }
+            }
+          },
+          [_vm._v("\n                Next\n            ")]
+        )
+      ])
     ])
   ])
 }
