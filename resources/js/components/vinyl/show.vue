@@ -21,9 +21,20 @@
         </div>
         <div class="row row-margin-top">
             <p> Tracklist : {{ vinyl.tracklist_content }}</p>
-            <ul>
-                <li v-for="(track, index) in vinyl.tracklist" :key="index"> {{ track.title }} </li>
-            </ul>
+            <table class="table table-striped">
+                <thead>
+                    <tr>
+                    <td>Track</td>
+                    <td>duration</td>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr v-for="(track, index) in vinyl.tracklist" :key="index">
+                        <td>{{ track.title }}</td>
+                        <td>{{ track.duration }}</td>
+                    </tr>
+                </tbody>
+            </table>
         </div>
     </div>
 </template>

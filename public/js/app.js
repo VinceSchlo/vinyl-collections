@@ -2898,47 +2898,6 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
 
 /* harmony default export */ __webpack_exports__["default"] = ({
   data: function data() {
@@ -2989,6 +2948,8 @@ __webpack_require__.r(__webpack_exports__);
 __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var axios__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! axios */ "./node_modules/axios/index.js");
 /* harmony import */ var axios__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(axios__WEBPACK_IMPORTED_MODULE_0__);
+//
+//
 //
 //
 //
@@ -41132,110 +41093,7 @@ var render = function() {
         )
       }),
       0
-    ),
-    _vm._v(" "),
-    _c("div", { staticClass: "row" }, [
-      _c("table", { staticClass: "table table-striped" }, [
-        _vm._m(1),
-        _vm._v(" "),
-        _c(
-          "tbody",
-          _vm._l(_vm.vinyls.data, function(vinyl, index) {
-            return _c("tr", { key: index }, [
-              _c("td", [_vm._v(_vm._s(vinyl.id))]),
-              _vm._v(" "),
-              _c(
-                "td",
-                [
-                  _c(
-                    "router-link",
-                    {
-                      attrs: {
-                        to: { name: "vinylShow", params: { id: vinyl.id } }
-                      }
-                    },
-                    [_vm._v(_vm._s(vinyl.name))]
-                  )
-                ],
-                1
-              ),
-              _vm._v(" "),
-              _c("td", [_vm._v(_vm._s(vinyl.date))]),
-              _vm._v(" "),
-              _c("td", [_vm._v(_vm._s(vinyl.format))]),
-              _vm._v(" "),
-              _c("td", [
-                _c(
-                  "ul",
-                  _vm._l(vinyl.tracklist, function(track, index) {
-                    return _c("li", { key: index }, [
-                      _vm._v(" " + _vm._s(track.title) + " ")
-                    ])
-                  }),
-                  0
-                )
-              ]),
-              _vm._v(" "),
-              _c("td", [_vm._v(_vm._s(vinyl.artist.name))]),
-              _vm._v(" "),
-              vinyl.genre
-                ? _c("td", [_vm._v(_vm._s(vinyl.genre.name))])
-                : _c("td", [_c("i", [_vm._v("unknown")])]),
-              _vm._v(" "),
-              _c(
-                "td",
-                [
-                  _c(
-                    "router-link",
-                    {
-                      staticClass: "btn btn-warning",
-                      attrs: {
-                        to: { name: "vinylEdit", params: { id: vinyl.id } }
-                      }
-                    },
-                    [_vm._v("Edit")]
-                  )
-                ],
-                1
-              ),
-              _vm._v(" "),
-              _c("td", [
-                _c(
-                  "form",
-                  {
-                    on: {
-                      submit: function($event) {
-                        $event.preventDefault()
-                        return _vm.destroy(vinyl.id)
-                      }
-                    }
-                  },
-                  [
-                    _c(
-                      "button",
-                      {
-                        staticClass: "btn btn-danger",
-                        attrs: { type: "submit" }
-                      },
-                      [_vm._v("Delete")]
-                    )
-                  ]
-                ),
-                _vm._v(" "),
-                _vm.success
-                  ? _c("div", { staticClass: "alert alert-success mt-3" }, [
-                      _vm._v(
-                        "\n                            Vinyle supprimé !\n                        "
-                      )
-                    ])
-                  : _vm._e()
-              ])
-            ])
-          }),
-          0
-        )
-      ])
-    ])
+    )
   ])
 }
 var staticRenderFns = [
@@ -41245,30 +41103,6 @@ var staticRenderFns = [
     var _c = _vm._self._c || _h
     return _c("div", { staticClass: "col-2" }, [
       _c("h2", { staticClass: "page-title" }, [_vm._v("Vinyls")])
-    ])
-  },
-  function() {
-    var _vm = this
-    var _h = _vm.$createElement
-    var _c = _vm._self._c || _h
-    return _c("thead", [
-      _c("tr", [
-        _c("td", [_vm._v("ID")]),
-        _vm._v(" "),
-        _c("td", [_vm._v("Nom")]),
-        _vm._v(" "),
-        _c("td", [_vm._v("Date")]),
-        _vm._v(" "),
-        _c("td", [_vm._v("Format")]),
-        _vm._v(" "),
-        _c("td", [_vm._v("Tracklist")]),
-        _vm._v(" "),
-        _c("td", [_vm._v("Artiste")]),
-        _vm._v(" "),
-        _c("td", [_vm._v("Genre")]),
-        _vm._v(" "),
-        _c("td", { attrs: { colspan: "3" } }, [_vm._v("Action")])
-      ])
     ])
   }
 ]
@@ -41373,15 +41207,18 @@ var render = function() {
     _c("div", { staticClass: "row row-margin-top" }, [
       _c("p", [_vm._v(" Tracklist : " + _vm._s(_vm.vinyl.tracklist_content))]),
       _vm._v(" "),
-      _c(
-        "ul",
-        _vm._l(_vm.vinyl.tracklist, function(track, index) {
-          return _c("li", { key: index }, [
-            _vm._v(" " + _vm._s(track.title) + " ")
-          ])
-        }),
-        0
-      )
+      _c("table", [
+        _c(
+          "tbody",
+          _vm._l(_vm.vinyl.tracklist, function(track, index) {
+            return _c("li", { key: index }, [
+              _vm._v(" " + _vm._s(track.title) + " "),
+              _c("span", [_vm._v(_vm._s(track.duration) + " ")])
+            ])
+          }),
+          0
+        )
+      ])
     ])
   ])
 }
