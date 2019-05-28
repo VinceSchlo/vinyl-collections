@@ -23,10 +23,6 @@ class User extends JsonResource
             'name' => $this->name,
             'email' => $this->email,
             'collection' => Vinyl::collection($this->vinyls),
-            // 'collection' => new ArtistResource(Artist::find($this->artist_id)),
-        //     'created_at' => $this->created_at,
-        //     'updated_at' => $this->updated_at,
         ];
-        return parent::toArray($request);
     }
 }

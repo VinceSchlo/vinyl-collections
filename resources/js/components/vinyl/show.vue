@@ -19,6 +19,12 @@
                 <p><span v-if="vinyl.genre">{{ vinyl.genre.name }}</span><span v-else><i>unknown genre</i></span> &middot; {{ vinyl.date.substring(0,4) }} &middot; {{ vinyl.format }} tours</p>
             </div>
         </div>
+        <div class="row row-margin-top">
+            <p> Tracklist : {{ vinyl.tracklist_content }}</p>
+            <ul>
+                <li v-for="(track, index) in vinyl.tracklist" :key="index"> {{ track.title }} </li>
+            </ul>
+        </div>
     </div>
 </template>
 
@@ -36,11 +42,6 @@
         methods: {
             getVinyl: function () {
                 return axios.get(`/api/vinyls/${this.id}`);
-            },
-            getTracklist: function() {
-                let config = { headers: { 'Access-Control-Allow-Methods': 'GET,PUT,PATCH,POST,DELETE', 'Access-Control-Allow-Origin': '*', 'Content-Type': 'application/json', 'Access-Control-Allow-Headers': 'Content-Type' } };
-                // const tracklist_id = this.vinyl.tracklist;
-                return axios.get('https://api.discogs.com/masters/1203', config);
             },
             getPochette: function() {
                 return `/storage/${this.vinyl.pochette.image}`;
@@ -61,13 +62,6 @@
             vm.getVinyl().then((result) => {
                 vm.vinyl = result.data.data;
             });
-
-            vm.getTracklist().then((result) => {
-                vm.vinyl.tracklist_content = result.tracklist;
-            }).catch(error => {
-                console.log(error);
-
-            })
         }
     }
 </script>

@@ -86,9 +86,9 @@ export default {
                 date: this.fields.date,
                 tracklist: this.fields.tracklist,
                 format: this.fields.format,
-                artist_id: this.fields.artist.id,
-                genre_id: this.fields.genre.id,
-                pochette_id: this.fields.pochette.id,
+                artist_id: this.fields.artist_id,
+                genre_id: this.fields.genre_id,
+                pochette_id: this.fields.pochette_id,
                 _method: 'patch'
             }).then(response => {
                 this.success = true;

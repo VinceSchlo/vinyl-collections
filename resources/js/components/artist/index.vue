@@ -15,7 +15,7 @@
                 </tr>
             </thead>
             <tbody>
-                <tr v-for="(artist, index) in artists.data" :key="index">
+                <tr v-for="(artist, index) in artists" :key="index">
                     <td>{{artist.id}}</td>
                     <td>{{artist.name}}</td>
                     <td><router-link :to="{name: 'artistEdit', params: {id: artist.id }}" class="btn btn-warning">Edit</router-link></td>
@@ -25,16 +25,16 @@
                         </form>
                     </td>
                 </tr>
-                <!-- <td><a href="{{ route('artists.show', ['artist' => $artist->id] ) }}" class="btn btn-success">Show</a></td> -->
             </tbody>
         </table>
         <div class="pagination">
-            <b-pagination
-                    v-model="artists.meta.current_page"
-                    :total-rows="artists.meta.to"
-                    :per-page="artists.meta.perPage"
-                    aria-controls="my-table"
-            ></b-pagination>
+            <button class="btn btn-default" @click="fetchPaginateArtists(pagination.prev_page_url)" :disabled="!pagination.prev_page_url">
+                Previous
+            </button>
+            <span>Page {{ pagination.current_page }} of {{ pagination.last_page }}</span>
+            <button class="btn btn-default" @click="fetchPaginateArtists(pagination.next_page_url)" :disabled="!pagination.next_page_url">
+                Next
+            </button>
         </div>
     </div>
 </div>
@@ -48,19 +48,25 @@
             return {
                 artists: [],
                 error: {},
-                artist: {}
+                artist: {},
+                url: '/api/artists',
+                pagination: []
             }
         },
         methods: {
             getArtistsFromApi: function () {
-                return axios.get('/api/artists');
+                axios.get(this.url).then(response => {
+                    this.artists = response.data.data;
+
+                    this.makePagination(response.data)
+                })
             },
             destroy: function (id) {
                 axios.post(`/api/artists/${id}`, { _method: 'delete' }).then(response => {
                     this.success = true;
 
                     this.getArtistsFromApi().then((result) => {
-                        this.artists = result.data;
+                        this.artists = result.data
                     })
 
                 }).catch(error => {
@@ -71,14 +77,24 @@
                         this.error = "Impossible de supprimer cet artiste";
                     }
             });
+            },
+            makePagination(data){
+                let pagination = {
+                    current_page: data.meta.current_page,
+                    last_page: data.meta.last_page,
+                    next_page_url: data.links.next,
+                    prev_page_url: data.links.prev
+                }
+
+                this.pagination = pagination
+            },
+            fetchPaginateArtists(url){
+                this.url = url
+                this.getArtistsFromApi()
             }
         },
         created() {
-            let vm = this;
-            vm.getArtistsFromApi().then((result) => {
-                    let artists;
-                    vm.artists = result.data;
-                })
+            this.getArtistsFromApi()
         }
     }
 </script>

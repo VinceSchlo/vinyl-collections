@@ -19,9 +19,6 @@ class Pochette extends JsonResource
             'image' => $this->image,
             'illustrator' => $this->illustrator,
             'vinyl_id' => $this->vinyl_id,
-            // 'created_at' => $this->created_at,
-            // 'updated_at' => $this->updated_at,
         ];
-//        return parent::toArray($request);
     }
 }

@@ -1,7 +1,6 @@
 <template>
     <div class="container">
         <h1>Ajouter une nouvelle pochette</h1>
-<!--        <router-link :to="{name: 'artists'}" class="btn btn-default">Tous les Artistes</router-link>-->
         <div class="row">
             <form @submit.prevent="submit">
                 <div class="form-group">
@@ -18,14 +17,10 @@
             </form>
             <div v-if="success" class="alert alert-success mt-3">
                 Pochette ajoutée !
-<!--                {{ file }}-->
-<!--                {{ fields }}-->
             </div>
         </div>
     </div>
 </template>
-
-
 
 <script>
     import 'axios'
@@ -53,12 +48,9 @@
                     }
 
                     let formData = new FormData();
-                    /*
-                        Add the form data we need to submit
-                    */
+
                     formData.append('file', this.file);
                     formData.append('illustrator', this.fields.illustrator);
-
 
                     axios.post('/api/pochettes', formData, config).then(response => {
                         this.fields = {}; //Clear input fields.

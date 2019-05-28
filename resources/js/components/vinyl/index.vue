@@ -16,7 +16,45 @@
             </div>
         </div>
         <div class="row">
-            <!-- <td>{{ vinyl.tracklist }}</td> -->
+            <table class="table table-striped">
+                <thead>
+                    <tr>
+                    <td>ID</td>
+                    <td>Nom</td>
+                    <td>Date</td>
+                    <td>Format</td>
+                    <td>Tracklist</td>
+                    <td>Artiste</td>
+                    <td>Genre</td>
+                    <td colspan="3">Action</td>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr v-for="(vinyl, index) in vinyls.data" :key="index">
+                        <td>{{ vinyl.id }}</td>
+                        <td><router-link :to="{name: 'vinylShow', params: {id: vinyl.id}}">{{ vinyl.name }}</router-link></td>
+                        <td>{{ vinyl.date }}</td>
+                        <td>{{ vinyl.format }}</td>
+                        <td>
+                            <ul>
+                                <li v-for="(track, index) in vinyl.tracklist" :key="index"> {{ track.title }} </li>
+                            </ul>
+                        </td>
+                        <td>{{ vinyl.artist.name }}</td>
+                        <td v-if='vinyl.genre'>{{ vinyl.genre.name }}</td>
+                        <td v-else><i>unknown</i></td>
+                        <td><router-link :to="{name: 'vinylEdit', params: {id: vinyl.id }}" class="btn btn-warning">Edit</router-link></td>
+                        <td>
+                            <form @submit.prevent="destroy(vinyl.id)">
+                                <button class="btn btn-danger" type="submit">Delete</button>
+                            </form>
+                            <div v-if="success" class="alert alert-success mt-3">
+                                Vinyle supprimé !
+                            </div>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
         </div>
     </div>
 </template>
