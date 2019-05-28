@@ -4,7 +4,8 @@
             <h2>Ma collection</h2>
             <router-link :to="{name: 'collectionAdd'}" class="btn btn-default">Ajouter un Vinyle</router-link>
         </div>
-        <div class="row">
+        <Loader v-if="vinylCollection.length <= 0" />
+        <div v-else class="row">
             <table class="table table-striped">
                 <thead>
                     <tr>
@@ -24,7 +25,16 @@
                         <td>{{ vinyl.name }}</td>
                         <td>{{ vinyl.date }}</td>
                         <td>{{ vinyl.format }}</td>
-                        <td>{{ vinyl.tracklist }}</td>
+                        <td>
+                                <table class="table table-striped">
+                                    <tbody>
+                                    <tr v-for="(track, index) in vinyl.tracklist" :key="index">
+                                        <td>{{ track.title }}</td>
+                                        <td>{{ track.duration }}</td>
+                                    </tr>
+                                    </tbody>
+                                </table>
+                        </td>
                         <td>{{ vinyl.artist.name }}</td>
                         <td v-if='vinyl.genre'>{{ vinyl.genre.name }}</td>
                         <td><button class="btn btn-warning" @click="removeVinyl(vinyl.id)">Remove</button></td>
@@ -40,6 +50,7 @@
 
 <script>
     import 'axios'
+    import Loader from '../loader'
 
     export default {
         data() {
@@ -70,6 +81,9 @@
             this.getCollectionFromApi().then((result) => {
                 this.vinylCollection = result.data.data.collection;
             })
+        },
+        components: {
+            Loader
         }
     }
 </script>

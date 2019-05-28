@@ -9,7 +9,8 @@
                 <button class="btn btn-danger" @click="destroy(vinyl.id)">Delete</button>
             </div>
         </div>
-        <div class="row row-margin-top">
+        <Loader v-if="vinyl.length <= 0" />
+        <div v-else class="row row-margin-top">
             <div class="col-4">
                 <img :src="getPochette()" class="img-fluid vinyl-cover">
             </div>
@@ -18,8 +19,6 @@
                 <p>{{ vinyl.artist.name }}</p>
                 <p><span v-if="vinyl.genre">{{ vinyl.genre.name }}</span><span v-else><i>unknown genre</i></span> &middot; {{ vinyl.date.substring(0,4) }} &middot; {{ vinyl.format }} tours</p>
             </div>
-        </div>
-        <div class="row row-margin-top">
             <p> Tracklist : {{ vinyl.tracklist_content }}</p>
             <table class="table table-striped">
                 <thead>
@@ -41,12 +40,16 @@
 
 <script>
     import 'axios'
+    import Loader from '../loader'
 
     export default {
+        components: {
+            Loader
+        },
         data() {
             return {
                 id: this.$route.params.id,
-                vinyl: {},
+                vinyl: [],
                 success: false
             }
         },

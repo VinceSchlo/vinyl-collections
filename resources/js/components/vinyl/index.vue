@@ -8,7 +8,8 @@
                 <router-link :to="{name: 'vinylCreate'}" class="btn btn-secondary">Add vinyl</router-link>
             </div>
         </div>
-        <div class="row row-margin-top">
+        <Loader v-if="vinyls.length <= 0" />
+        <div v-else class="row row-margin-top">
             <div v-for="(vinyl, index) in vinyls.data" :key="index" class="col-3">
                 <router-link :to="{name: 'vinylShow', params: {id: vinyl.id}}"><img :src="getPochette(vinyl)" class="img-fluid vinyl-cover"></router-link>
                 <h3 class="vinyl-title"><router-link :to="{name: 'vinylShow', params: {id: vinyl.id}}" class="link">{{ vinyl.name }}</router-link></h3>
@@ -20,11 +21,13 @@
 
 <script>
     import 'axios'
+    import Loader from '../loader'
 
     export default {
+
         data() {
             return {
-                vinyls: {},
+                vinyls: [],
                 success: false,
             }
         },
@@ -56,6 +59,9 @@
                     vm.vinyls = result.data;
                 })
 
+        },
+        components: {
+            Loader
         }
     }
 </script>
