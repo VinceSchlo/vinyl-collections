@@ -25,7 +25,6 @@
                         </form>
                     </td>
                 </tr>
-                <!-- <td><a href="{{ route('artists.show', ['artist' => $artist->id] ) }}" class="btn btn-success">Show</a></td> -->
             </tbody>
         </table>
         <div class="pagination">

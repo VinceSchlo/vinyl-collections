@@ -2,7 +2,6 @@
 <div class="container">
     <div class="row">
         <form @submit.prevent="submit">
-            <!-- @method('PATCH') -->
             <div class="form-group">
                 <label for="name">Titre</label>
                 <input type="text" class="form-control" id="name" name="name" v-model="fields.name"/>
@@ -39,13 +38,12 @@
                     <option v-for="(genre, index) in genres.data" :value='genre.id' :key='index'>{{ genre.name }}</option>
                 </select>
             </div>
-            <!--<div class="form-group">
-                <select name="pochette-id" id="pochette">
-                    @foreach ($pochettes as $pochette)
-                        <option value="{{ $pochette->id }}">{{ $pochette->illustrator }}</option>
-                    @endforeach
+            <div class="form-group">
+                <label for="pochette_id">Pochette</label>
+                <select name="pochette_id" id="pochette_id" v-model="fields.pochette_id">
+                    <option v-for="(pochette, index) in pochettes.data" :value='pochette.id' :key="index">{{ pochette.illustrator }}</option>
                 </select>
-            </div> -->
+            </div>
             <button type="submit" class="btn btn-primary">Update</button>
         </form>
         <div v-if="success" class="alert alert-success mt-3">
@@ -65,6 +63,7 @@ export default {
             fields: {},
             genres: {},
             artists: {},
+            pochettes: {},
             errors: {},
             success: false,
         }
@@ -80,6 +79,7 @@ export default {
                 format: this.fields.format,
                 artist_id: this.fields.artist_id,
                 genre_id: this.fields.genre_id,
+                pochette_id: this.fields.pochette_id,
                 _method: 'patch'
             }).then(response => {
                 this.success = true;
@@ -97,6 +97,9 @@ export default {
         },
         getGenres() {
             return axios.get(`/api/genres`);
+        },
+        getPochettesFromApi() {
+            return axios.get(`/api/pochettes`);
         }
 
     },
@@ -113,6 +116,9 @@ export default {
         vm.getGenres().then((response) => {
             let genres;
             vm.genres = response.data;
+        })
+        vm.getPochettesFromApi().then((result) => {
+            vm.pochettes = result.data;
         })
     },
 

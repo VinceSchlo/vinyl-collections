@@ -5,22 +5,25 @@
             <router-link :to="{name: 'vinylCreate'}" class="btn btn-default">Ajouter un Vinyle</router-link>
         </div>
         <div class="row">
-            <p>nom : {{ vinyl.name }}</p>
+            <p>Nom : {{ vinyl.name }}</p>
         </div>
         <div class="row">
-            <p> date : {{ vinyl.date }}</p>
+            <p> Date : {{ vinyl.date }}</p>
         </div>
         <div class="row">
-            <p> format : {{ vinyl.format }}</p>
+            <p> Format : {{ vinyl.format }}</p>
         </div>
         <div class="row">
-            <p> tracklist : {{ vinyl.tracklist_content }}</p>
+            <p> Tracklist : {{ vinyl.tracklist_content }}</p>
+            <ul>
+                <li v-for="(track, index) in vinyl.tracklist"> {{ track.title }} </li>
+            </ul>
         </div>
         <div class="row">
-            <p> artiste : {{ vinyl.artist.name }}</p>
+            <p> Artiste : {{ vinyl.artist.name }}</p>
         </div>
         <div class="row">
-            <p v-if='vinyl.genre'>genre : {{ vinyl.genre.name }}</p>
+            <p v-if='vinyl.genre'>Genre : {{ vinyl.genre.name }}</p>
             <p v-else><i>unknown</i></p>
         </div>
         <div class="row">
@@ -42,11 +45,6 @@
         methods: {
             getVinyl: function () {
                 return axios.get(`/api/vinyls/${this.id}`);
-            },
-            getTracklist: function() {
-                let config = { headers: { 'Access-Control-Allow-Methods': 'GET,PUT,PATCH,POST,DELETE', 'Access-Control-Allow-Origin': '*', 'Content-Type': 'application/json', 'Access-Control-Allow-Headers': 'Content-Type' } };
-                // const tracklist_id = this.vinyl.tracklist;
-                return axios.get('https://api.discogs.com/masters/1203', config);
             }
         },
         mounted() {
@@ -54,13 +52,6 @@
             vm.getVinyl().then((result) => {
                 vm.vinyl = result.data.data;
             });
-
-            vm.getTracklist().then((result) => {
-                vm.vinyl.tracklist_content = result.tracklist;
-            }).catch(error => {
-                console.log(error);
-
-            })
         }
     }
 </script>

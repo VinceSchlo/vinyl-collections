@@ -1878,7 +1878,6 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
-//
 
 /* harmony default export */ __webpack_exports__["default"] = ({
   data: function data() {
@@ -1932,7 +1931,6 @@ __webpack_require__.r(__webpack_exports__);
 __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var axios__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! axios */ "./node_modules/axios/index.js");
 /* harmony import */ var axios__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(axios__WEBPACK_IMPORTED_MODULE_0__);
-//
 //
 //
 //
@@ -2169,15 +2167,6 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
-//
-//
-//
-//
-//
-//
-//
-//
-//
 
 /* harmony default export */ __webpack_exports__["default"] = ({
   data: function data() {
@@ -2299,7 +2288,6 @@ __webpack_require__.r(__webpack_exports__);
 __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var axios__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! axios */ "./node_modules/axios/index.js");
 /* harmony import */ var axios__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(axios__WEBPACK_IMPORTED_MODULE_0__);
-//
 //
 //
 //
@@ -2508,16 +2496,6 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
 /* harmony default export */ __webpack_exports__["default"] = ({});
 
 /***/ }),
@@ -2535,11 +2513,6 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var axios__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(axios__WEBPACK_IMPORTED_MODULE_0__);
 /* harmony import */ var util__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! util */ "./node_modules/node-libs-browser/node_modules/util/util.js");
 /* harmony import */ var util__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(util__WEBPACK_IMPORTED_MODULE_1__);
-//
-//
-//
-//
-//
 //
 //
 //
@@ -2590,10 +2563,6 @@ __webpack_require__.r(__webpack_exports__);
           }
         };
         var formData = new FormData();
-        /*
-            Add the form data we need to submit
-        */
-
         formData.append('file', this.file);
         formData.append('illustrator', this.fields.illustrator);
         axios.post('/api/pochettes', formData, config).then(function (response) {
@@ -2813,8 +2782,6 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
-//
-//
 
 /* harmony default export */ __webpack_exports__["default"] = ({
   data: function data() {
@@ -2823,6 +2790,7 @@ __webpack_require__.r(__webpack_exports__);
       fields: {},
       genres: {},
       artists: {},
+      pochettes: {},
       errors: {},
       success: false
     };
@@ -2840,6 +2808,7 @@ __webpack_require__.r(__webpack_exports__);
         format: this.fields.format,
         artist_id: this.fields.artist_id,
         genre_id: this.fields.genre_id,
+        pochette_id: this.fields.pochette_id,
         _method: 'patch'
       }).then(function (response) {
         _this.success = true;
@@ -2857,6 +2826,9 @@ __webpack_require__.r(__webpack_exports__);
     },
     getGenres: function getGenres() {
       return axios.get("/api/genres");
+    },
+    getPochettesFromApi: function getPochettesFromApi() {
+      return axios.get("/api/pochettes");
     }
   },
   mounted: function mounted() {
@@ -2871,6 +2843,9 @@ __webpack_require__.r(__webpack_exports__);
     }), vm.getGenres().then(function (response) {
       var genres;
       vm.genres = response.data;
+    });
+    vm.getPochettesFromApi().then(function (result) {
+      vm.pochettes = result.data;
     });
   }
 });
@@ -2888,12 +2863,6 @@ __webpack_require__.r(__webpack_exports__);
 __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var axios__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! axios */ "./node_modules/axios/index.js");
 /* harmony import */ var axios__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(axios__WEBPACK_IMPORTED_MODULE_0__);
-//
-//
-//
-//
-//
-//
 //
 //
 //
@@ -3026,6 +2995,9 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
 
 /* harmony default export */ __webpack_exports__["default"] = ({
   data: function data() {
@@ -3037,29 +3009,12 @@ __webpack_require__.r(__webpack_exports__);
   methods: {
     getVinyl: function getVinyl() {
       return axios.get("/api/vinyls/".concat(this.id));
-    },
-    getTracklist: function getTracklist() {
-      var config = {
-        headers: {
-          'Access-Control-Allow-Methods': 'GET,PUT,PATCH,POST,DELETE',
-          'Access-Control-Allow-Origin': '*',
-          'Content-Type': 'application/json',
-          'Access-Control-Allow-Headers': 'Content-Type'
-        }
-      }; // const tracklist_id = this.vinyl.tracklist;
-
-      return axios.get('https://api.discogs.com/masters/1203', config);
     }
   },
   mounted: function mounted() {
     var vm = this;
     vm.getVinyl().then(function (result) {
       vm.vinyl = result.data.data;
-    });
-    vm.getTracklist().then(function (result) {
-      vm.vinyl.tracklist_content = result.tracklist;
-    })["catch"](function (error) {
-      console.log(error);
     });
   }
 });
@@ -40312,7 +40267,7 @@ var render = function() {
       _vm._v(" "),
       _vm.success
         ? _c("div", { staticClass: "alert alert-success mt-3" }, [
-            _vm._v("\n                Pochette ajoutée !\n")
+            _vm._v("\n            Pochette ajoutée !\n        ")
           ])
         : _vm._e()
     ])
@@ -40940,6 +40895,52 @@ var render = function() {
             )
           ]),
           _vm._v(" "),
+          _c("div", { staticClass: "form-group" }, [
+            _c("label", { attrs: { for: "pochette_id" } }, [
+              _vm._v("Pochette")
+            ]),
+            _vm._v(" "),
+            _c(
+              "select",
+              {
+                directives: [
+                  {
+                    name: "model",
+                    rawName: "v-model",
+                    value: _vm.fields.pochette_id,
+                    expression: "fields.pochette_id"
+                  }
+                ],
+                attrs: { name: "pochette_id", id: "pochette_id" },
+                on: {
+                  change: function($event) {
+                    var $$selectedVal = Array.prototype.filter
+                      .call($event.target.options, function(o) {
+                        return o.selected
+                      })
+                      .map(function(o) {
+                        var val = "_value" in o ? o._value : o.value
+                        return val
+                      })
+                    _vm.$set(
+                      _vm.fields,
+                      "pochette_id",
+                      $event.target.multiple ? $$selectedVal : $$selectedVal[0]
+                    )
+                  }
+                }
+              },
+              _vm._l(_vm.pochettes.data, function(pochette, index) {
+                return _c(
+                  "option",
+                  { key: index, domProps: { value: pochette.id } },
+                  [_vm._v(_vm._s(pochette.illustrator))]
+                )
+              }),
+              0
+            )
+          ]),
+          _vm._v(" "),
           _c(
             "button",
             { staticClass: "btn btn-primary", attrs: { type: "submit" } },
@@ -41027,7 +41028,15 @@ var render = function() {
               _vm._v(" "),
               _c("td", [_vm._v(_vm._s(vinyl.format))]),
               _vm._v(" "),
-              _c("td", [_vm._v(_vm._s(vinyl.tracklist))]),
+              _c("td", [
+                _c(
+                  "ul",
+                  _vm._l(vinyl.tracklist, function(track, index) {
+                    return _c("li", [_vm._v(" " + _vm._s(track.title) + " ")])
+                  }),
+                  0
+                )
+              ]),
               _vm._v(" "),
               _c("td", [_vm._v(_vm._s(vinyl.artist.name))]),
               _vm._v(" "),
@@ -41158,28 +41167,36 @@ var render = function() {
     ),
     _vm._v(" "),
     _c("div", { staticClass: "row" }, [
-      _c("p", [_vm._v("nom : " + _vm._s(_vm.vinyl.name))])
+      _c("p", [_vm._v("Nom : " + _vm._s(_vm.vinyl.name))])
     ]),
     _vm._v(" "),
     _c("div", { staticClass: "row" }, [
-      _c("p", [_vm._v(" date : " + _vm._s(_vm.vinyl.date))])
+      _c("p", [_vm._v(" Date : " + _vm._s(_vm.vinyl.date))])
     ]),
     _vm._v(" "),
     _c("div", { staticClass: "row" }, [
-      _c("p", [_vm._v(" format : " + _vm._s(_vm.vinyl.format))])
+      _c("p", [_vm._v(" Format : " + _vm._s(_vm.vinyl.format))])
     ]),
     _vm._v(" "),
     _c("div", { staticClass: "row" }, [
-      _c("p", [_vm._v(" tracklist : " + _vm._s(_vm.vinyl.tracklist_content))])
+      _c("p", [_vm._v(" Tracklist : " + _vm._s(_vm.vinyl.tracklist_content))]),
+      _vm._v(" "),
+      _c(
+        "ul",
+        _vm._l(_vm.vinyl.tracklist, function(track, index) {
+          return _c("li", [_vm._v(" " + _vm._s(track.title) + " ")])
+        }),
+        0
+      )
     ]),
     _vm._v(" "),
     _c("div", { staticClass: "row" }, [
-      _c("p", [_vm._v(" artiste : " + _vm._s(_vm.vinyl.artist.name))])
+      _c("p", [_vm._v(" Artiste : " + _vm._s(_vm.vinyl.artist.name))])
     ]),
     _vm._v(" "),
     _c("div", { staticClass: "row" }, [
       _vm.vinyl.genre
-        ? _c("p", [_vm._v("genre : " + _vm._s(_vm.vinyl.genre.name))])
+        ? _c("p", [_vm._v("Genre : " + _vm._s(_vm.vinyl.genre.name))])
         : _c("p", [_c("i", [_vm._v("unknown")])])
     ]),
     _vm._v(" "),

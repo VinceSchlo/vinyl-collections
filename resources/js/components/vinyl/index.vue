@@ -15,7 +15,6 @@
                     <td>Tracklist</td>
                     <td>Artiste</td>
                     <td>Genre</td>
-                    <!-- <td>Genre</td> -->
                     <td colspan="3">Action</td>
                     </tr>
                 </thead>
@@ -25,7 +24,11 @@
                         <td><router-link :to="{name: 'vinylShow', params: {id: vinyl.id}}">{{ vinyl.name }}</router-link></td>
                         <td>{{ vinyl.date }}</td>
                         <td>{{ vinyl.format }}</td>
-                        <td>{{ vinyl.tracklist }}</td>
+                        <td>
+                            <ul>
+                                <li v-for="(track, index) in vinyl.tracklist"> {{ track.title }} </li>
+                            </ul>
+                        </td>
                         <td>{{ vinyl.artist.name }}</td>
                         <td v-if='vinyl.genre'>{{ vinyl.genre.name }}</td>
                         <td v-else><i>unknown</i></td>
@@ -38,15 +41,6 @@
                                 Vinyle supprimé !
                             </div>
                         </td>
-                        <!-- <td><a href="{{ route('vinyls.edit', ['vinyl' => $vinyl->id] ) }}" class="btn btn-warning">Edit</a></td>
-                        <td>
-                            <form action="{{ route('vinyls.destroy', ['vinyl' => $vinyl->id]) }} " method="post">
-                                @method('DELETE')
-                                @csrf
-                                <button class="btn btn-danger" type="submit">Delete</button>
-                            </form>
-                        </td>
-                        <td><a href="{{ route('vinyls.show', ['vinyl' => $vinyl->id] ) }}" class="btn btn-success">Show</a></td> -->
                     </tr>
                 </tbody>
             </table>

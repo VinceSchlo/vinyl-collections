@@ -2,7 +2,6 @@
 <div class="container">
     <div class="row">
         <form @submit.prevent="submit" >
-            <!-- @method('PATCH') -->
             <div class="form-group">
                 <label for="name">Nom</label>
                 <input type="text" class="form-control" name="name" v-model="fields.name"  />

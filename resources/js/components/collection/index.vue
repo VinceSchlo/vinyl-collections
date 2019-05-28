@@ -28,15 +28,6 @@
                         <td>{{ vinyl.artist.name }}</td>
                         <td v-if='vinyl.genre'>{{ vinyl.genre.name }}</td>
                         <td><button class="btn btn-warning" @click="removeVinyl(vinyl.id)">Remove</button></td>
-                        <!-- <td><a href="{{ route('vinyls.edit', ['vinyl' => $vinyl->id] ) }}" class="btn btn-warning">Edit</a></td>
-                        <td>
-                            <form action="{{ route('vinyls.destroy', ['vinyl' => $vinyl->id]) }} " method="post">
-                                @method('DELETE')
-                                @csrf
-                                <button class="btn btn-danger" type="submit">Delete</button>
-                            </form>
-                        </td>
-                        <td><a href="{{ route('vinyls.show', ['vinyl' => $vinyl->id] ) }}" class="btn btn-success">Show</a></td> -->
                     </tr>
                     <tr>
                         <td v-if="success" class="alert alert-success mt-3" colspan="8"> Vinyl supprimé de votre collection !</td>
