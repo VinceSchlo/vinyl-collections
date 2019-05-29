@@ -1,49 +1,24 @@
 <template>
     <div class="container">
-        <div class="row">
-            <h2>Ma collection</h2>
-            <router-link :to="{name: 'collectionAdd'}" class="btn btn-default">Ajouter un Vinyle</router-link>
+        <div class="row justify-content-between">
+            <div class="col-2">
+                <h2 class="page-title">My collection</h2>
+            </div>
+            <div class="col-2">
+                <router-link :to="{name: 'collectionAdd'}" class="btn btn-secondary">Add vinyl</router-link>
+            </div>
+        </div>
+        <div v-if="success" class="row row-margin-top alert alert-success mt-3" colspan="8">
+            <p>Vinyl successfully deleted from collection!</p>
         </div>
         <Loader v-if="vinylCollection.length <= 0" />
-        <div v-else class="row">
-            <table class="table table-striped">
-                <thead>
-                    <tr>
-                    <td>ID</td>
-                    <td>Nom</td>
-                    <td>Date</td>
-                    <td>Format</td>
-                    <td>Tracklist</td>
-                    <td>Artiste</td>
-                    <td>Genre</td>
-                    <td colspan="3">Action</td>
-                    </tr>
-                </thead>
-                <tbody>
-                    <tr v-for="(vinyl, index) in vinylCollection" :key="index">
-                        <td>{{ vinyl.id }}</td>
-                        <td>{{ vinyl.name }}</td>
-                        <td>{{ vinyl.date }}</td>
-                        <td>{{ vinyl.format }}</td>
-                        <td>
-                                <table class="table table-striped">
-                                    <tbody>
-                                    <tr v-for="(track, index) in vinyl.tracklist" :key="index">
-                                        <td>{{ track.title }}</td>
-                                        <td>{{ track.duration }}</td>
-                                    </tr>
-                                    </tbody>
-                                </table>
-                        </td>
-                        <td>{{ vinyl.artist.name }}</td>
-                        <td v-if='vinyl.genre'>{{ vinyl.genre.name }}</td>
-                        <td><button class="btn btn-warning" @click="removeVinyl(vinyl.id)">Remove</button></td>
-                    </tr>
-                    <tr>
-                        <td v-if="success" class="alert alert-success mt-3" colspan="8"> Vinyl supprimé de votre collection !</td>
-                    </tr>
-                </tbody>
-            </table>
+        <div v-else class="row row-margin-top">
+            <div v-for="(vinyl, index) in vinylCollection" :key="index" class="col-3">
+                <router-link :to="{name: 'collectionShow', params: {id: vinyl.id}}"><img :src="getPochette(vinyl)" class="img-fluid vinyl-cover"></router-link>
+                <h3 class="vinyl-title"><router-link :to="{name: 'collectionShow', params: {id: vinyl.id}}" class="link">{{ vinyl.name }}</router-link></h3>
+                <p class="vinyl-artist">{{ vinyl.artist.name }}</p>
+                <button @click="removeVinyl(vinyl.id)" class="btn btn-danger remove-from-collection">Remove</button>
+            </div>
         </div>
     </div>
 </template>
@@ -75,6 +50,9 @@
                     })
                 })
                 .catch(error => { console.log('oups, something went wrong'); });
+            },
+            getPochette: function(vinyl) {
+                return `/storage/${vinyl.pochette.image}`;
             }
         },
         created() {

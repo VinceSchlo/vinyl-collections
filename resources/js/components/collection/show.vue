@@ -2,15 +2,13 @@
     <div class="container">
         <div class="row justify-content-between">
             <div class="col-2">
-                <router-link :to="{ name: 'vinyls' }" class="page-title link">Vinyls</router-link> / {{ vinyl.name }}
+                <router-link :to="{ name: 'collections' }" class="page-title link">My collection</router-link> / {{ vinyl.name }}
             </div>
             <div class="col-2">
-                <router-link :to="{name: 'vinylEdit', params: {id: vinyl.id }}" class="btn btn-warning">Edit</router-link>
-                <button class="btn btn-danger" @click="destroy(vinyl.id)">Delete</button>
+                <button class="btn btn-danger" @click="removeVinyl(vinyl.id)">Remove</button>
             </div>
         </div>
-        <Loader v-if="vinyl.length <= 0" />
-        <div v-else class="row row-margin-top">
+        <div class="row row-margin-top">
             <div class="col-4">
                 <img :src="getPochette()" class="img-fluid vinyl-cover">
             </div>
@@ -46,16 +44,12 @@
 
 <script>
     import 'axios'
-    import Loader from '../loader'
 
     export default {
-        components: {
-            Loader
-        },
         data() {
             return {
                 id: this.$route.params.id,
-                vinyl: [],
+                vinyl: {},
                 success: false
             }
         },
@@ -66,16 +60,19 @@
             getPochette: function() {
                 return `/storage/${this.vinyl.pochette.image}`;
             },
-            destroy: function (id) {
-                axios.post(`/api/vinyls/${id}`, { _method: 'delete' }).then(response => {
-                this.success = true;
-                this.$router.push({ name: 'vinyls' });
-            }).catch(error => {
-                if (error.response.status === 422) {
-                    this.errors = error.response.data.errors || {};
-                }
-            });
-            }
+            removeVinyl: function(id) {
+                axios.post(`/api/users/${this.$userId}`, {
+                    user_id: this.$userId,
+                    vinyl_id: id,
+                    _method: 'delete' })
+                .then(response => {
+                    this.success = true;
+                    this.getCollectionFromApi().then((result) => {
+                        this.vinylCollection = result.data.data.collection;
+                    })
+                })
+                .catch(error => { console.log('oups, something went wrong'); });
+            },
         },
         mounted() {
             let vm = this;

@@ -21,6 +21,7 @@ import VinylShow from './components/vinyl/show.vue';
 // Collection components
 import CollectionAdd from './components/collection/add.vue';
 import CollectionIndex from './components/collection/index.vue';
+import CollectionShow from './components/collection/show.vue';
 
 // Genres components
 import GenreIndex from './components/genre/index.vue';
@@ -87,6 +88,11 @@ const routes =
         path: '/collections/add',
         name: 'collectionAdd',
         component: CollectionAdd
+    },
+    {
+        path: '/collections/show',
+        name: 'collectionShow',
+        component: CollectionShow
     },
     // Genres routes
     {

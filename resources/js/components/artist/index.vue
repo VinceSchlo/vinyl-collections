@@ -1,40 +1,55 @@
 <template>
 <div class="container">
- 
-    <div class="row">
-        <h2>Tous les artistes</h2>
-        <router-link :to="{name: 'artistCreate'}" class="btn btn-default">Ajouter un Artiste</router-link>
+    <div class="row justify-content-between">
+        <div class="col-2">
+            <h2 class="page-title">Artists</h2>
+        </div>
+        <div class="col-2">
+            <router-link :to="{name: 'artistCreate'}" class="btn btn-secondary">Add artist</router-link>
+        </div>
+    </div>
+    <div class="row row-margin-top">
+        <div class="col-12">
+            <table class="table table-striped">
+                <thead>
+                    <tr>
+                    <th>#</th>
+                    <th>Name</th>
+                    <th colspan="3">Action</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr v-for="(artist, index) in artists" :key="index">
+                        <td>{{artist.id}}</td>
+                        <td>{{artist.name}}</td>
+                        <td><router-link :to="{name: 'artistEdit', params: {id: artist.id }}" class="btn btn-warning">Edit</router-link></td>
+                        <td>
+                            <form @submit.prevent="destroy(artist.id)">
+                                <button class="btn btn-danger" type="submit">Delete</button>
+                            </form>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
     </div>
     <div class="row">
-        <table class="table table-striped">
-            <thead>
-                <tr>
-                <td>ID</td>
-                <td>Nom</td>
-                <td colspan="3">Action</td>
-                </tr>
-            </thead>
-            <tbody>
-                <tr v-for="(artist, index) in artists" :key="index">
-                    <td>{{artist.id}}</td>
-                    <td>{{artist.name}}</td>
-                    <td><router-link :to="{name: 'artistEdit', params: {id: artist.id }}" class="btn btn-warning">Edit</router-link></td>
-                    <td>
-                        <form @submit.prevent="destroy(artist.id)">
-                            <button class="btn btn-danger" type="submit">Delete</button>
-                        </form>
-                    </td>
-                </tr>
-            </tbody>
-        </table>
-        <div class="pagination">
-            <button class="btn btn-default" @click="fetchPaginateArtists(pagination.prev_page_url)" :disabled="!pagination.prev_page_url">
-                Previous
-            </button>
-            <span>Page {{ pagination.current_page }} of {{ pagination.last_page }}</span>
-            <button class="btn btn-default" @click="fetchPaginateArtists(pagination.next_page_url)" :disabled="!pagination.next_page_url">
-                Next
-            </button>
+        <div class="col-12">
+            <ul class="pagination justify-content-center">
+                <li class="page-item">
+                    <button class="page-link" @click="fetchPaginateArtists(pagination.prev_page_url)" :disabled="!pagination.prev_page_url">
+                    Previous
+                    </button>
+                </li>
+                <li class="page-item">
+                    <span class="page-link">Page {{ pagination.current_page }} of {{ pagination.last_page }}</span>
+                </li>
+                <li class="page-item">
+                    <button class="page-link" @click="fetchPaginateArtists(pagination.next_page_url)" :disabled="!pagination.next_page_url">
+                        Next
+                    </button>
+                </li>
+            </ul>
         </div>
     </div>
 </div>
@@ -85,7 +100,7 @@
                     next_page_url: data.links.next,
                     prev_page_url: data.links.prev
                 }
-
+                console.log(data);
                 this.pagination = pagination
             },
             fetchPaginateArtists(url){

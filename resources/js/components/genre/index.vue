@@ -1,17 +1,20 @@
 <template>
 <div class="container">
-
-    <div class="row">
-        <h2>Tous les genres</h2>
-        <router-link :to="{name: 'genreCreate'}" class="btn btn-default">Ajouter un Genre</router-link>
+    <div class="row justify-content-between">
+        <div class="col-2">
+            <h2 class="page-title">Genres</h2>
+        </div>
+        <div class="col-2">
+            <router-link :to="{name: 'genreCreate'}" class="btn btn-secondary">Add genre</router-link>
+        </div>
     </div>
-    <div class="row">
+    <div class="row row-margin-top">
         <table class="table table-striped">
             <thead>
                 <tr>
-                <td>ID</td>
-                <td>Nom</td>
-                <td colspan="3">Action</td>
+                <th>#</th>
+                <th>Name</th>
+                <th colspan="3">Action</th>
                 </tr>
             </thead>
             <tbody>
