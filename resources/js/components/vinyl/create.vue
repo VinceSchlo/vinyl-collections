@@ -32,6 +32,7 @@
                 <div class="form-group">
                     <label for="artist_id">Artist</label>
                     <select name="artist_id" id="artist_id" v-model="fields.artist_id">
+                        <option disabled selected>Select artist</option>
                         <option v-for="(artist, index) in artists.data" :value='artist.id' :key="index">{{ artist.name }}</option>
                     </select>
                     <div v-if="errors && errors.artist_id" class="text-danger">{{ errors.artist_id[0] }}</div>
@@ -39,12 +40,14 @@
                 <div class="form-group">
                     <label for="genre_id">Genre</label>
                     <select name="genre_id" id="genre_id" v-model="fields.genre_id">
+                        <option disabled selected>Select genre</option>
                         <option v-for="(genre, index) in genres.data" :value='genre.id' :key="index">{{ genre.name }}</option>
                     </select>
                 </div>
                 <div class="form-group">
                     <label for="pochette_id">Cover</label>
                     <select name="pochette_id" id="pochette_id" v-model="fields.pochette_id">
+                        <option disabled selected>Select cover</option>
                         <option v-for="(pochette, index) in pochettes.data" :value='pochette.id' :key="index">{{ pochette.illustrator }}</option>
                     </select>
                 </div>

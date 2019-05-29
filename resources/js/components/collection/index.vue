@@ -11,7 +11,9 @@
         <div v-if="success" class="row row-margin-top alert alert-success mt-3" colspan="8">
             <p>Vinyl successfully deleted from collection!</p>
         </div>
-        <Loader v-if="vinylCollection.length <= 0" />
+        <div v-if="vinylCollection.length <= 0" class="row row-margin-top justify-content-center">
+            <Loader/>
+        </div>
         <div v-else class="row row-margin-top">
             <div v-for="(vinyl, index) in vinylCollection" :key="index" class="col-3">
                 <router-link :to="{name: 'collectionShow', params: {id: vinyl.id}}"><img :src="getPochette(vinyl)" class="img-fluid vinyl-cover"></router-link>

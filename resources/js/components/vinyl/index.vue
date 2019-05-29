@@ -8,7 +8,9 @@
                 <router-link :to="{name: 'vinylCreate'}" class="btn btn-secondary">Add vinyl</router-link>
             </div>
         </div>
-        <Loader v-if="vinyls.length <= 0" />
+        <div v-if="vinyls.length <= 0" class="row justify-content-center row-margin-top">
+            <Loader/>
+        </div>
         <div v-else class="row row-margin-top">
             <div v-for="(vinyl, index) in vinyls.data" :key="index" class="col-3">
                 <router-link :to="{name: 'vinylShow', params: {id: vinyl.id}}"><img :src="getPochette(vinyl)" class="img-fluid vinyl-cover"></router-link>

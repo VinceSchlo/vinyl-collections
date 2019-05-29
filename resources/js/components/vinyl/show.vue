@@ -9,7 +9,9 @@
                 <button class="btn btn-danger" @click="destroy(vinyl.id)">Delete</button>
             </div>
         </div>
-        <Loader v-if="vinyl.length <= 0" />
+        <div v-if="vinyl.length <= 0" class="row justify-content-center row-margin-top">
+            <Loader/>
+        </div>
         <div v-else class="row row-margin-top">
             <div class="col-4">
                 <img :src="getPochette()" class="img-fluid vinyl-cover">
@@ -20,7 +22,10 @@
                 <p><span v-if="vinyl.genre">{{ vinyl.genre.name }}</span><span v-else><i>unknown genre</i></span> &middot; {{ vinyl.date.substring(0,4) }} &middot; {{ vinyl.format }} tours</p>
             </div>
         </div>
-        <div class="row row-margin-top">
+        <div v-if="vinyl.tracklist.length === 0" class="row justify-content-center row-margin-top">
+            <Loader/>
+        </div>
+        <div v-else class="row row-margin-top">
             <div class="col-12">
                 <table class="table table-striped table-sm">
                     <caption>Tracklist</caption>
