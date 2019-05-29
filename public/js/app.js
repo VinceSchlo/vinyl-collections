@@ -2498,14 +2498,6 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
-//
-//
-//
-//
-//
-//
-//
-//
 /* harmony default export */ __webpack_exports__["default"] = ({});
 
 /***/ }),
@@ -2688,6 +2680,17 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 
 /* harmony default export */ __webpack_exports__["default"] = ({
   data: function data() {
@@ -2709,7 +2712,22 @@ __webpack_require__.r(__webpack_exports__);
         this.loaded = false;
         this.success = false;
         this.errors = {};
-        axios.post('/api/vinyls', this.fields).then(function (response) {
+        var config = {
+          headers: {
+            'content-type': 'multipart/form-data'
+          }
+        };
+        var formData = new FormData();
+        formData.append('file', this.file);
+        formData.append('illustrator', this.fields.illustrator);
+        formData.append('name', this.fields.name);
+        formData.append('date', this.fields.date);
+        formData.append('tracklist', this.fields.tracklist);
+        formData.append('format', this.fields.format);
+        formData.append('artist_id', this.fields.artist_id);
+        formData.append('genre_id', this.fields.genre_id); // formData.append('pochette_id', this.fields.pochette_id)
+
+        axios.post('/api/vinyls', formData, config).then(function (response) {
           console.log(_this.fields);
           _this.fields = {}; //Clear input fields.
 
@@ -2737,6 +2755,10 @@ __webpack_require__.r(__webpack_exports__);
     },
     getPochettesFromApi: function getPochettesFromApi() {
       return axios.get("/api/pochettes");
+    },
+    processFile: function processFile(e) {
+      console.log(e.target.files[0]);
+      this.file = e.target.files[0];
     }
   },
   mounted: function mounted() {
@@ -40166,26 +40188,6 @@ var render = function() {
         ],
         1
       )
-    ]),
-    _vm._v(" "),
-    _c("div", { staticClass: "container" }, [
-      _vm._m(4),
-      _vm._v(" "),
-      _c(
-        "div",
-        { staticClass: "row" },
-        [
-          _c(
-            "router-link",
-            {
-              staticClass: "btn btn-default",
-              attrs: { to: { name: "pochetteCreate" } }
-            },
-            [_vm._v("Ajouter une pochette")]
-          )
-        ],
-        1
-      )
     ])
   ])
 }
@@ -40213,12 +40215,6 @@ var staticRenderFns = [
     var _h = _vm.$createElement
     var _c = _vm._self._c || _h
     return _c("div", { staticClass: "row" }, [_c("h2", [_vm._v("Collection")])])
-  },
-  function() {
-    var _vm = this
-    var _h = _vm.$createElement
-    var _c = _vm._self._c || _h
-    return _c("div", { staticClass: "row" }, [_c("h2", [_vm._v("Pochettes")])])
   }
 ]
 render._withStripped = true
@@ -40648,49 +40644,54 @@ var render = function() {
             ]),
             _vm._v(" "),
             _c("div", { staticClass: "form-group" }, [
-              _c("label", { attrs: { for: "pochette_id" } }, [_vm._v("Cover")]),
+              _c("label", { attrs: { for: "image" } }, [_vm._v("Image")]),
               _vm._v(" "),
-              _c(
-                "select",
-                {
-                  directives: [
-                    {
-                      name: "model",
-                      rawName: "v-model",
-                      value: _vm.fields.pochette_id,
-                      expression: "fields.pochette_id"
-                    }
-                  ],
-                  attrs: { name: "pochette_id", id: "pochette_id" },
-                  on: {
-                    change: function($event) {
-                      var $$selectedVal = Array.prototype.filter
-                        .call($event.target.options, function(o) {
-                          return o.selected
-                        })
-                        .map(function(o) {
-                          var val = "_value" in o ? o._value : o.value
-                          return val
-                        })
-                      _vm.$set(
-                        _vm.fields,
-                        "pochette_id",
-                        $event.target.multiple
-                          ? $$selectedVal
-                          : $$selectedVal[0]
-                      )
-                    }
+              _c("input", {
+                ref: "file",
+                staticClass: "form-control-file",
+                attrs: { type: "file", name: "image", id: "image" },
+                on: { change: _vm.processFile }
+              }),
+              _vm._v(" "),
+              _vm.errors && _vm.errors.image
+                ? _c("div", { staticClass: "text-danger" }, [
+                    _vm._v(_vm._s(_vm.errors.image[0]))
+                  ])
+                : _vm._e()
+            ]),
+            _vm._v(" "),
+            _c("div", { staticClass: "form-group" }, [
+              _c("label", { attrs: { for: "illustrator" } }, [
+                _vm._v("Illustrateur")
+              ]),
+              _vm._v(" "),
+              _c("input", {
+                directives: [
+                  {
+                    name: "model",
+                    rawName: "v-model",
+                    value: _vm.fields.illustrator,
+                    expression: "fields.illustrator"
                   }
-                },
-                _vm._l(_vm.pochettes.data, function(pochette, index) {
-                  return _c(
-                    "option",
-                    { key: index, domProps: { value: pochette.id } },
-                    [_vm._v(_vm._s(pochette.illustrator))]
-                  )
-                }),
-                0
-              )
+                ],
+                staticClass: "form-control",
+                attrs: { type: "text", name: "illustrator", id: "illustrator" },
+                domProps: { value: _vm.fields.illustrator },
+                on: {
+                  input: function($event) {
+                    if ($event.target.composing) {
+                      return
+                    }
+                    _vm.$set(_vm.fields, "illustrator", $event.target.value)
+                  }
+                }
+              }),
+              _vm._v(" "),
+              _vm.errors && _vm.errors.illustrator
+                ? _c("div", { staticClass: "text-danger" }, [
+                    _vm._v(_vm._s(_vm.errors.illustrator[0]))
+                  ])
+                : _vm._e()
             ]),
             _vm._v(" "),
             _c(

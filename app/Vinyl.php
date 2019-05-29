@@ -14,7 +14,7 @@ class Vinyl extends Model
      */
     public function pochette()
     {
-        return $this->hasOne('App\Pochette');
+        return $this->hasOne('App\Pochette', 'vinyl_id');
     }
 
     /**
@@ -41,7 +41,7 @@ class Vinyl extends Model
         return $this->belongsToMany('App\User', 'vinyls_users');
     }
 
-    public function saveVinyl($data)
+    public function saveVinyl($data, $pochette)
     {
         $this->name        = $data['name'];
         $this->date        = $data['date'];
@@ -49,7 +49,11 @@ class Vinyl extends Model
         $this->format      = $data['format'];
         $this->artist_id   = $data['artist_id'];
         $this->genre_id    = $data['genre_id'];
-        $this->pochette_id = $data['pochette_id'];
+
+        $this->pochette()->save($pochette);
+
+        $this->pochette_id = $pochette->id;
+
         $this->save();
     }
 }

@@ -18,7 +18,6 @@ class VinylController extends Controller
      */
     public function store(Request $request)
     {
-        $vinyl = new Vinyl();
         $data = $this->validate($request, [
             'name'=>'required|max:100',
             'date'=>'required|date',
@@ -26,10 +25,19 @@ class VinylController extends Controller
             'format'=>'required|max:100',
             'artist_id'=>'required',
             'genre_id'=>'required',
-            'pochette_id'=>'required',
+            'illustrator'=>'required|max:100',
         ]);
-       
-        $vinyl->saveVinyl($data);
+
+        $image = $request->file->store('pochettes');
+
+        $pochette = new Pochette();
+        $pochette->image = $image;
+        $pochette->illustrator = $data['illustrator'];
+//        $pochette->save();
+
+
+        $vinyl = new Vinyl();
+        $vinyl->saveVinyl($data, $pochette);
         return response()->json("created", 201);
     }
 

@@ -42,12 +42,23 @@
                         <option v-for="(genre, index) in genres.data" :value='genre.id' :key="index">{{ genre.name }}</option>
                     </select>
                 </div>
+<!--                <div class="form-group">-->
+<!--                    <label for="pochette_id">Cover</label>-->
+<!--                    <select name="pochette_id" id="pochette_id" v-model="fields.pochette_id">-->
+<!--                        <option v-for="(pochette, index) in pochettes.data" :value='pochette.id' :key="index">{{ pochette.illustrator }}</option>-->
+<!--                    </select>-->
+<!--                </div>-->
                 <div class="form-group">
-                    <label for="pochette_id">Cover</label>
-                    <select name="pochette_id" id="pochette_id" v-model="fields.pochette_id">
-                        <option v-for="(pochette, index) in pochettes.data" :value='pochette.id' :key="index">{{ pochette.illustrator }}</option>
-                    </select>
+                    <label for="image">Image</label>
+                    <input type="file" class="form-control-file" name="image" id="image" ref="file" @change="processFile"/>
+                    <div v-if="errors && errors.image" class="text-danger">{{ errors.image[0] }}</div>
                 </div>
+                <div class="form-group">
+                    <label for="illustrator">Illustrateur</label>
+                    <input type="text" class="form-control" name="illustrator" id="illustrator" v-model="fields.illustrator"/>
+                    <div v-if="errors && errors.illustrator" class="text-danger">{{ errors.illustrator[0] }}</div>
+                </div>
+
                 <button type="submit" class="btn btn-primary">Create</button>
             </form>
             <div v-if="success" class="alert alert-success mt-3">
@@ -79,7 +90,25 @@ export default {
                 this.loaded = false;
                 this.success = false;
                 this.errors = {};
-                axios.post('/api/vinyls', this.fields).then(response => {
+
+                const config = {
+                    headers: { 'content-type': 'multipart/form-data' }
+                }
+
+                let formData = new FormData();
+
+                formData.append('file', this.file);
+                formData.append('illustrator', this.fields.illustrator);
+
+                formData.append('name', this.fields.name)
+                formData.append('date', this.fields.date)
+                formData.append('tracklist', this.fields.tracklist)
+                formData.append('format', this.fields.format)
+                formData.append('artist_id', this.fields.artist_id)
+                formData.append('genre_id', this.fields.genre_id)
+                // formData.append('pochette_id', this.fields.pochette_id)
+
+                axios.post('/api/vinyls', formData, config).then(response => {
                     console.log(this.fields)
                     this.fields = {}; //Clear input fields.
                     this.loaded = true;
@@ -102,6 +131,10 @@ export default {
         },
         getPochettesFromApi() {
             return axios.get(`/api/pochettes`);
+        },
+        processFile(e) {
+            console.log(e.target.files[0]);
+            this.file = e.target.files[0];
         }
     },
     mounted() {

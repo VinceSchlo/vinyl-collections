@@ -36,14 +36,6 @@
             <router-link :to="{name: 'collectionAdd'}" class="btn btn-default">Ajouter un Vinyle à ma collection</router-link>
         </div>
     </div>
-    <div class="container">
-        <div class="row">
-            <h2>Pochettes</h2>
-        </div>
-        <div class="row">
-            <router-link :to="{name: 'pochetteCreate'}" class="btn btn-default">Ajouter une pochette</router-link>
-        </div>
-    </div>
 </div>
 </template>
 
