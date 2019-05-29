@@ -14,6 +14,6 @@ class Pochette extends Model
      */
     public function vinyl()
     {
-        return $this->belongsTo('App\Vinyl');
+        return $this->belongsTo('App\Vinyl', 'vinyl_id');
     }
 }
