@@ -10704,3 +10704,14 @@ a.text-dark:focus {
   min-width: fit-content;
   align-self: center;
 }
+
+.table th,
+.table td {
+  vertical-align: middle;
+}
+
+.remove-from-collection {
+  position: absolute;
+  top: 0;
+}
+

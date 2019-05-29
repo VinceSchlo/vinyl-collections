@@ -52,9 +52,9 @@
         created() {
             let vm = this;
             vm.getVinylsFromApi().then((result) => {
-                    let vinyls;
-                    vm.vinyls = result.data;
-                })
+                let vinyls;
+                vm.vinyls = result.data;
+            })
 
         }
     }
