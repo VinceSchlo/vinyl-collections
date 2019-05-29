@@ -40,8 +40,9 @@
 
                     <!-- Right Side Of Navbar -->
                     <ul class="navbar-nav ml-auto">
-                    <li class="nav-item"><a class="nav-link" href="http://127.0.0.1:8000/vinyls">Vinyls</a></li>
-                    <li class="nav-item"><a class="nav-link" href="http://127.0.0.1:8000/collections">My Collection</a></li>
+                    <li class="nav-item"><a class="nav-link" href="/vinyls">Vinyls</a></li>
+                    <li class="nav-item"><a class="nav-link" href="/collections">My Collection</a>
+                </li>
                         <!-- Authentication Links -->
                         @guest
                             <li class="nav-item">
@@ -59,9 +60,9 @@
                                 </a>
 
                                 <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdown">
-                                    <a class="dropdown-item" href="http://127.0.0.1:8000/artists">Manage Artists</a>
-                                    <a class="dropdown-item" href="http://127.0.0.1:8000/genres">Manage Genres</a>
-                                    <a class="dropdown-item" href="http://127.0.0.1:8000/pochettes/create">Add Cover</a>
+                                    <a class="dropdown-item" href="/artists">Manage Artists</a>
+                                    <a class="dropdown-item" href="/genres">Manage Genres</a>
+                                    <a class="dropdown-item" href="/pochettes/create">Add Cover</a>
                                     <a class="dropdown-item" href="{{ route('logout') }}"
                                        onclick="event.preventDefault();
                                                      document.getElementById('logout-form').submit();">
