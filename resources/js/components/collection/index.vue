@@ -11,7 +11,8 @@
         <div v-if="success" class="row row-margin-top alert alert-success mt-3" colspan="8">
             <p>Vinyl successfully deleted from collection!</p>
         </div>
-        <div class="row row-margin-top">
+        <Loader v-if="vinylCollection.length <= 0" />
+        <div v-else class="row row-margin-top">
             <div v-for="(vinyl, index) in vinylCollection" :key="index" class="col-3">
                 <router-link :to="{name: 'collectionShow', params: {id: vinyl.id}}"><img :src="getPochette(vinyl)" class="img-fluid vinyl-cover"></router-link>
                 <h3 class="vinyl-title"><router-link :to="{name: 'collectionShow', params: {id: vinyl.id}}" class="link">{{ vinyl.name }}</router-link></h3>
@@ -24,6 +25,7 @@
 
 <script>
     import 'axios'
+    import Loader from '../loader'
 
     export default {
         data() {
@@ -57,6 +59,9 @@
             this.getCollectionFromApi().then((result) => {
                 this.vinylCollection = result.data.data.collection;
             })
+        },
+        components: {
+            Loader
         }
     }
 </script>

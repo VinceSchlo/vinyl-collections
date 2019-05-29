@@ -9,7 +9,8 @@
                 <button class="btn btn-danger" @click="destroy(vinyl.id)">Delete</button>
             </div>
         </div>
-        <div class="row row-margin-top">
+        <Loader v-if="vinyl.length <= 0" />
+        <div v-else class="row row-margin-top">
             <div class="col-4">
                 <img :src="getPochette()" class="img-fluid vinyl-cover">
             </div>
@@ -45,12 +46,16 @@
 
 <script>
     import 'axios'
+    import Loader from '../loader'
 
     export default {
+        components: {
+            Loader
+        },
         data() {
             return {
                 id: this.$route.params.id,
-                vinyl: {},
+                vinyl: [],
                 success: false
             }
         },

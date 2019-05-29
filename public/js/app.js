@@ -2148,6 +2148,7 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
 __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var axios__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! axios */ "./node_modules/axios/index.js");
 /* harmony import */ var axios__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(axios__WEBPACK_IMPORTED_MODULE_0__);
+/* harmony import */ var _loader__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../loader */ "./resources/js/components/loader.vue");
 //
 //
 //
@@ -2172,6 +2173,8 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+
 
 /* harmony default export */ __webpack_exports__["default"] = ({
   data: function data() {
@@ -2211,6 +2214,9 @@ __webpack_require__.r(__webpack_exports__);
     this.getCollectionFromApi().then(function (result) {
       _this2.vinylCollection = result.data.data.collection;
     });
+  },
+  components: {
+    Loader: _loader__WEBPACK_IMPORTED_MODULE_1__["default"]
   }
 });
 
@@ -2600,6 +2606,25 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
+//
+//
+/* harmony default export */ __webpack_exports__["default"] = ({});
+
+/***/ }),
+
+/***/ "./node_modules/babel-loader/lib/index.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/loader.vue?vue&type=script&lang=js&":
+/*!*****************************************************************************************************************************************************************!*\
+  !*** ./node_modules/babel-loader/lib??ref--4-0!./node_modules/vue-loader/lib??vue-loader-options!./resources/js/components/loader.vue?vue&type=script&lang=js& ***!
+  \*****************************************************************************************************************************************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
 //
 //
 //
@@ -3001,6 +3026,8 @@ __webpack_require__.r(__webpack_exports__);
 __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var axios__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! axios */ "./node_modules/axios/index.js");
 /* harmony import */ var axios__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(axios__WEBPACK_IMPORTED_MODULE_0__);
+/* harmony import */ var _loader__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../loader */ "./resources/js/components/loader.vue");
+//
 //
 //
 //
@@ -3022,10 +3049,11 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 
+
 /* harmony default export */ __webpack_exports__["default"] = ({
   data: function data() {
     return {
-      vinyls: {},
+      vinyls: [],
       success: false
     };
   },
@@ -3055,6 +3083,9 @@ __webpack_require__.r(__webpack_exports__);
       var vinyls;
       vm.vinyls = result.data;
     });
+  },
+  components: {
+    Loader: _loader__WEBPACK_IMPORTED_MODULE_1__["default"]
   }
 });
 
@@ -3071,6 +3102,8 @@ __webpack_require__.r(__webpack_exports__);
 __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var axios__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! axios */ "./node_modules/axios/index.js");
 /* harmony import */ var axios__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(axios__WEBPACK_IMPORTED_MODULE_0__);
+/* harmony import */ var _loader__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../loader */ "./resources/js/components/loader.vue");
+//
 //
 //
 //
@@ -3117,11 +3150,15 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 
+
 /* harmony default export */ __webpack_exports__["default"] = ({
+  components: {
+    Loader: _loader__WEBPACK_IMPORTED_MODULE_1__["default"]
+  },
   data: function data() {
     return {
       id: this.$route.params.id,
-      vinyl: {},
+      vinyl: [],
       success: false
     };
   },
@@ -39742,102 +39779,112 @@ var render = function() {
   var _vm = this
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
-  return _c("div", { staticClass: "container" }, [
-    _c("div", { staticClass: "row justify-content-between" }, [
-      _vm._m(0),
-      _vm._v(" "),
-      _c(
-        "div",
-        { staticClass: "col-2" },
-        [
-          _c(
-            "router-link",
-            {
-              staticClass: "btn btn-secondary",
-              attrs: { to: { name: "collectionAdd" } }
-            },
-            [_vm._v("Add vinyl")]
-          )
-        ],
-        1
-      )
-    ]),
-    _vm._v(" "),
-    _vm.success
-      ? _c(
+  return _c(
+    "div",
+    { staticClass: "container" },
+    [
+      _c("div", { staticClass: "row justify-content-between" }, [
+        _vm._m(0),
+        _vm._v(" "),
+        _c(
           "div",
-          {
-            staticClass: "row row-margin-top alert alert-success mt-3",
-            attrs: { colspan: "8" }
-          },
-          [_c("p", [_vm._v("Vinyl successfully deleted from collection!")])]
-        )
-      : _vm._e(),
-    _vm._v(" "),
-    _c(
-      "div",
-      { staticClass: "row row-margin-top" },
-      _vm._l(_vm.vinylCollection, function(vinyl, index) {
-        return _c(
-          "div",
-          { key: index, staticClass: "col-3" },
+          { staticClass: "col-2" },
           [
             _c(
               "router-link",
               {
-                attrs: {
-                  to: { name: "collectionShow", params: { id: vinyl.id } }
-                }
+                staticClass: "btn btn-secondary",
+                attrs: { to: { name: "collectionAdd" } }
               },
-              [
-                _c("img", {
-                  staticClass: "img-fluid vinyl-cover",
-                  attrs: { src: _vm.getPochette(vinyl) }
-                })
-              ]
-            ),
-            _vm._v(" "),
-            _c(
-              "h3",
-              { staticClass: "vinyl-title" },
-              [
-                _c(
-                  "router-link",
-                  {
-                    staticClass: "link",
-                    attrs: {
-                      to: { name: "collectionShow", params: { id: vinyl.id } }
-                    }
-                  },
-                  [_vm._v(_vm._s(vinyl.name))]
-                )
-              ],
-              1
-            ),
-            _vm._v(" "),
-            _c("p", { staticClass: "vinyl-artist" }, [
-              _vm._v(_vm._s(vinyl.artist.name))
-            ]),
-            _vm._v(" "),
-            _c(
-              "button",
-              {
-                staticClass: "btn btn-danger remove-from-collection",
-                on: {
-                  click: function($event) {
-                    return _vm.removeVinyl(vinyl.id)
-                  }
-                }
-              },
-              [_vm._v("Remove")]
+              [_vm._v("Add vinyl")]
             )
           ],
           1
         )
-      }),
-      0
-    )
-  ])
+      ]),
+      _vm._v(" "),
+      _vm.success
+        ? _c(
+            "div",
+            {
+              staticClass: "row row-margin-top alert alert-success mt-3",
+              attrs: { colspan: "8" }
+            },
+            [_c("p", [_vm._v("Vinyl successfully deleted from collection!")])]
+          )
+        : _vm._e(),
+      _vm._v(" "),
+      _vm.vinylCollection.length <= 0
+        ? _c("Loader")
+        : _c(
+            "div",
+            { staticClass: "row row-margin-top" },
+            _vm._l(_vm.vinylCollection, function(vinyl, index) {
+              return _c(
+                "div",
+                { key: index, staticClass: "col-3" },
+                [
+                  _c(
+                    "router-link",
+                    {
+                      attrs: {
+                        to: { name: "collectionShow", params: { id: vinyl.id } }
+                      }
+                    },
+                    [
+                      _c("img", {
+                        staticClass: "img-fluid vinyl-cover",
+                        attrs: { src: _vm.getPochette(vinyl) }
+                      })
+                    ]
+                  ),
+                  _vm._v(" "),
+                  _c(
+                    "h3",
+                    { staticClass: "vinyl-title" },
+                    [
+                      _c(
+                        "router-link",
+                        {
+                          staticClass: "link",
+                          attrs: {
+                            to: {
+                              name: "collectionShow",
+                              params: { id: vinyl.id }
+                            }
+                          }
+                        },
+                        [_vm._v(_vm._s(vinyl.name))]
+                      )
+                    ],
+                    1
+                  ),
+                  _vm._v(" "),
+                  _c("p", { staticClass: "vinyl-artist" }, [
+                    _vm._v(_vm._s(vinyl.artist.name))
+                  ]),
+                  _vm._v(" "),
+                  _c(
+                    "button",
+                    {
+                      staticClass: "btn btn-danger remove-from-collection",
+                      on: {
+                        click: function($event) {
+                          return _vm.removeVinyl(vinyl.id)
+                        }
+                      }
+                    },
+                    [_vm._v("Remove")]
+                  )
+                ],
+                1
+              )
+            }),
+            0
+          )
+    ],
+    1
+  )
 }
 var staticRenderFns = [
   function() {
@@ -40487,6 +40534,30 @@ var staticRenderFns = [
     return _c("div", { staticClass: "row" }, [_c("h2", [_vm._v("Pochettes")])])
   }
 ]
+render._withStripped = true
+
+
+
+/***/ }),
+
+/***/ "./node_modules/vue-loader/lib/loaders/templateLoader.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/loader.vue?vue&type=template&id=155ec09e&":
+/*!*********************************************************************************************************************************************************************************************************!*\
+  !*** ./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/vue-loader/lib??vue-loader-options!./resources/js/components/loader.vue?vue&type=template&id=155ec09e& ***!
+  \*********************************************************************************************************************************************************************************************************/
+/*! exports provided: render, staticRenderFns */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "render", function() { return render; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "staticRenderFns", function() { return staticRenderFns; });
+var render = function() {
+  var _vm = this
+  var _h = _vm.$createElement
+  var _c = _vm._self._c || _h
+  return _c("keep-alive", [_c("img", { attrs: { src: "/loader.gif" } })])
+}
+var staticRenderFns = []
 render._withStripped = true
 
 
@@ -41376,76 +41447,85 @@ var render = function() {
   var _vm = this
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
-  return _c("div", { staticClass: "container" }, [
-    _c("div", { staticClass: "row justify-content-between" }, [
-      _vm._m(0),
-      _vm._v(" "),
-      _c(
-        "div",
-        { staticClass: "col-2" },
-        [
-          _c(
-            "router-link",
-            {
-              staticClass: "btn btn-secondary",
-              attrs: { to: { name: "vinylCreate" } }
-            },
-            [_vm._v("Add vinyl")]
-          )
-        ],
-        1
-      )
-    ]),
-    _vm._v(" "),
-    _c(
-      "div",
-      { staticClass: "row row-margin-top" },
-      _vm._l(_vm.vinyls.data, function(vinyl, index) {
-        return _c(
+  return _c(
+    "div",
+    { staticClass: "container" },
+    [
+      _c("div", { staticClass: "row justify-content-between" }, [
+        _vm._m(0),
+        _vm._v(" "),
+        _c(
           "div",
-          { key: index, staticClass: "col-3" },
+          { staticClass: "col-2" },
           [
             _c(
               "router-link",
               {
-                attrs: { to: { name: "vinylShow", params: { id: vinyl.id } } }
+                staticClass: "btn btn-secondary",
+                attrs: { to: { name: "vinylCreate" } }
               },
-              [
-                _c("img", {
-                  staticClass: "img-fluid vinyl-cover",
-                  attrs: { src: _vm.getPochette(vinyl) }
-                })
-              ]
-            ),
-            _vm._v(" "),
-            _c(
-              "h3",
-              { staticClass: "vinyl-title" },
-              [
-                _c(
-                  "router-link",
-                  {
-                    staticClass: "link",
-                    attrs: {
-                      to: { name: "vinylShow", params: { id: vinyl.id } }
-                    }
-                  },
-                  [_vm._v(_vm._s(vinyl.name))]
-                )
-              ],
-              1
-            ),
-            _vm._v(" "),
-            _c("p", { staticClass: "vinyl-artist" }, [
-              _vm._v(_vm._s(vinyl.artist.name))
-            ])
+              [_vm._v("Add vinyl")]
+            )
           ],
           1
         )
-      }),
-      0
-    )
-  ])
+      ]),
+      _vm._v(" "),
+      _vm.vinyls.length <= 0
+        ? _c("Loader")
+        : _c(
+            "div",
+            { staticClass: "row row-margin-top" },
+            _vm._l(_vm.vinyls.data, function(vinyl, index) {
+              return _c(
+                "div",
+                { key: index, staticClass: "col-3" },
+                [
+                  _c(
+                    "router-link",
+                    {
+                      attrs: {
+                        to: { name: "vinylShow", params: { id: vinyl.id } }
+                      }
+                    },
+                    [
+                      _c("img", {
+                        staticClass: "img-fluid vinyl-cover",
+                        attrs: { src: _vm.getPochette(vinyl) }
+                      })
+                    ]
+                  ),
+                  _vm._v(" "),
+                  _c(
+                    "h3",
+                    { staticClass: "vinyl-title" },
+                    [
+                      _c(
+                        "router-link",
+                        {
+                          staticClass: "link",
+                          attrs: {
+                            to: { name: "vinylShow", params: { id: vinyl.id } }
+                          }
+                        },
+                        [_vm._v(_vm._s(vinyl.name))]
+                      )
+                    ],
+                    1
+                  ),
+                  _vm._v(" "),
+                  _c("p", { staticClass: "vinyl-artist" }, [
+                    _vm._v(_vm._s(vinyl.artist.name))
+                  ])
+                ],
+                1
+              )
+            }),
+            0
+          )
+    ],
+    1
+  )
 }
 var staticRenderFns = [
   function() {
@@ -41478,107 +41558,116 @@ var render = function() {
   var _vm = this
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
-  return _c("div", { staticClass: "container" }, [
-    _c("div", { staticClass: "row justify-content-between" }, [
-      _c(
-        "div",
-        { staticClass: "col-2" },
-        [
-          _c(
-            "router-link",
-            {
-              staticClass: "page-title link",
-              attrs: { to: { name: "vinyls" } }
-            },
-            [_vm._v("Vinyls")]
-          ),
-          _vm._v(" / " + _vm._s(_vm.vinyl.name) + "\n        ")
-        ],
-        1
-      ),
-      _vm._v(" "),
-      _c(
-        "div",
-        { staticClass: "col-2" },
-        [
-          _c(
-            "router-link",
-            {
-              staticClass: "btn btn-warning",
-              attrs: { to: { name: "vinylEdit", params: { id: _vm.vinyl.id } } }
-            },
-            [_vm._v("Edit")]
-          ),
-          _vm._v(" "),
-          _c(
-            "button",
-            {
-              staticClass: "btn btn-danger",
-              on: {
-                click: function($event) {
-                  return _vm.destroy(_vm.vinyl.id)
+  return _c(
+    "div",
+    { staticClass: "container" },
+    [
+      _c("div", { staticClass: "row justify-content-between" }, [
+        _c(
+          "div",
+          { staticClass: "col-2" },
+          [
+            _c(
+              "router-link",
+              {
+                staticClass: "page-title link",
+                attrs: { to: { name: "vinyls" } }
+              },
+              [_vm._v("Vinyls")]
+            ),
+            _vm._v(" / " + _vm._s(_vm.vinyl.name) + "\n        ")
+          ],
+          1
+        ),
+        _vm._v(" "),
+        _c(
+          "div",
+          { staticClass: "col-2" },
+          [
+            _c(
+              "router-link",
+              {
+                staticClass: "btn btn-warning",
+                attrs: {
+                  to: { name: "vinylEdit", params: { id: _vm.vinyl.id } }
                 }
-              }
-            },
-            [_vm._v("Delete")]
-          )
-        ],
-        1
-      )
-    ]),
-    _vm._v(" "),
-    _c("div", { staticClass: "row row-margin-top" }, [
-      _c("div", { staticClass: "col-4" }, [
-        _c("img", {
-          staticClass: "img-fluid vinyl-cover",
-          attrs: { src: _vm.getPochette() }
-        })
+              },
+              [_vm._v("Edit")]
+            ),
+            _vm._v(" "),
+            _c(
+              "button",
+              {
+                staticClass: "btn btn-danger",
+                on: {
+                  click: function($event) {
+                    return _vm.destroy(_vm.vinyl.id)
+                  }
+                }
+              },
+              [_vm._v("Delete")]
+            )
+          ],
+          1
+        )
       ]),
       _vm._v(" "),
-      _c("div", { staticClass: "col-8" }, [
-        _c("h2", [_vm._v(_vm._s(_vm.vinyl.name))]),
-        _vm._v(" "),
-        _c("p", [_vm._v(_vm._s(_vm.vinyl.artist.name))]),
-        _vm._v(" "),
-        _c("p", [
-          _vm.vinyl.genre
-            ? _c("span", [_vm._v(_vm._s(_vm.vinyl.genre.name))])
-            : _c("span", [_c("i", [_vm._v("unknown genre")])]),
-          _vm._v(
-            " · " +
-              _vm._s(_vm.vinyl.date.substring(0, 4)) +
-              " · " +
-              _vm._s(_vm.vinyl.format) +
-              " tours"
-          )
-        ])
-      ])
-    ]),
-    _vm._v(" "),
-    _c("div", { staticClass: "row row-margin-top" }, [
-      _c("div", { staticClass: "col-12" }, [
-        _c("table", { staticClass: "table table-striped table-sm" }, [
-          _c("caption", [_vm._v("Tracklist")]),
-          _vm._v(" "),
-          _vm._m(0),
-          _vm._v(" "),
-          _c(
-            "tbody",
-            _vm._l(_vm.vinyl.tracklist, function(track, index) {
-              return _c("tr", { key: index }, [
-                _c("td", [_vm._v(_vm._s(track.position))]),
-                _vm._v(" "),
-                _c("td", [_vm._v(_vm._s(track.title))]),
-                _vm._v(" "),
-                _c("td", [_vm._v(_vm._s(track.duration))])
+      _vm.vinyl.length <= 0
+        ? _c("Loader")
+        : _c("div", { staticClass: "row row-margin-top" }, [
+            _c("div", { staticClass: "col-4" }, [
+              _c("img", {
+                staticClass: "img-fluid vinyl-cover",
+                attrs: { src: _vm.getPochette() }
+              })
+            ]),
+            _vm._v(" "),
+            _c("div", { staticClass: "col-8" }, [
+              _c("h2", [_vm._v(_vm._s(_vm.vinyl.name))]),
+              _vm._v(" "),
+              _c("p", [_vm._v(_vm._s(_vm.vinyl.artist.name))]),
+              _vm._v(" "),
+              _c("p", [
+                _vm.vinyl.genre
+                  ? _c("span", [_vm._v(_vm._s(_vm.vinyl.genre.name))])
+                  : _c("span", [_c("i", [_vm._v("unknown genre")])]),
+                _vm._v(
+                  " · " +
+                    _vm._s(_vm.vinyl.date.substring(0, 4)) +
+                    " · " +
+                    _vm._s(_vm.vinyl.format) +
+                    " tours"
+                )
               ])
-            }),
-            0
-          )
+            ])
+          ]),
+      _vm._v(" "),
+      _c("div", { staticClass: "row row-margin-top" }, [
+        _c("div", { staticClass: "col-12" }, [
+          _c("table", { staticClass: "table table-striped table-sm" }, [
+            _c("caption", [_vm._v("Tracklist")]),
+            _vm._v(" "),
+            _vm._m(0),
+            _vm._v(" "),
+            _c(
+              "tbody",
+              _vm._l(_vm.vinyl.tracklist, function(track, index) {
+                return _c("tr", { key: index }, [
+                  _c("td", [_vm._v(_vm._s(track.position))]),
+                  _vm._v(" "),
+                  _c("td", [_vm._v(_vm._s(track.title))]),
+                  _vm._v(" "),
+                  _c("td", [_vm._v(_vm._s(track.duration))])
+                ])
+              }),
+              0
+            )
+          ])
         ])
       ])
-    ])
-  ])
+    ],
+    1
+  )
 }
 var staticRenderFns = [
   function() {
@@ -56436,6 +56525,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var vue_router__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! vue-router */ "./node_modules/vue-router/dist/vue-router.esm.js");
 /* harmony import */ var _router__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./router */ "./resources/js/router.js");
 /* harmony import */ var _components_app__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./components/app */ "./resources/js/components/app.vue");
+/* harmony import */ var _components_loader__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ./components/loader */ "./resources/js/components/loader.vue");
 /**
  * First we will load all of this project's JavaScript dependencies which
  * includes Vue and other libraries. It is a great starting point when
@@ -56448,6 +56538,7 @@ __webpack_require__(/*! ./bootstrap */ "./resources/js/bootstrap.js");
 
 vue__WEBPACK_IMPORTED_MODULE_0___default.a.use(vue_router__WEBPACK_IMPORTED_MODULE_1__["default"]);
 vue__WEBPACK_IMPORTED_MODULE_0___default.a.prototype.$userId = document.querySelector("meta[name='user-id']").getAttribute('content');
+
 
 var app = new vue__WEBPACK_IMPORTED_MODULE_0___default.a({
   el: '#app',
@@ -57271,6 +57362,75 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "render", function() { return _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_home_vue_vue_type_template_id_fa6affac___WEBPACK_IMPORTED_MODULE_0__["render"]; });
 
 /* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "staticRenderFns", function() { return _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_home_vue_vue_type_template_id_fa6affac___WEBPACK_IMPORTED_MODULE_0__["staticRenderFns"]; });
+
+
+
+/***/ }),
+
+/***/ "./resources/js/components/loader.vue":
+/*!********************************************!*\
+  !*** ./resources/js/components/loader.vue ***!
+  \********************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _loader_vue_vue_type_template_id_155ec09e___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./loader.vue?vue&type=template&id=155ec09e& */ "./resources/js/components/loader.vue?vue&type=template&id=155ec09e&");
+/* harmony import */ var _loader_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./loader.vue?vue&type=script&lang=js& */ "./resources/js/components/loader.vue?vue&type=script&lang=js&");
+/* empty/unused harmony star reexport *//* harmony import */ var _node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../../../node_modules/vue-loader/lib/runtime/componentNormalizer.js */ "./node_modules/vue-loader/lib/runtime/componentNormalizer.js");
+
+
+
+
+
+/* normalize component */
+
+var component = Object(_node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_2__["default"])(
+  _loader_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__["default"],
+  _loader_vue_vue_type_template_id_155ec09e___WEBPACK_IMPORTED_MODULE_0__["render"],
+  _loader_vue_vue_type_template_id_155ec09e___WEBPACK_IMPORTED_MODULE_0__["staticRenderFns"],
+  false,
+  null,
+  null,
+  null
+  
+)
+
+/* hot reload */
+if (false) { var api; }
+component.options.__file = "resources/js/components/loader.vue"
+/* harmony default export */ __webpack_exports__["default"] = (component.exports);
+
+/***/ }),
+
+/***/ "./resources/js/components/loader.vue?vue&type=script&lang=js&":
+/*!*********************************************************************!*\
+  !*** ./resources/js/components/loader.vue?vue&type=script&lang=js& ***!
+  \*********************************************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _node_modules_babel_loader_lib_index_js_ref_4_0_node_modules_vue_loader_lib_index_js_vue_loader_options_loader_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../node_modules/babel-loader/lib??ref--4-0!../../../node_modules/vue-loader/lib??vue-loader-options!./loader.vue?vue&type=script&lang=js& */ "./node_modules/babel-loader/lib/index.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/loader.vue?vue&type=script&lang=js&");
+/* empty/unused harmony star reexport */ /* harmony default export */ __webpack_exports__["default"] = (_node_modules_babel_loader_lib_index_js_ref_4_0_node_modules_vue_loader_lib_index_js_vue_loader_options_loader_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__["default"]); 
+
+/***/ }),
+
+/***/ "./resources/js/components/loader.vue?vue&type=template&id=155ec09e&":
+/*!***************************************************************************!*\
+  !*** ./resources/js/components/loader.vue?vue&type=template&id=155ec09e& ***!
+  \***************************************************************************/
+/*! exports provided: render, staticRenderFns */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_loader_vue_vue_type_template_id_155ec09e___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!../../../node_modules/vue-loader/lib??vue-loader-options!./loader.vue?vue&type=template&id=155ec09e& */ "./node_modules/vue-loader/lib/loaders/templateLoader.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/loader.vue?vue&type=template&id=155ec09e&");
+/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "render", function() { return _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_loader_vue_vue_type_template_id_155ec09e___WEBPACK_IMPORTED_MODULE_0__["render"]; });
+
+/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "staticRenderFns", function() { return _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_loader_vue_vue_type_template_id_155ec09e___WEBPACK_IMPORTED_MODULE_0__["staticRenderFns"]; });
 
 
 

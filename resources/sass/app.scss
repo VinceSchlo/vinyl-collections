@@ -53,3 +53,14 @@
   min-width: fit-content;
   align-self: center;
 }
+
+// Tables
+.table th, .table td {
+  vertical-align: middle;
+}
+
+// Buttons
+.remove-from-collection {
+  position: absolute;
+  top: 0;
+}

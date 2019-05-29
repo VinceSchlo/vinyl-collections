@@ -1,23 +1,31 @@
 <template>
     <div class="container">
-        <h1>Ajouter une nouvelle pochette</h1>
         <div class="row">
-            <form @submit.prevent="submit">
-                <div class="form-group">
-                    <label for="image">Image</label>
-                    <input type="file" class="form-control-file" name="image" id="image" ref="file" @change="processFile"/>
-                    <div v-if="errors && errors.image" class="text-danger">{{ errors.image[0] }}</div>
-                </div>
-                <div class="form-group">
-                    <label for="illustrator">Illustrateur</label>
-                    <input type="text" class="form-control" name="illustrator" id="illustrator" v-model="fields.illustrator"/>
-                    <div v-if="errors && errors.illustrator" class="text-danger">{{ errors.illustrator[0] }}</div>
-                </div>
-                <button type="submit" class="btn btn-primary">Create</button>
-            </form>
-            <div v-if="success" class="alert alert-success mt-3">
-                Pochette ajoutée !
+            <div class="col-12">
+                <p><span class="page-title">Covers</span> / Create a new cover</p>
             </div>
+        </div>
+        <div class="row">
+            <div class="col-6">
+                <form @submit.prevent="submit">
+                    <div class="form-group">
+                        <label for="image">Image</label>
+                        <input type="file" class="form-control-file" name="image" id="image" ref="file" @change="processFile"/>
+                        <div v-if="errors && errors.image" class="text-danger">{{ errors.image[0] }}</div>
+                    </div>
+                    <div class="form-group">
+                        <label for="illustrator">Illustrator</label>
+                        <input type="text" class="form-control" name="illustrator" id="illustrator" v-model="fields.illustrator"/>
+                        <div v-if="errors && errors.illustrator" class="text-danger">{{ errors.illustrator[0] }}</div>
+                    </div>
+                    <button type="submit" class="btn btn-primary">Create</button>
+                </form>
+            </div>
+        <div v-if="success" class="row alert alert-success mt-3">
+            <div class="col-12">
+                Cover successfully created!
+            </div>
+        </div>
         </div>
     </div>
 </template>

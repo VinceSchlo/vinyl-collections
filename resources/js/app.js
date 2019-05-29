@@ -14,6 +14,7 @@ Vue.use(VueRouter)
 Vue.prototype.$userId = document.querySelector("meta[name='user-id']").getAttribute('content');
 
 import App from './components/app'
+import Loader from './components/loader'
 
 const app = new Vue({
     el: '#app',
