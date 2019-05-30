@@ -44,7 +44,8 @@
     export default {
         data() {
             return {
-                genres: []
+                genres: [],
+                success: false
             }
         },
         methods: {
