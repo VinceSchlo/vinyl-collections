@@ -36,6 +36,7 @@ class Vinyl extends JsonResource
         return [
             'id' => $this->id,
             'name' => $this->name,
+            'track_id' => $this->tracklist,
             'tracklist' => json_decode($response->getBody()->getContents())->tracklist,
             'format' => $this->format,
             'date' => $this->date,

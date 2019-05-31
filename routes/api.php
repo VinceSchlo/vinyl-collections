@@ -54,7 +54,7 @@ Route::middleware('auth:api')->get('/user', function (Request $request) {
 
 // Artist API
 Route::get('/artists', function () {
-    return new ArtistCollection(Artist::paginate());
+    return new ArtistCollection(Artist::paginate(5));
 })->name('artist.index');
 Route::get('/artists/{artist}', function (Artist $artist) {
     return new ArtistResource($artist);

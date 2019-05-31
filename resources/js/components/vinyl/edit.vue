@@ -21,7 +21,7 @@
                 </div>
                 <div class="form-group">
                     <label for="tracklist">Tracklist</label>
-                    <input type="text" class="form-control" id="tracklist" name="tracklist" v-model="fields.tracklist"/>
+                    <input type="text" class="form-control" id="tracklist" name="tracklist" v-model="fields.track_id"/>
                     <div v-if="errors && errors.tracklist" class="text-danger">{{ errors.tracklist[0] }}</div>
                 </div>
                 <div class="form-group">
@@ -32,22 +32,22 @@
                 </div>
                 <div class="form-group">
                     <label for="artist_id">Artist</label>
-                    <select name="artist_id" id="artist_id" v-model="fields.artist_id">
+                    <select name="artist_id" id="artist_id" v-model="fields.artist.id">
                         <option disabled>Current artist : {{ fields.artist.name }}</option>
-                        <option v-for="(artist, index) in artists.data" :value='artist.id' :key='index'>{{ artist.name }}</option>
+                        <option v-for="(artist, index) in artists.data" :value='artist.id' :key='artist.id'>{{ artist.name }}</option>
                     </select>
                     <div v-if="errors && errors.artist_id" class="text-danger">{{ errors.artist_id[0] }}</div>
                 </div>
                 <div class="form-group">
                     <label for="genre_id">Genre</label>
-                    <select name="genre_id" id="genre_id" v-model="fields.genre_id">
+                    <select name="genre_id" id="genre_id" v-model="fields.genre.id">
                         <option disabled>Current genre : {{ fields.genre.name }}</option>
-                        <option v-for="(genre, index) in genres.data" :value='genre.id' :key='index'>{{ genre.name }}</option>
+                        <option v-for="(genre, index) in genres.data" :value='genre.id' :key='genre.id'>{{ genre.name }}</option>
                     </select>
                 </div>
                 <div class="form-group">
                     <label for="pochette_id">Cover</label>
-                    <select name="pochette_id" id="pochette_id" v-model="fields.pochette_id">
+                    <select name="pochette_id" id="pochette_id" v-model="fields.pochette.id">
                         <option disabled>Current cover : {{ fields.pochette.illustrator }}</option>
                         <option v-for="(pochette, index) in pochettes.data" :value='pochette.id' :key="index">{{ pochette.illustrator }}</option>
                     </select>
@@ -86,9 +86,9 @@ export default {
                 date: this.fields.date,
                 tracklist: this.fields.tracklist,
                 format: this.fields.format,
-                artist_id: this.fields.artist_id,
-                genre_id: this.fields.genre_id,
-                pochette_id: this.fields.pochette_id,
+                artist_id: this.fields.artist.id,
+                genre_id: this.fields.genre.id,
+                pochette_id: this.fields.pochette.id,
                 _method: 'patch'
             }).then(response => {
                 this.success = true;
