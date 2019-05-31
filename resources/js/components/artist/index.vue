@@ -100,7 +100,6 @@
                     next_page_url: data.links.next,
                     prev_page_url: data.links.prev
                 }
-                console.log(data);
                 this.pagination = pagination
             },
             fetchPaginateArtists(url){

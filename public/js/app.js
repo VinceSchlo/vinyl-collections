@@ -2035,7 +2035,6 @@ __webpack_require__.r(__webpack_exports__);
         next_page_url: data.links.next,
         prev_page_url: data.links.prev
       };
-      console.log(data);
       this.pagination = pagination;
     },
     fetchPaginateArtists: function fetchPaginateArtists(url) {
@@ -2518,7 +2517,8 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony default export */ __webpack_exports__["default"] = ({
   data: function data() {
     return {
-      genres: []
+      genres: [],
+      success: false
     };
   },
   methods: {
@@ -2565,6 +2565,8 @@ __webpack_require__.r(__webpack_exports__);
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
+/* harmony import */ var axios__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! axios */ "./node_modules/axios/index.js");
+/* harmony import */ var axios__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(axios__WEBPACK_IMPORTED_MODULE_0__);
 //
 //
 //
@@ -2606,7 +2608,130 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
-/* harmony default export */ __webpack_exports__["default"] = ({});
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+
+/* harmony default export */ __webpack_exports__["default"] = ({
+  data: function data() {
+    return {
+      recentVinyls: [],
+      recentArtists: [],
+      recentGenres: []
+    };
+  },
+  methods: {
+    getThreeVinyls: function getThreeVinyls() {
+      return axios.get('/api/vinyls'); // récupérer seulement les trois derniers avec les query parameters
+    },
+    // getThreeArtists: function() {
+    //     let allArtists = axios.get('/api/artists');
+    //     return allArtists;
+    // },
+    // getThreeGenres: function() {
+    //     return axios.get('/api/genres');
+    // },
+    getPochette: function getPochette(vinyl) {
+      return "/storage/".concat(vinyl.pochette.image);
+    }
+  },
+  mounted: function mounted() {
+    var vm = this;
+    vm.getThreeVinyls().then(function (response) {
+      var recentVinyls;
+      vm.recentVinyls = response.data.data;
+    }); // vm.getThreeArtists().then((response) => {
+    //     let recentArtists;
+    //     vm.recentArtists = response.data.data;
+    // })
+    // vm.getThreeGenres().then((response) => {
+    //     let recentGenres;
+    //     vm.recentGenres = response.data.data;
+    // })
+  }
+});
 
 /***/ }),
 
@@ -2998,7 +3123,7 @@ __webpack_require__.r(__webpack_exports__);
         pochette_id: this.fields.pochette.id,
         _method: 'patch'
       }).then(function (response) {
-        _this.success = true; // console.log(reponse);
+        _this.success = true;
 
         _this.$router.push("/vinyls/".concat(_this.id, "/show"));
       })["catch"](function (error) {
@@ -3027,13 +3152,13 @@ __webpack_require__.r(__webpack_exports__);
       vm.fields = result.data.data;
     }), vm.getArtists().then(function (response) {
       var artists;
-      vm.artists = response.data;
+      vm.artists = response.data.data;
     }), vm.getGenres().then(function (response) {
       var genres;
-      vm.genres = response.data;
+      vm.genres = response.data.data;
     }), vm.getPochettes().then(function (response) {
       var pochettes;
-      vm.pochettes = response.data;
+      vm.pochettes = response.data.data;
     });
   }
 });
@@ -40398,119 +40523,119 @@ var render = function() {
   var _c = _vm._self._c || _h
   return _c("div", { staticClass: "container" }, [
     _c("div", { staticClass: "container" }, [
-      _vm._m(0),
+      _c("div", { staticClass: "row" }, [
+        _c(
+          "div",
+          { staticClass: "col-12 text-center" },
+          [
+            _c("h2", [_vm._v("Welcome to Vinyls Collections!")]),
+            _vm._v(" "),
+            _vm._m(0),
+            _vm._v(" "),
+            _c("p"),
+            _vm._v(" "),
+            _c(
+              "router-link",
+              {
+                staticClass: "btn btn-secondary text-center",
+                attrs: { to: { name: "vinyls" } }
+              },
+              [_vm._v("See all Vinyls")]
+            )
+          ],
+          1
+        )
+      ]),
       _vm._v(" "),
-      _c(
-        "div",
-        { staticClass: "row" },
-        [
+      _c("div", { staticClass: "row row-margin-top justify-content-center" }, [
+        _c("div", { staticClass: "col-3" }, [
           _c(
-            "router-link",
+            "div",
             {
-              staticClass: "btn btn-default",
-              attrs: { to: { name: "artists" } }
+              staticClass: "carousel slide",
+              attrs: {
+                id: "carouselExampleIndicators",
+                "data-ride": "carousel"
+              }
             },
-            [_vm._v("Tous les Artistes")]
-          ),
-          _vm._v(" "),
-          _c(
-            "router-link",
-            {
-              staticClass: "btn btn-default",
-              attrs: { to: { name: "artistCreate" } }
-            },
-            [_vm._v("Ajouter un Artiste")]
+            [
+              _vm._m(1),
+              _vm._v(" "),
+              _c("div", { staticClass: "carousel-inner" }, [
+                _c("div", { staticClass: "carousel-item active" }, [
+                  _c("img", {
+                    staticClass: "d-block w-100",
+                    attrs: {
+                      src: _vm.getPochette(_vm.recentVinyls[0]),
+                      alt: "First slide"
+                    }
+                  }),
+                  _vm._v(" "),
+                  _c("div", { staticClass: "carousel-caption d-md-block" }, [
+                    _c("h5", [_vm._v(_vm._s(_vm.recentVinyls[0].name))]),
+                    _vm._v(" "),
+                    _c("p", [
+                      _vm._v(
+                        _vm._s(_vm.recentVinyls[0].artist.name) +
+                          " · " +
+                          _vm._s(_vm.recentVinyls[2].date.substring(0, 4))
+                      )
+                    ])
+                  ])
+                ]),
+                _vm._v(" "),
+                _c("div", { staticClass: "carousel-item" }, [
+                  _c("img", {
+                    staticClass: "d-block w-100",
+                    attrs: {
+                      src: _vm.getPochette(_vm.recentVinyls[1]),
+                      alt: "Second slide"
+                    }
+                  }),
+                  _vm._v(" "),
+                  _c("div", { staticClass: "carousel-caption d-md-block" }, [
+                    _c("h5", [_vm._v(_vm._s(_vm.recentVinyls[1].name))]),
+                    _vm._v(" "),
+                    _c("p", [
+                      _vm._v(
+                        _vm._s(_vm.recentVinyls[1].artist.name) +
+                          " · " +
+                          _vm._s(_vm.recentVinyls[1].date.substring(0, 4))
+                      )
+                    ])
+                  ])
+                ]),
+                _vm._v(" "),
+                _c("div", { staticClass: "carousel-item" }, [
+                  _c("img", {
+                    staticClass: "d-block w-100",
+                    attrs: {
+                      src: _vm.getPochette(_vm.recentVinyls[2]),
+                      alt: "Third slide"
+                    }
+                  }),
+                  _vm._v(" "),
+                  _c("div", { staticClass: "carousel-caption d-md-block" }, [
+                    _c("h5", [_vm._v(_vm._s(_vm.recentVinyls[2].name))]),
+                    _vm._v(" "),
+                    _c("p", [
+                      _vm._v(
+                        _vm._s(_vm.recentVinyls[2].artist.name) +
+                          " · " +
+                          _vm._s(_vm.recentVinyls[2].date.substring(0, 4))
+                      )
+                    ])
+                  ])
+                ])
+              ]),
+              _vm._v(" "),
+              _vm._m(2),
+              _vm._v(" "),
+              _vm._m(3)
+            ]
           )
-        ],
-        1
-      )
-    ]),
-    _vm._v(" "),
-    _c("div", { staticClass: "container" }, [
-      _vm._m(1),
-      _vm._v(" "),
-      _c(
-        "div",
-        { staticClass: "row" },
-        [
-          _c(
-            "router-link",
-            {
-              staticClass: "btn btn-default",
-              attrs: { to: { name: "genres" } }
-            },
-            [_vm._v("Tous les Genres")]
-          ),
-          _vm._v(" "),
-          _c(
-            "router-link",
-            {
-              staticClass: "btn btn-default",
-              attrs: { to: { name: "genreCreate" } }
-            },
-            [_vm._v("Ajouter un Genre")]
-          )
-        ],
-        1
-      )
-    ]),
-    _vm._v(" "),
-    _c("div", { staticClass: "container" }, [
-      _vm._m(2),
-      _vm._v(" "),
-      _c(
-        "div",
-        { staticClass: "row" },
-        [
-          _c(
-            "router-link",
-            {
-              staticClass: "btn btn-default",
-              attrs: { to: { name: "vinyls" } }
-            },
-            [_vm._v("Tous les Vinyles")]
-          ),
-          _vm._v(" "),
-          _c(
-            "router-link",
-            {
-              staticClass: "btn btn-default",
-              attrs: { to: { name: "vinylCreate" } }
-            },
-            [_vm._v("Ajouter un Vinyle")]
-          )
-        ],
-        1
-      )
-    ]),
-    _vm._v(" "),
-    _c("div", { staticClass: "container" }, [
-      _vm._m(3),
-      _vm._v(" "),
-      _c(
-        "div",
-        { staticClass: "row" },
-        [
-          _c(
-            "router-link",
-            {
-              staticClass: "btn btn-default",
-              attrs: { to: { name: "collections" } }
-            },
-            [_vm._v("Afficher ma collection")]
-          ),
-          _vm._v(" "),
-          _c(
-            "router-link",
-            {
-              staticClass: "btn btn-default",
-              attrs: { to: { name: "collectionAdd" } }
-            },
-            [_vm._v("Ajouter un Vinyle à ma collection")]
-          )
-        ],
-        1
-      )
+        ])
+      ])
     ])
   ])
 }
@@ -40519,25 +40644,89 @@ var staticRenderFns = [
     var _vm = this
     var _h = _vm.$createElement
     var _c = _vm._self._c || _h
-    return _c("div", { staticClass: "row" }, [_c("h2", [_vm._v("Artistes")])])
+    return _c("p", [
+      _vm._v("You'll find below the latest vinyls added to our database. "),
+      _c("br"),
+      _vm._v("Add those you own to your collection, "),
+      _c("br"),
+      _vm._v("and start keeping track of your records today!")
+    ])
   },
   function() {
     var _vm = this
     var _h = _vm.$createElement
     var _c = _vm._self._c || _h
-    return _c("div", { staticClass: "row" }, [_c("h2", [_vm._v("Genres")])])
+    return _c("ol", { staticClass: "carousel-indicators" }, [
+      _c("li", {
+        staticClass: "active",
+        attrs: {
+          "data-target": "#carouselExampleIndicators",
+          "data-slide-to": "0"
+        }
+      }),
+      _vm._v(" "),
+      _c("li", {
+        attrs: {
+          "data-target": "#carouselExampleIndicators",
+          "data-slide-to": "1"
+        }
+      }),
+      _vm._v(" "),
+      _c("li", {
+        attrs: {
+          "data-target": "#carouselExampleIndicators",
+          "data-slide-to": "2"
+        }
+      })
+    ])
   },
   function() {
     var _vm = this
     var _h = _vm.$createElement
     var _c = _vm._self._c || _h
-    return _c("div", { staticClass: "row" }, [_c("h2", [_vm._v("Vinyles")])])
+    return _c(
+      "a",
+      {
+        staticClass: "carousel-control-prev",
+        attrs: {
+          href: "#carouselExampleIndicators",
+          role: "button",
+          "data-slide": "prev"
+        }
+      },
+      [
+        _c("span", {
+          staticClass: "carousel-control-prev-icon",
+          attrs: { "aria-hidden": "true" }
+        }),
+        _vm._v(" "),
+        _c("span", { staticClass: "sr-only" }, [_vm._v("Previous")])
+      ]
+    )
   },
   function() {
     var _vm = this
     var _h = _vm.$createElement
     var _c = _vm._self._c || _h
-    return _c("div", { staticClass: "row" }, [_c("h2", [_vm._v("Collection")])])
+    return _c(
+      "a",
+      {
+        staticClass: "carousel-control-next",
+        attrs: {
+          href: "#carouselExampleIndicators",
+          role: "button",
+          "data-slide": "next"
+        }
+      },
+      [
+        _c("span", {
+          staticClass: "carousel-control-next-icon",
+          attrs: { "aria-hidden": "true" }
+        }),
+        _vm._v(" "),
+        _c("span", { staticClass: "sr-only" }, [_vm._v("Next")])
+      ]
+    )
   }
 ]
 render._withStripped = true
@@ -41306,10 +41495,10 @@ var render = function() {
                     _vm._v("Current artist : " + _vm._s(_vm.fields.artist.name))
                   ]),
                   _vm._v(" "),
-                  _vm._l(_vm.artists.data, function(artist, index) {
+                  _vm._l(_vm.artists, function(artist, index) {
                     return _c(
                       "option",
-                      { key: artist.id, domProps: { value: artist.id } },
+                      { key: index, domProps: { value: artist.id } },
                       [_vm._v(_vm._s(artist.name))]
                     )
                   })
@@ -41364,10 +41553,10 @@ var render = function() {
                     _vm._v("Current genre : " + _vm._s(_vm.fields.genre.name))
                   ]),
                   _vm._v(" "),
-                  _vm._l(_vm.genres.data, function(genre, index) {
+                  _vm._l(_vm.genres, function(genre, index) {
                     return _c(
                       "option",
-                      { key: genre.id, domProps: { value: genre.id } },
+                      { key: index, domProps: { value: genre.id } },
                       [_vm._v(_vm._s(genre.name))]
                     )
                   })
@@ -41419,7 +41608,7 @@ var render = function() {
                     )
                   ]),
                   _vm._v(" "),
-                  _vm._l(_vm.pochettes.data, function(pochette, index) {
+                  _vm._l(_vm.pochettes, function(pochette, index) {
                     return _c(
                       "option",
                       { key: index, domProps: { value: pochette.id } },
@@ -41434,7 +41623,7 @@ var render = function() {
             _c(
               "button",
               { staticClass: "btn btn-primary", attrs: { type: "submit" } },
-              [_vm._v("Update")]
+              [_vm._v("Updated")]
             )
           ]
         ),

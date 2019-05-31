@@ -34,7 +34,7 @@
                     <label for="artist_id">Artist</label>
                     <select name="artist_id" id="artist_id" v-model="fields.artist.id">
                         <option disabled>Current artist : {{ fields.artist.name }}</option>
-                        <option v-for="(artist, index) in artists.data" :value='artist.id' :key='artist.id'>{{ artist.name }}</option>
+                        <option v-for="(artist, index) in artists" :value='artist.id' :key='index'>{{ artist.name }}</option>
                     </select>
                     <div v-if="errors && errors.artist_id" class="text-danger">{{ errors.artist_id[0] }}</div>
                 </div>
@@ -42,17 +42,17 @@
                     <label for="genre_id">Genre</label>
                     <select name="genre_id" id="genre_id" v-model="fields.genre.id">
                         <option disabled>Current genre : {{ fields.genre.name }}</option>
-                        <option v-for="(genre, index) in genres.data" :value='genre.id' :key='genre.id'>{{ genre.name }}</option>
+                        <option v-for="(genre, index) in genres" :value='genre.id' :key='index'>{{ genre.name }}</option>
                     </select>
                 </div>
                 <div class="form-group">
                     <label for="pochette_id">Cover</label>
                     <select name="pochette_id" id="pochette_id" v-model="fields.pochette.id">
                         <option disabled>Current cover : {{ fields.pochette.illustrator }}</option>
-                        <option v-for="(pochette, index) in pochettes.data" :value='pochette.id' :key="index">{{ pochette.illustrator }}</option>
+                        <option v-for="(pochette, index) in pochettes" :value='pochette.id' :key="index">{{ pochette.illustrator }}</option>
                     </select>
                 </div>
-                <button type="submit" class="btn btn-primary">Update</button>
+                <button type="submit" class="btn btn-primary">Updated</button>
             </form>
             <div v-if="success" class="alert alert-success mt-3">
                 Vinyl updated !
@@ -92,8 +92,7 @@ export default {
                 _method: 'patch'
             }).then(response => {
                 this.success = true;
-                // console.log(reponse);
-                this.$router.push(`/vinyls/${this.id}/show` );
+                this.$router.push(`/vinyls/${this.id}/show`);
             }).catch(error => {
                 if (error.response.status === 422) {
                     this.errors = error.response.data.errors || {};
@@ -122,15 +121,15 @@ export default {
         }),
         vm.getArtists().then((response) => {
             let artists;
-            vm.artists = response.data;
+            vm.artists = response.data.data;
         }),
         vm.getGenres().then((response) => {
             let genres;
-            vm.genres = response.data;
+            vm.genres = response.data.data;
         }),
         vm.getPochettes().then((response) => {
             let pochettes;
-            vm.pochettes = response.data;
+            vm.pochettes = response.data.data;
         })
     },
 

@@ -10715,3 +10715,7 @@ a.text-dark:focus {
   top: 0;
 }
 
+.btn-secondary {
+  align-self: center;
+}
+
