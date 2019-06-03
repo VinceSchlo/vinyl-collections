@@ -37,7 +37,7 @@ import PochetteCreate from './components/pochette/create.vue';
 const routes =
 [
     {
-        path: '/',
+        path: '/en',
         name: 'home',
         component: Home
     },

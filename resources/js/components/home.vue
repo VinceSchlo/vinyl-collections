@@ -23,25 +23,31 @@
                     </ol>
                     <div class="carousel-inner">
                         <div class="carousel-item active">
-                            <img class="d-block w-100" :src="getPochette(recentVinyls[0])" alt="First slide">
-                            <div class="carousel-caption d-md-block">
-                                <h5>{{recentVinyls[0].name }}</h5>
-                                <p>{{ recentVinyls[0].artist.name }} &middot; {{ recentVinyls[2].date.substring(0,4) }}</p>
-                            </div>
+                            <a :href="'/vinyls/' + recentVinyls[0].id + '/show'">
+                                <img class="d-block w-100" :src="getPochette(recentVinyls[0])" alt="First slide">
+                                <div class="carousel-caption d-md-block">
+                                    <h5>{{recentVinyls[0].name }}</h5>
+                                    <p>{{ recentVinyls[0].artist.name }} &middot; {{ recentVinyls[2].date.substring(0,4) }}</p>
+                                </div>
+                            </a>
                         </div>
                         <div class="carousel-item">
-                            <img class="d-block w-100" :src="getPochette(recentVinyls[1])" alt="Second slide">
-                            <div class="carousel-caption d-md-block">
-                                <h5>{{recentVinyls[1].name }}</h5>
-                                <p>{{ recentVinyls[1].artist.name }} &middot; {{ recentVinyls[1].date.substring(0,4) }}</p>
-                            </div>
+                            <a :href="'/vinyls/' + recentVinyls[1].id + '/show'">
+                                <img class="d-block w-100" :src="getPochette(recentVinyls[1])" alt="Second slide">
+                                <div class="carousel-caption d-md-block">
+                                    <h5>{{recentVinyls[1].name }}</h5>
+                                    <p>{{ recentVinyls[1].artist.name }} &middot; {{ recentVinyls[1].date.substring(0,4) }}</p>
+                                </div>
+                            </a>
                         </div>
                         <div class="carousel-item">
-                            <img class="d-block w-100" :src="getPochette(recentVinyls[2])" alt="Third slide">
-                            <div class="carousel-caption d-md-block">
-                                <h5>{{recentVinyls[2].name }}</h5>
-                                <p>{{ recentVinyls[2].artist.name }} &middot; {{ recentVinyls[2].date.substring(0,4) }}</p>
-                            </div>
+                            <a :href="'/vinyls/' + recentVinyls[2].id + '/show'">
+                                <img class="d-block w-100" :src="getPochette(recentVinyls[2])" alt="Third slide">
+                                <div class="carousel-caption d-md-block">
+                                    <h5>{{recentVinyls[2].name }}</h5>
+                                    <p>{{ recentVinyls[2].artist.name }} &middot; {{ recentVinyls[2].date.substring(0,4) }}</p>
+                                </div>
+                            </a>
                         </div>
                     </div>
                     <a class="carousel-control-prev" href="#carouselExampleIndicators" role="button" data-slide="prev">

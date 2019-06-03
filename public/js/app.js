@@ -2693,6 +2693,12 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
+//
+//
 
 /* harmony default export */ __webpack_exports__["default"] = ({
   data: function data() {
@@ -40563,69 +40569,111 @@ var render = function() {
               _vm._v(" "),
               _c("div", { staticClass: "carousel-inner" }, [
                 _c("div", { staticClass: "carousel-item active" }, [
-                  _c("img", {
-                    staticClass: "d-block w-100",
-                    attrs: {
-                      src: _vm.getPochette(_vm.recentVinyls[0]),
-                      alt: "First slide"
-                    }
-                  }),
-                  _vm._v(" "),
-                  _c("div", { staticClass: "carousel-caption d-md-block" }, [
-                    _c("h5", [_vm._v(_vm._s(_vm.recentVinyls[0].name))]),
-                    _vm._v(" "),
-                    _c("p", [
-                      _vm._v(
-                        _vm._s(_vm.recentVinyls[0].artist.name) +
-                          " · " +
-                          _vm._s(_vm.recentVinyls[2].date.substring(0, 4))
+                  _c(
+                    "a",
+                    {
+                      attrs: {
+                        href: "/vinyls/" + _vm.recentVinyls[0].id + "/show"
+                      }
+                    },
+                    [
+                      _c("img", {
+                        staticClass: "d-block w-100",
+                        attrs: {
+                          src: _vm.getPochette(_vm.recentVinyls[0]),
+                          alt: "First slide"
+                        }
+                      }),
+                      _vm._v(" "),
+                      _c(
+                        "div",
+                        { staticClass: "carousel-caption d-md-block" },
+                        [
+                          _c("h5", [_vm._v(_vm._s(_vm.recentVinyls[0].name))]),
+                          _vm._v(" "),
+                          _c("p", [
+                            _vm._v(
+                              _vm._s(_vm.recentVinyls[0].artist.name) +
+                                " · " +
+                                _vm._s(_vm.recentVinyls[2].date.substring(0, 4))
+                            )
+                          ])
+                        ]
                       )
-                    ])
-                  ])
+                    ]
+                  )
                 ]),
                 _vm._v(" "),
                 _c("div", { staticClass: "carousel-item" }, [
-                  _c("img", {
-                    staticClass: "d-block w-100",
-                    attrs: {
-                      src: _vm.getPochette(_vm.recentVinyls[1]),
-                      alt: "Second slide"
-                    }
-                  }),
-                  _vm._v(" "),
-                  _c("div", { staticClass: "carousel-caption d-md-block" }, [
-                    _c("h5", [_vm._v(_vm._s(_vm.recentVinyls[1].name))]),
-                    _vm._v(" "),
-                    _c("p", [
-                      _vm._v(
-                        _vm._s(_vm.recentVinyls[1].artist.name) +
-                          " · " +
-                          _vm._s(_vm.recentVinyls[1].date.substring(0, 4))
+                  _c(
+                    "a",
+                    {
+                      attrs: {
+                        href: "/vinyls/" + _vm.recentVinyls[1].id + "/show"
+                      }
+                    },
+                    [
+                      _c("img", {
+                        staticClass: "d-block w-100",
+                        attrs: {
+                          src: _vm.getPochette(_vm.recentVinyls[1]),
+                          alt: "Second slide"
+                        }
+                      }),
+                      _vm._v(" "),
+                      _c(
+                        "div",
+                        { staticClass: "carousel-caption d-md-block" },
+                        [
+                          _c("h5", [_vm._v(_vm._s(_vm.recentVinyls[1].name))]),
+                          _vm._v(" "),
+                          _c("p", [
+                            _vm._v(
+                              _vm._s(_vm.recentVinyls[1].artist.name) +
+                                " · " +
+                                _vm._s(_vm.recentVinyls[1].date.substring(0, 4))
+                            )
+                          ])
+                        ]
                       )
-                    ])
-                  ])
+                    ]
+                  )
                 ]),
                 _vm._v(" "),
                 _c("div", { staticClass: "carousel-item" }, [
-                  _c("img", {
-                    staticClass: "d-block w-100",
-                    attrs: {
-                      src: _vm.getPochette(_vm.recentVinyls[2]),
-                      alt: "Third slide"
-                    }
-                  }),
-                  _vm._v(" "),
-                  _c("div", { staticClass: "carousel-caption d-md-block" }, [
-                    _c("h5", [_vm._v(_vm._s(_vm.recentVinyls[2].name))]),
-                    _vm._v(" "),
-                    _c("p", [
-                      _vm._v(
-                        _vm._s(_vm.recentVinyls[2].artist.name) +
-                          " · " +
-                          _vm._s(_vm.recentVinyls[2].date.substring(0, 4))
+                  _c(
+                    "a",
+                    {
+                      attrs: {
+                        href: "/vinyls/" + _vm.recentVinyls[2].id + "/show"
+                      }
+                    },
+                    [
+                      _c("img", {
+                        staticClass: "d-block w-100",
+                        attrs: {
+                          src: _vm.getPochette(_vm.recentVinyls[2]),
+                          alt: "Third slide"
+                        }
+                      }),
+                      _vm._v(" "),
+                      _c(
+                        "div",
+                        { staticClass: "carousel-caption d-md-block" },
+                        [
+                          _c("h5", [_vm._v(_vm._s(_vm.recentVinyls[2].name))]),
+                          _vm._v(" "),
+                          _c("p", [
+                            _vm._v(
+                              _vm._s(_vm.recentVinyls[2].artist.name) +
+                                " · " +
+                                _vm._s(_vm.recentVinyls[2].date.substring(0, 4))
+                            )
+                          ])
+                        ]
                       )
-                    ])
-                  ])
+                    ]
+                  )
                 ])
               ]),
               _vm._v(" "),
@@ -58055,7 +58103,7 @@ vue__WEBPACK_IMPORTED_MODULE_0___default.a.use(vue_router__WEBPACK_IMPORTED_MODU
 // Chaque route doit être mappée à un composant
 
 var routes = [{
-  path: '/',
+  path: '/en',
   name: 'home',
   component: _components_home_vue__WEBPACK_IMPORTED_MODULE_2__["default"]
 }, // Artist routes
